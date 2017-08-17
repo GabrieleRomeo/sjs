@@ -1,12 +1,12 @@
 const webpack = require('webpack');
 const path = require('path');
 const debug = process.env.NODE_ENV !== 'production';
-const libraryName = 'uly';
+const libraryName = 'sjs';
 
 module.exports = {
 
   devtool: debug ? 'inline-sourcemap' : null,
-  entry: path.join(__dirname, 'src/uly.js'),
+  entry: path.join(__dirname, 'src/sjs.js'),
   output: {
     path: path.join(__dirname, 'build/'),
     filename: 'build.js',

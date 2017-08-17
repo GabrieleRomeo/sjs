@@ -1,6 +1,6 @@
 
-import { types as TYPES } from './uly.functional';
-import ULYF from './uly.functional';
+import { types as TYPES } from './sjs.functional';
+import ULYF from './sjs.functional';
 
 'use strict';
 

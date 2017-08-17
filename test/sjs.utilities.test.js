@@ -1,7 +1,7 @@
 'use strict';
 
 import 'babel-polyfill';
-import u from '../src/uly.utilities';
+import u from '../src/sjs.utilities';
 
 const assert = require('assert');
 const should = require('chai').should();

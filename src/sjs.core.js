@@ -1,5 +1,3 @@
-import functional from './uly.functional';
-
 'use strict';
 
   /**********************************************************************

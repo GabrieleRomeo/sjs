@@ -1,7 +1,7 @@
 'use strict';
 
 import 'babel-polyfill';
-import v from '../src/uly.validators';
+import v from '../src/sjs.validators';
 
 const assert = require('assert');
 

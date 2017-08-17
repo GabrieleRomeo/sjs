@@ -33,7 +33,7 @@
     <div id="container">
       <table id="testTable">
         <thead>
-          <th id="testTableHeader" colspan="2">Test Algorithms</th>
+          <th id="testTableHeader" colspan="2">Test</th>
         </thead>
         <tbody>
           <tr style="text-align: center">
@@ -71,35 +71,35 @@
     <script>
     (function() {
       document.addEventListener('DOMContentLoaded', function() {
-        var $ = uly.DOM.$;
+        var $ = sjs.DOM.$;
         var expires = new Date();
         var oneDay = 1000 * 60 * 60 * 24;
 
         // TEST Alg 1
-        $('#alg1').textContent = 'uly.U.generateGUID';
-        $('#alg1Test').textContent = uly.U.generateGUID();
+        $('#alg1').textContent = 'sjs.U.generateGUID';
+        $('#alg1Test').textContent = sjs.U.generateGUID();
 
         // TEST Alg 2
-        $('#alg2').textContent = 'uly.F.capitalize';
-        $('#alg2Test').textContent = uly.F.capitalize('hello world');
+        $('#alg2').textContent = 'sjs.F.capitalize';
+        $('#alg2Test').textContent = sjs.F.capitalize('hello world');
 
         // TEST Alg 3
         expires.setTime(expires.getTime() + oneDay);
         document.cookie = 'cookie_test=my_cookie;expires=' + expires.toUTCString();
-        $('#alg3').textContent = 'uly.U.getCookies';
-        $('#alg3Test').textContent = JSON.stringify(uly.U.getCookies());
+        $('#alg3').textContent = 'sjs.U.getCookies';
+        $('#alg3Test').textContent = JSON.stringify(sjs.U.getCookies());
 
         // TEST Alg 4
-        $('#alg4').textContent = 'uly.V.isEmailAddress';
-        $('#alg4Test').textContent = 'apple.com - ' + uly.V.isEmailAddress('apple.com');
+        $('#alg4').textContent = 'sjs.V.isEmailAddress';
+        $('#alg4Test').textContent = 'apple.com - ' + sjs.V.isEmailAddress('apple.com');
 
         // TEST Alg 5
-        $('#alg5').textContent = 'uly.V.isEmailAddress';
-        $('#alg5Test').textContent = 'test@bov.com - ' + uly.V.isEmailAddress('test@bov.com');
+        $('#alg5').textContent = 'sjs.V.isEmailAddress';
+        $('#alg5Test').textContent = 'test@bov.com - ' + sjs.V.isEmailAddress('test@bov.com');
 
         // TEST Alg 6
-        $('#alg6').textContent = 'uly.V.contains';
-        $('#alg6Test').textContent = 'Visiting new places. ["coconut"] - ' + uly.V.contains("Visiting new places.", ["coconut"]);
+        $('#alg6').textContent = 'sjs.V.contains';
+        $('#alg6Test').textContent = 'Visiting new places. ["coconut"] - ' + sjs.V.contains("Visiting new places.", ["coconut"]);
       });
     })();
     </script>
