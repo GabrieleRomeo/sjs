@@ -24,6 +24,7 @@ const arr = typeOf('Array');
 const sym = typeOf('Symbol');
 const regex = typeOf('RegExp');
 const HTMLNode = typeOf('HtmlNode');
+const HTMLFragment = typeOf('DocumentFragment');
 
 // Custom data type
 const allowedTypes = (...types) => typeOf(types);
@@ -40,6 +41,7 @@ export const types = {
   sym,
   regex,
   HTMLNode,
+  HTMLFragment,
   allowedTypes,
 };
 
