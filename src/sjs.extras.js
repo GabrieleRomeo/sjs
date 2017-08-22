@@ -8,32 +8,51 @@ const e = {};
 const { isArray, indexOf } = ULYU;
 const { not } = ULYF;
 
+/**
+ * An Event Emitter which emits events
+ */
 e.EventEmitter = class EventEmitter {
   constructor() {
     this.events = {};
   }
-
+  /**
+   * The on method allows us to associate a listener to a particular event.
+   * Every time the Event Emitter emits the intended event, each associated
+   * listener will be called accordingly
+   *
+   * @param      {String}  event     The event's name
+   * @param      {Function}  listener  The listener you wish to attach to the event
+   */
   on(event, listener) {
-    if (not(isArray(this.events[event]))) {
+    if (not(isArray(this.events[TYPES.str(event)]))) {
       this.events[event] = [];
     }
-    this.events[event].push(listener);
+    this.events[event].push(TYPES.fun(listener));
   }
-
+  /**
+   * Removes a listener.
+   *
+   * @param      {String}  event     The event's name
+   * @param      {Function}  listener  The listener you wish to remove from the event
+   */
   removeListener(event, listener) {
-    if (isArray(this.events[event])) {
-      let idx = indexOf(this.events[event], listener);
+    if (isArray(this.events[TYPES.str(event)])) {
+      let idx = indexOf(this.events[event], TYPES.fun(listener));
 
       if ( idx > -1 ) {
         this.events[event].splice( idx, 1 );
       }
     }
   }
-
+  /**
+   * The event you wish to emit
+   *
+   * @param      {String}  event   The event's name
+   */
   emit(event) {
     const args = [].slice.call( arguments, 1 );
 
-    if (isArray(this.events[event])) {
+    if (isArray(this.events[TYPES.str(event)])) {
       let listeners = this.events[event].slice();
       let length    = listeners.length;
 
@@ -42,15 +61,23 @@ e.EventEmitter = class EventEmitter {
       }
     }
   }
-
+  /**
+   * The once method allows us to emit a particular event just once.
+   *
+   * @param      {String}  event     The event's name
+   * @param      {Function}  listener  The listener you wish to attach to the event
+   */
   once(event, listener) {
     this.on(event, function g() {
       this.removeListener(event, g);
-      listener.apply(this, arguments);
+      TYPES.fun(listener).apply(this, arguments);
     });
   }
 };
 
+/**
+ * A Queue object which emits events during its lifetime
+ */
 e.Queue = class Queue extends e.EventEmitter {
   constructor() {
     super();
@@ -92,6 +119,9 @@ e.Queue = class Queue extends e.EventEmitter {
   }
 };
 
+/**
+ * A Stack object which emits events during its lifetime
+ */
 e.Stack = class Stack extends e.EventEmitter {
   constructor() {
     super();
@@ -130,6 +160,62 @@ e.Stack = class Stack extends e.EventEmitter {
   isEmpty() {
     return this.arr.length === 0;
   }
+};
+
+/**
+ * A convenient way to handle Ajax Requests
+ *
+ * @param      {(String)}  url     The url
+ * @return     {(Object|Promise)}   An object containing the allowed CRUD
+ *                                  operations. Each operation returns a Promise
+ *                                  which can be used to follow up with its status
+ */
+e.$http = (url) => {
+
+  const core = {
+    ajax: (method, url, args) => {
+      method = TYPES.str(method);
+      args = TYPES.obj(args);
+      const promise = new Promise((resolve, reject) => {
+        const client = new XMLHttpRequest();
+        let uri = TYPES.str(url);
+
+        if (args && (method === 'POST' || method === 'PUT')) {
+          uri += '?';
+          let argcount = 0;
+          for (let key of args) {
+            if (argcount++) {
+              uri += '&';
+            }
+            uri += encodeURIComponent(key) + '=' + encodeURIComponent(args[key]);
+          }
+        }
+
+        client.open(method, uri);
+        client.send();
+
+        client.onload = function () {
+          if (this.status === 200) {
+            resolve(this.response);
+          } else {
+            reject(this.statusText);
+          }
+        };
+        client.onerror = function () {
+          reject(this.statusText);
+        };
+      });
+
+      return promise;
+    }
+  };
+
+  return {
+    'get': args => core.ajax('GET', url, args),
+    'post': args => core.ajax('POST', url, args),
+    'put': args => core.ajax('PUT', url, args),
+    'delete': args => core.ajax('DELETE', url, args)
+  };
 };
 
 
