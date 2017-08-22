@@ -171,14 +171,14 @@ e.Stack = class Stack extends e.EventEmitter {
  *                                  which can be used to follow up with its status
  */
 e.$http = (url) => {
-
+  url = TYPES.str(url);
   const core = {
     ajax: (method, url, args) => {
       method = TYPES.str(method);
       args = TYPES.obj(args);
       const promise = new Promise((resolve, reject) => {
         const client = new XMLHttpRequest();
-        let uri = TYPES.str(url);
+        let uri = url;
 
         if (args && (method === 'POST' || method === 'PUT')) {
           uri += '?';
