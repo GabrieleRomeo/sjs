@@ -24,6 +24,7 @@ const arr = typeOf('Array');
 const sym = typeOf('Symbol');
 const regex = typeOf('RegExp');
 const HTMLNode = typeOf('HtmlNode');
+const HTMLFragment = typeOf('DocumentFragment');
 
 // Custom data type
 const allowedTypes = (...types) => typeOf(types);
@@ -40,6 +41,7 @@ export const types = {
   sym,
   regex,
   HTMLNode,
+  HTMLFragment,
   allowedTypes,
 };
 
@@ -225,6 +227,14 @@ f.memoized = (fn) => {
 
 // not :: bool -> bool
 f.not = (x) => !bool(x);
+
+// asyncAction :: Function -> Function
+f.asyncAction = action =>  {
+  action = fun(action);
+  return function(context, ...args) {
+    return window.requestAnimationFrame(() => action.apply(context, args));
+  };
+};
 
 /*
  * Given a data type, it returns a function that, when applied, checks if

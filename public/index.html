@@ -67,6 +67,11 @@
         </tbody>
       </table>
     </div>
+    <div>
+      <h2>DOM Manipulation test</h2>
+      <button id="appendButton">Append 20000 items to the DOM</button>
+      <div id="appendDiv"></div>
+    </div>
     <script src="../build/build.js"></script>
     <script>
     (function() {
@@ -100,6 +105,29 @@
         // TEST Alg 6
         $('#alg6').textContent = 'sjs.V.contains';
         $('#alg6Test').textContent = 'Visiting new places. ["coconut"] - ' + sjs.V.contains("Visiting new places.", ["coconut"]);
+
+        // DOM TESTS
+        let appendButton = $('#appendButton');
+        let appendDiv = $('#appendDiv');
+
+        const generateFrag = numOfItems => {
+          let frag = document.createDocumentFragment();
+          for (; numOfItems--;) {
+            let item = document.createElement('DIV');
+            item.textContent = 'Item number - ' + numOfItems;
+            frag.insertBefore(item, frag.firstElementChild);
+          }
+          return frag;
+        };
+
+        const frag = generateFrag(20000);
+        //let appendToDiv = sjs.DOM.appendTo(appendDiv);
+
+        appendButton.addEventListener('click', function() {
+          sjs.DOM
+          .appendTo(appendDiv)(frag)
+          .then(result => console.log('Ended with result ' + result));
+        });
       });
     })();
     </script>
