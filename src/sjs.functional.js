@@ -228,6 +228,14 @@ f.memoized = (fn) => {
 // not :: bool -> bool
 f.not = (x) => !bool(x);
 
+// asyncAction :: Function -> Function
+f.asyncAction = action =>  {
+  action = fun(action);
+  return function(context, ...args) {
+    return window.requestAnimationFrame(() => action.apply(context, args));
+  };
+};
+
 /*
  * Given a data type, it returns a function that, when applied, checks if
  * the provide value is of the intended data type
