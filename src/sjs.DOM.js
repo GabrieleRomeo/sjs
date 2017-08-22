@@ -1,9 +1,9 @@
 import { types as TYPES } from './sjs.functional';
-import ULYF from './sjs.functional';
+import U from './sjs.utilities';
+import F from './sjs.functional';
 
 'use strict';
 
-const { curry } = ULYF;
 const d = {};
 
 
@@ -218,6 +218,73 @@ d.getPageInfo = () => {
  */
 d.getElemInfo = (element) => TYPES.HTMLNode(element).getBoundingClientRect();
 
+/**
+ * Generate a document fragment if necessary
+ *
+ * @param      {DocumentFragment | Node | Array}  children  The children to be
+ *                                                           appended to the
+ *                                                           document fragment
+ * @return     {DocumentFragment}  A documentFragment containing the intended
+ *                                 children
+ */
+const _generateFragment = (children = []) => {
+  let frag = document.createDocumentFragment();
+  const customT = TYPES.allowedTypes('DocumentFragment', 'HTMLNode');
+
+  // Check if the provided arguments are allowed, then create the fragment
+  F.arrayOf(customT)(children).forEach(child => frag.appendChild(child));
+
+  return frag;
+};
+
+/**
+ * It appends asynchronously a Node, or an Array containing nodes, or a
+ * documentFragment to a parent Node
+ *
+ * @param      {Node}   parent    The parent node
+ * @param      {DocumentFragment | Node | Array}   children  The children that
+ *                                                           you wish to append
+ *                                                           to
+ * @return     {Promise}  { It returns a Promise that can be exploited to
+ *                          understand when the action will be satisfied or not.
+ *                         }
+ */
+d.appendTo = (parent = document.body) => (...children) => {
+  const fragment = _generateFragment(children);
+  const append = F.asyncAction(Element.prototype.appendChild);
+  return new Promise((resolve, reject) => {
+    try {
+      resolve(append(TYPES.HTMLNode(parent), fragment));
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
+/**
+ * It prepends asynchronously a Node, or an Array containing nodes, or a
+ * documentFragment to a target Node
+ *
+ * @param      {Node}   target    The target node
+ * @param      {DocumentFragment | Node | Array}   children  The children that
+ *                                                           you wish to prepend
+ *                                                           to
+ * @return     {Promise}  { It returns a Promise that can be exploited to
+ *                          understand when the action will be satisfied or not.
+ *                         }
+ */
+d.prependTo = (target = document.body.firstChild) => (...children) => {
+  const fragment = _generateFragment(children);
+  const prepend = F.asyncAction(Element.prototype.insertBefore);
+  return new Promise((resolve, reject) => {
+    try {
+      resolve(prepend(TYPES.HTMLNode(target), fragment, target.firstChild));
+    } catch (e) {
+      reject(e);
+    }
+  });
+
+};
 
 // export public functions
 export default { ...d };
