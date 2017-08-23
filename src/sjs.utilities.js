@@ -341,7 +341,7 @@ U.getIncRandomInt = (max = 10, min = 0) => {
  * Retrieve the value of a particular cookie through its name
  * @memberof Utilities
  * @param  {string}   name The cookie's name
- * @return {string || undefined}  Returns the value of the intended cookie
+ * @return {(string | undefined)}  Returns the value of the intended cookie
  *                                or undefined
  */
 U.getCookie = (name) => {
