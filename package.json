@@ -22,6 +22,7 @@
     "compression-webpack-plugin": "^0.4.0",
     "git-revision-webpack-plugin": "^2.5.1",
     "html-webpack-plugin": "^2.29.0",
+    "jsdoc": "^3.5.4",
     "jsdom": "11.1.0",
     "jsdom-global": "3.0.2",
     "mocha": "^3.4.2",
@@ -34,7 +35,8 @@
     "test:mocha:watch": "webpack-dev-server --hot --config webpack.mocha.js",
     "dev": "webpack-dev-server --port 3000 --inline --colors --watch --hot --progress",
     "dev2": "WEBPACK_ENV=dev webpack --progress --colors --watch",
-    "prod": "webpack -p --env=prod --progress"
+    "prod": "webpack -p --env=prod --progress",
+    "generate-docs": "node_modules/.bin/jsdoc -c jsdoc.json"
   },
   "author": "Gabriele Romeo",
   "license": "ISC"
