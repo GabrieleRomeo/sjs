@@ -1,10 +1,9 @@
-import { types as TYPES } from './sjs.functional';
-import ULYF from './sjs.functional';
-import ULYD from './sjs.DOM';
-
 'use strict';
 
-const a = {};
+import { types as TYPES } from './sjs.functional';
+import ULYD from './sjs.DOM';
+
+const A = {};
 
 const easings = {
   'linear': (t) => {
@@ -53,7 +52,7 @@ const easings = {
  * @param  {String} [easingName]  The easing function's name you are looking for
  * @return {Function} The easing function (if any) or linear (default)
  */
-a.getEasing = (easingName = 'linear') => easings[TYPES.str(easingName)];
+A.getEasing = (easingName = 'linear') => easings[TYPES.str(easingName)];
 
 /**
  * Scroll the window to the element position
@@ -63,7 +62,7 @@ a.getEasing = (easingName = 'linear') => easings[TYPES.str(easingName)];
  * @param {Function} callback An optional callback
  */
 
-a.scrollTo = (element, options, callback) => {
+A.scrollTo = (element, options, callback) => {
   options = options || {};
   callback = callback && TYPES.fun(callback);
 
@@ -85,7 +84,7 @@ a.scrollTo = (element, options, callback) => {
   function scroll() {
     const now = Date.now();
     const time = Math.min(1, ((now - startTime) / duration));
-    const timeFunction = a.getEasing(easingName)(time);
+    const timeFunction = A.getEasing(easingName)(time);
 
     body.scrollTop = (timeFunction * (destination - start)) + start;
 
@@ -105,4 +104,4 @@ a.scrollTo = (element, options, callback) => {
 };
 
 
-export default { ...a };
+export default { ...A };
