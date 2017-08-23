@@ -1,9 +1,9 @@
+'use strict';
+
 import { types as TYPES } from './sjs.functional';
 import ULYF from './sjs.functional';
 
-'use strict';
-
-var v = {};
+const V = {};
 
 const _ALPHA  = 'abcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -19,13 +19,13 @@ const _ALPHA  = 'abcdefghijklmnopqrstuvwxyz0123456789';
  * @returns {boolean} True or False
  */
 
-v.isEmailAddress = (input) => {
+V.isEmailAddress = (input) => {
   const parts = TYPES.str(input).split('@');
 
   const minLength = parts.length === 2 || false;
   const local     = parts[0] && (parts[0].length > 0) &&
-                    !v.isConsecutive(parts[0], '.')  || false;
-  const domain    = parts[1] && !v.isConsecutive(parts[1], '.') || false;
+                    !V.isConsecutive(parts[0], '.')  || false;
+  const domain    = parts[1] && !V.isConsecutive(parts[1], '.') || false;
 
   return minLength && local && domain;
 };
@@ -53,7 +53,7 @@ v.isEmailAddress = (input) => {
  * @returns {boolean} True or False
  */
 
-v.isPhoneNumber = function(input) {
+V.isPhoneNumber = function(input) {
 
   const COUNTRY_CODE        = '39',
         INTERNATIONAL_PRFX  = '00',
@@ -207,7 +207,7 @@ v.isPhoneNumber = function(input) {
  * @returns {string} The input parameter text with all symbols removed
  */
 
-v.withoutSymbols = (input) => {
+V.withoutSymbols = (input) => {
   return TYPES.str(input).split('').map((item) => {
     const char = item.toLowerCase();
     return ((_ALPHA.indexOf(char) === -1) && item !== ' ') ? '' : item;
@@ -225,7 +225,7 @@ v.withoutSymbols = (input) => {
  * @returns {boolean} True or False
  */
 
-v.isDate = (input) => {
+V.isDate = (input) => {
   const customType = TYPES.allowedTypes('String', 'Date');
   const date = new Date(customType(input));
   return !isNaN(date.getDate());
@@ -245,12 +245,12 @@ v.isDate = (input) => {
  * @returns {boolean} True or False
  */
 
-v.isBeforeDate = (input, reference) => {
+V.isBeforeDate = (input, reference) => {
   const customType = TYPES.allowedTypes('String', 'Date');
   const d1 = new Date(customType(input));
   const d2 = new Date(customType(reference));
 
-  if (!v.isDate(d1) || !v.isDate(d2)) {
+  if (!V.isDate(d1) || !V.isDate(d2)) {
     throw 'Invalid Date';
   }
 
@@ -271,12 +271,12 @@ v.isBeforeDate = (input, reference) => {
  * @returns {boolean} True or False
  */
 
-v.isAfterDate = (input, reference) => {
+V.isAfterDate = (input, reference) => {
   const customType = TYPES.allowedTypes('String', 'Date');
   const d1 = new Date(customType(input));
   const d2 = new Date(customType(reference));
 
-  if (!v.isDate(d1) || !v.isDate(d2)) {
+  if (!V.isDate(d1) || !V.isDate(d2)) {
     throw 'Invalid Date';
   }
 
@@ -295,15 +295,15 @@ v.isAfterDate = (input, reference) => {
  * @returns {boolean} True or False
  */
 
-v.isBeforeToday = (input) => {
+V.isBeforeToday = (input) => {
   const customType = TYPES.allowedTypes('String', 'Date');
   const d1 = new Date(customType(input));
   const d2 = new Date();
   let days;
 
-  if (!v.isDate(d1)) throw 'Invalid Date';
+  if (!V.isDate(d1)) throw 'Invalid Date';
 
-  days = v.diffInDays(d1, d2);
+  days = V.diffInDays(d1, d2);
 
   return days < 0;
 };
@@ -320,15 +320,15 @@ v.isBeforeToday = (input) => {
  * @returns {boolean} True or False
  */
 
-v.isAfterToday = (input) => {
+V.isAfterToday = (input) => {
   const customType = TYPES.allowedTypes('String', 'Date');
   const d1 = new Date(customType(input));
   const d2 = new Date();
   let days;
 
-  if (!v.isDate(d1)) throw 'Invalid Date';
+  if (!V.isDate(d1)) throw 'Invalid Date';
 
-  days = v.diffInDays(d1, d2);
+  days = V.diffInDays(d1, d2);
 
   return days > 0;
 };
@@ -350,7 +350,7 @@ v.isAfterToday = (input) => {
  * @returns {boolean} True or False
  */
 
-v.isEmpty = (input) => {
+V.isEmpty = (input) => {
   if (ULYF.notExists(input) || input.trim().length > 0) {
     return false;
   } else {
@@ -379,7 +379,7 @@ v.isEmpty = (input) => {
  * @returns {boolean} True or False
  */
 
-v.contains = (input, words) => {
+V.contains = (input, words) => {
   let wlen;
   let inputList;
   let i;
@@ -423,7 +423,7 @@ v.contains = (input, words) => {
  * @returns {boolean} True or False
  */
 
-v.lacks = (input, words) => !v.contains.call(this, input, words);
+V.lacks = (input, words) => !V.contains.call(this, input, words);
 
 
 /**
@@ -443,10 +443,10 @@ v.lacks = (input, words) => !v.contains.call(this, input, words);
  * @returns {boolean} True or False
  */
 
-v.isComposedOf = function(input, strings) {
+V.isComposedOf = function(input, strings) {
   let result = TYPES.arr(strings).map(item => item.toString().toLowerCase())
                   .reduce((prev, curr) => {
-                    return prev.toLowerCase().split(curr).join('');
+                    return preV.toLowerCase().split(curr).join('');
                   },  TYPES.str(input)).trim();
 
   return result.length === 0;
@@ -471,7 +471,7 @@ v.isComposedOf = function(input, strings) {
  * @returns {boolean} True or False
  */
 
-v.isLength = (input, n) => TYPES.str(input).length <= TYPES.int(n);
+V.isLength = (input, n) => TYPES.str(input).length <= TYPES.int(n);
 
 
 /**
@@ -493,7 +493,7 @@ v.isLength = (input, n) => TYPES.str(input).length <= TYPES.int(n);
  * @returns {boolean} True or False
  */
 
-v.isOfLength = (input, n) => TYPES.str(input).length >= TYPES.int(n);
+V.isOfLength = (input, n) => TYPES.str(input).length >= TYPES.int(n);
 
 
 /**
@@ -513,7 +513,7 @@ v.isOfLength = (input, n) => TYPES.str(input).length >= TYPES.int(n);
  * @returns {integer} The number of contained words
  */
 
-v.countWords = (input) => {
+V.countWords = (input) => {
   input = TYPES.str(input).replace(/[^a-zA-Z\d\s\-:]/g, '');
 
   if (input.length === 0) {
@@ -535,7 +535,7 @@ v.countWords = (input) => {
  * @returns {boolean} True or False
  */
 
-v.lessWordsThan = (input, n) => v.countWords(input) <= TYPES.int(n);
+V.lessWordsThan = (input, n) => V.countWords(input) <= TYPES.int(n);
 
 /**
  * Checks if the input parameter has a word count greater than or equal to
@@ -547,7 +547,7 @@ v.lessWordsThan = (input, n) => v.countWords(input) <= TYPES.int(n);
  * @returns {boolean} True or False
  */
 
-v.moreWordsThan = (input, n) => v.countWords(input) >= TYPES.int(n);
+V.moreWordsThan = (input, n) => V.countWords(input) >= TYPES.int(n);
 
 
 /**
@@ -563,7 +563,7 @@ v.moreWordsThan = (input, n) => v.countWords(input) >= TYPES.int(n);
  * @returns {boolean} True or False
  */
 
-v.isBetween = function(input, floor, ceil) {
+V.isBetween = function(input, floor, ceil) {
   const customType = TYPES.allowedTypes('String', 'NUMBER');
   input = customType(input);
   floor = customType(floor);
@@ -594,7 +594,7 @@ v.isBetween = function(input, floor, ceil) {
  * @returns {boolean} True or False
  */
 
-v.isAlphanumeric = function(input) {
+V.isAlphanumeric = function(input) {
   const customType = TYPES.allowedTypes('String', 'INTEGER');
   return customType(input).toString().split('').reduce((prev, curr) => {
     return (_ALPHA.indexOf(curr.toLowerCase()) === -1) ? false : prev;
@@ -625,16 +625,16 @@ v.isAlphanumeric = function(input) {
  * @returns {boolean} True or False
  */
 
-v.isCreditCard = function isCreditCard(input) {
+V.isCreditCard = function isCreditCard(input) {
   input = TYPES.str(input);
 
-  const firstT = v.countWords(input) === 4 && input.indexOf('-') !== -1;
+  const firstT = V.countWords(input) === 4 && input.indexOf('-') !== -1;
 
   if (firstT) {
-    input = v.withoutSymbols(input);
+    input = V.withoutSymbols(input);
   }
 
-  if (!v.isAlphanumeric(input) || input.length !== 16) {
+  if (!V.isAlphanumeric(input) || input.length !== 16) {
     return false;
   }
 
@@ -668,7 +668,7 @@ v.isCreditCard = function isCreditCard(input) {
  * @returns {boolean} True or False
  */
 
-v.isHex = (input) => {
+V.isHex = (input) => {
   const len = TYPES.str(input).length;
   const chars = input.substr(1).split('');
 
@@ -676,8 +676,8 @@ v.isHex = (input) => {
   if (len !== 4 && len !== 7) return false;
 
   return chars.reduce(function(prev, curr) {
-    const chk1 = v.isBetween(curr, 'a', 'f');
-    const chk2 = v.isBetween(curr, '0', '9');
+    const chk1 = V.isBetween(curr, 'a', 'f');
+    const chk2 = V.isBetween(curr, '0', '9');
     return (chk1 || chk2) ? prev : false;
   }, true);
 
@@ -708,14 +708,14 @@ v.isHex = (input) => {
  * @returns {boolean} True or False
  */
 
-v.isRGB = (input) => {
+V.isRGB = (input) => {
   const sanitized = TYPES.str(input).split('rgb(').join('').split(')').join('');
   const values   = sanitized.split(',');
 
   if (values.length !== 3) return false;
 
   return values.reduce(function(prev, curr) {
-    return (v.isBetween(curr.trim(), '0', '255')) ? prev : false;
+    return (V.isBetween(curr.trim(), '0', '255')) ? prev : false;
   }, true);
 };
 
@@ -734,15 +734,15 @@ v.isRGB = (input) => {
  * @returns {boolean} True or False
  */
 
-v.isHSL = (input) => {
+V.isHSL = (input) => {
   const sanitized = TYPES.str(input).split('hsl(').join('').split(')').join('');
   const values   = sanitized.split(',');
 
   if (values.length !== 3) return false;
 
-  if (!(v.isBetween(values[0].trim(), 0, 360))) return false;
-  if (!(v.isBetween(values[1].trim(), 0, 1))) return false;
-  if (!(v.isBetween(values[2].trim(), 0, 1))) return false;
+  if (!(V.isBetween(values[0].trim(), 0, 360))) return false;
+  if (!(V.isBetween(values[1].trim(), 0, 1))) return false;
+  if (!(V.isBetween(values[2].trim(), 0, 1))) return false;
 
   return true;
 };
@@ -768,7 +768,7 @@ v.isHSL = (input) => {
  * @returns {boolean} True or False
  */
 
-v.isColor = (input) => v.isHex(input) || v.isRGB(input) || v.isHSL(input);
+V.isColor = (input) => V.isHex(input) || V.isRGB(input) || V.isHSL(input);
 
 
 /**
@@ -792,7 +792,7 @@ v.isColor = (input) => v.isHex(input) || v.isRGB(input) || v.isHSL(input);
  * @returns {boolean} True or False
  */
 
-v.isTrimmed = function isTrimmed(input) {
+V.isTrimmed = function isTrimmed(input) {
   const chars = TYPES.str(input).split(' ');
 
   return chars.reduce(function(prev, curr) {
@@ -809,7 +809,7 @@ v.isTrimmed = function isTrimmed(input) {
  * @returns {int} The difference in days
  */
 
-v.diffInDays = (d1, d2) => {
+V.diffInDays = (d1, d2) => {
 
   let diffInMilliSec = d1.getTime() - d2.getTime();
   const milliSecInAday = 24 * 60 * 60 * 1000; //total milli-seconds in a day
@@ -830,7 +830,7 @@ v.diffInDays = (d1, d2) => {
  *
  * @returns {boolean} True if word is consecutive, False otherwise
  */
-v.isConsecutive = (string, word) => {
+V.isConsecutive = (string, word) => {
   const substrings = TYPES.str(string).split(TYPES.str(word));
 
   for(var item in substrings) {
@@ -841,4 +841,4 @@ v.isConsecutive = (string, word) => {
 
 
 // export public functions
-export default { ...v };
+export default { ...V };
