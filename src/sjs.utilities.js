@@ -1,77 +1,77 @@
+'use strict';
 
 import { types as TYPES } from './sjs.functional';
 import ULYF from './sjs.functional';
 
-'use strict';
-
+/**
+ * The Utilities namespace.
+ * This namespace contains a set of utility functions used for a variety of things.
+ * For example the evaluation of arguments or the generation of random integer
+ * or Guid
+ * @namespace U
+ */
 const U = {};
-const math = Math;
 
+const math = Math;
 const mathFloor = math.floor;
 const mathRnd = math.random;
 
 /**
- * Checks if the provided parameter is an Array
- *
+ * Checks if the provided argument is an Array
+ * @memberof Utilities
  * @param {Array} arr An Array
  *
  * @returns {Boolean} True | False
  *
  */
-
 U.isArray = Array.isArray || function(arr) {
   return Object.prototype.toString.call(arr) === '[object Array]';
 };
 
 /**
- * Checks if the provided parameter is a Function
- *
+ * Checks if the provided argument is a Function
+ * @memberof Utilities
  * @param {Fun} fn A Function
  *
  * @returns {Boolean} True | False
  *
  */
-
 U.isFunc = fn => typeof fn === 'function';
 
 /**
- * Checks if the provided parameter is a String
- *
+ * Checks if the provided argument is a String
+ * @memberof Utilities
  * @param {str} str A String
  *
  * @returns {Boolean} True | False
  *
  */
-
 U.isString = str => typeof str === 'string';
 
 /**
- * Checks if the provided parameter is a Number
- *
+ * Checks if the provided argument is a Number
+ * @memberof Utilities
  * @param {Number} num A Number
  *
  * @returns {Boolean} True | False
  *
  */
-
 U.isNumber = num => !isNaN(parseFloat(num)) && isFinite(num);
 
 /**
- * Checks if the provided parameter is an Integer
- *
+ * Checks if the provided argument is an Integer
+ * @memberof Utilities
  * @param {Number} num A Number
- *
  * @returns {Boolean} True | False
  *
  */
-
 U.isInt = num => U.isNumber(num) && (parseFloat(num) === parseInt(num, 10));
 
 /**
  * Iterates and calls the callback parameter for each element or property
  * of a list at the interval specified by the n parameter.
  * It does not call callback on values greater than the list’s number
- *
+ * @memberof Utilities
  * @param {Array} list The list of values
  * @param {int} n An interval used as step of the iteration
  * @param {Func} n A callback function applied on the elements within the
@@ -79,7 +79,6 @@ U.isInt = num => U.isNumber(num) && (parseFloat(num) === parseInt(num, 10));
  *
  * @returns {void}
  */
-
 U.by = (list, n, callback) => {
   list = TYPES.arr(list);
   callback = TYPES.fun(callback);
@@ -108,38 +107,32 @@ const _objExtract = (object, value) => {
 
 /**
  * Creates an array of all the keys of an object
- *
+ * @memberof Utilities
  * @param {Object} object The object used as a template
- *
  * @returns {Array} An Array containing all the keys of the provided object
  */
-
 U.keys = object => _objExtract(object, 'key');
 
 /**
  * Creates an array of all the value of an object
- *
+ * @memberof Utilities
  * @param {Object} object The object used as a template
- *
  * @returns {Array} An Array containing all the values of the provided
  *                  object
  */
-
 U.values = object => _objExtract(object, 'value');
 
 /**
  * Creates an array of all keys and values of an object in the order of
  * [key, value, key, value] for as many key/value pairs as exist in the
  * object.
- *
+ * @memberof Utilities
  * @param {Object} object The object used as a template
- *
  * @returns {Array} An Array containing all keys and values pairs of the provided
  *                  object
  * @example pairs({count: 5, length: 10, total: 16});
  * // returns ["count", 5, "length", 10, "total", 16]
  */
-
 U.pairs = function(object) {
   const list = Object.keys(TYPES.obj(object));
   return ULYF.flatten(list.map(v => [v, object[v]]));
@@ -148,15 +141,13 @@ U.pairs = function(object) {
 /**
  * Returns a randomly re-arranged copy of the elements in its parameter
  * array.
- *
+ * @memberof Utilities
  * @param {Array} object The Array used as a template
  * @returns {Array} A randomly re-arranged copy of the original Array
- *
  *  @example var arr = [1,2,3,4,5];
  *           utilities.shuffle(arr);
  *  // will output something like: [2,4,5,3,1]
  */
-
 U.shuffle = function(array) {
   let result = Array.from(TYPES.arr(array));
   for (let i = result.length; i; i--) {
@@ -172,7 +163,7 @@ U.shuffle = function(array) {
  * otherwise, add an “s” to the plural word.
  * If the pluralWord parameter is provided, instead of adding an “s,”
  * return the pluralWord.
- *
+ * @memberof Utilities
  * @param {int} n The number of "s"
  * @param {String} word A non-plural word
  * @param {String} pluralWord An optional plural word
@@ -194,7 +185,6 @@ U.shuffle = function(array) {
  * @example utilities.pluralize(2, "lioness", "lionesses);
  *  // "lionesses"
  */
-
 U.pluralize = function(n, word, pluralWord) {
   n = TYPES.int(n);
   word = TYPES.str(word);
@@ -211,16 +201,14 @@ U.pluralize = function(n, word, pluralWord) {
  * Camel case presents words with no spaces separating them and with
  * each word’s first letter capitalized except the first word,
  * which is lower case.
- *
+ * @memberof Utilities
  * @param {string} str A camelCase string
- *
  * @returns {String} A dashed string
  *
  * @example toDash(hotDog), toDash(spaceStationComplex), toDash(myFirstFunction)
  * // returs hot-dog, space-station-complex, my-first-function
  *
  */
-
 U.toDash = function(str) {
   let chars = TYPES.str(str).split('');
 
@@ -234,15 +222,13 @@ U.toDash = function(str) {
 
 /**
  * Converts a dashed string to a camel case string.
- *
+ * @memberof Utilities
  * @param {string} str A dashed string
- *
  * @returns {String} A camelCase string
  *
  * @example toCamel(hot-dog), toCamel(space-station-complex)
  * // returs hotDog, spaceStationComplex
  */
-
 U.toCamel = function(str) {
   let chars = TYPES.str(str).split('-');
   const head = ULYF.head(chars).toLowerCase();
@@ -258,14 +244,13 @@ U.toCamel = function(str) {
  * Searches all values of the parameter obj and returns “true” if any are
  * equal to the search parameter.
  * Otherwise it returns “false.”
- *
+ * @memberof Utilities
  * @param {Object} obj An object
  * @param {string} search The string you are looking for
  *
  * @returns {Boolean} True | False
  *
  */
-
 U.has = ULYF.maybe(function(object, search) {
   object = TYPES.obj(object);
 
@@ -282,7 +267,7 @@ U.has = ULYF.maybe(function(object, search) {
  * Returns a new object by picking all key/value pairs from the parameter
  * obj.
  * The keys that are picked will be determined by the array parameter keys.
- *
+ * @memberof Utilities
  * @param {Object} obj An object
  * @param {Array} keys A list of keys
  *
@@ -302,7 +287,6 @@ U.has = ULYF.maybe(function(object, search) {
   * @example utilities.pick(data, ["access", "animals"]);
     // returns {access: "full"};
  */
-
 U.pick = ULYF.maybe(function(obj, keys) {
   obj  = TYPES.obj(obj);
   keys = TYPES.arr(keys);
@@ -319,7 +303,7 @@ U.pick = ULYF.maybe(function(obj, keys) {
 /**
  * Replaces all occurencies of a particular search string with another
  * string
- *
+ * @memberof Utilities
  * @param {String} text A string used as a base for the search
  * @param {String} search A string you are looking for the replace
  * @param {String} replace A string used as replacing
@@ -327,40 +311,39 @@ U.pick = ULYF.maybe(function(obj, keys) {
  * @returns {String} A new string with all occurrencies replaced
  *
  */
-
 U.replaceAll = (text, search, replace) => TYPES.str(text)
                                                .split(TYPES.str(search))
                                                .join(TYPES.str(replace));
 
 /**
  * Get a random integer
+ * @memberof Utilities
  * @param  {Number} [max]  The upper limit (defualt 10 - not included)
  * @param  {Number} [min]  The lower limit (default 0 - included)
  * @return {Number}      A random integer from min to max
  */
-
 U.getRandomInt = (max = 10, min = 0) => {
   return mathFloor(mathRnd() * (TYPES.int(max) - TYPES.int(min))) + min;
 };
 
 /**
  * Get a random integer (inclusive)
+ * @memberof Utilities
  * @param  {Number} [max]  The upper limit (defualt 10 - included)
  * @param  {Number} [min]  The lower limit (default 0 - included)
  * @return {Number}      A random integer from min to max
  */
-
 U.getIncRandomInt = (max = 10, min = 0) => {
   return mathFloor(mathRnd() * (TYPES.int(max) - TYPES.int(min) + 1)) + min;
 };
 
 /**
  * Retrieve the value of a particular cookie through its name
+ * @memberof Utilities
  * @param  {string}   name The cookie's name
  * @return {string || undefined}  Returns the value of the intended cookie
  *                                or undefined
  */
-
 U.getCookie = (name) => {
   const decodedCookie = decodeURIComponent(document.cookie);
   const cookies = decodedCookie.split(';');
@@ -375,12 +358,12 @@ U.getCookie = (name) => {
 
 /*
  * Get an object containing all the existing cookies or a single cookie (if any)
+ * @memberof Utilities
  * @param  {string}   [name] The cookie's name
  * @return {Object}    Return an object containing all cookies, the intended
  *                      cookie (if the name argument has been provided), or
  *                      an empty object
  */
-
 U.getCookies = (name) => {
   const decodedCookie = decodeURIComponent(document.cookie);
   const cookies = decodedCookie.split(';');
@@ -410,13 +393,14 @@ const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substrin
 
 /**
  * Generate a random GUID
+ * @memberof Utilities
  * @return {String}
  */
 U.generateGUID = () => `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4() + s4() + s4()}`;
 
 /**
  * Given a day number it returns the day name
- *
+ * @memberof Utilities
  * @param      {Number}  dayNumber  The day number
  * @return     {string}  The day name.
  */
