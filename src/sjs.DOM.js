@@ -1,10 +1,9 @@
-import { types as TYPES } from './sjs.functional';
-import U from './sjs.utilities';
-import F from './sjs.functional';
-
 'use strict';
 
-const d = {};
+import { types as TYPES } from './sjs.functional';
+import F from './sjs.functional';
+
+const DOM = {};
 
 
 /**
@@ -17,7 +16,7 @@ const d = {};
  * @returns {object} The HTML object or null
  */
 
-d.$ = (selector, context) => (context || document).querySelector(TYPES.str(selector));
+DOM.$ = (selector, context) => (context || document).querySelector(TYPES.str(selector));
 
 
 /**
@@ -30,7 +29,7 @@ d.$ = (selector, context) => (context || document).querySelector(TYPES.str(selec
  * @returns {object} The HTML object or null
  */
 
-d.$$ = (selector, context) => (context || document).querySelectorAll(TYPES.str(selector));
+DOM.$$ = (selector, context) => (context || document).querySelectorAll(TYPES.str(selector));
 
 /**
  * Find the nearest ancestor that matches any CSS selector with respect
@@ -42,7 +41,7 @@ d.$$ = (selector, context) => (context || document).querySelectorAll(TYPES.str(s
  * @returns {object} The HTML object or null
  */
 
-d.getAncestorBySelector = (elem, selector) => {
+DOM.getAncestorBySelector = (elem, selector) => {
     // Element.matches polyfill
   if (!Object.prototype.matches) {
     if (!Element.prototype.matches) {
@@ -79,7 +78,7 @@ d.getAncestorBySelector = (elem, selector) => {
  * @return {Node}      document.documentElement or document.body
  */
 
-d.getBody = () => {
+DOM.getBody = () => {
   let body;
   document.documentElement.scrollTop += 1;
   body = ( document.documentElement.scrollTop !== 0 ) ?
@@ -94,7 +93,7 @@ d.getBody = () => {
  * @param  {Node}  elem  The element
  * @return {Number}      An integer representing the distance from the of the page
  */
-d.getElemDistanceFromTop = function(elem) {
+DOM.getElemDistanceFromTop = function(elem) {
   let location = 0;
   if ( TYPES.HTMLNode(elem).offsetParent ) {
     do {
@@ -110,7 +109,7 @@ d.getElemDistanceFromTop = function(elem) {
  * @param  {String}  selector A valid CSS selector
  * @return {Array}   An array containing the siblings
  */
-d.getSiblingsBySelector = (selector) => {
+DOM.getSiblingsBySelector = (selector) => {
   const siblings = [];
   const elem = document.querySelector(TYPES.str(selector));
   let sibling = elem.parentNode.firstChild;
@@ -131,7 +130,7 @@ d.getSiblingsBySelector = (selector) => {
  * @param  {Node}  refNode The existing node in the DOM
  * @return {Node}  The element that was inserted
  */
-d.insertAfter = (newNode, refNode) => {
+DOM.insertAfter = (newNode, refNode) => {
   const p = refNode.parentNode;
   return p.insertBefore(TYPES.HTMLNode(newNode), TYPES.HTMLNode(refNode.nextSibling));
 };
@@ -143,7 +142,7 @@ d.insertAfter = (newNode, refNode) => {
  * @return {Boolean}  It returns true if the swap was successful
  *                    and false otherwise
  */
-d.swapElements = (nodeA, nodeB) => {
+DOM.swapElements = (nodeA, nodeB) => {
   const parentA = TYPES.HTMLNode(nodeA).parentNode;
   const parentB = TYPES.HTMLNode(nodeB).parentNode;
   let success = null;
@@ -164,8 +163,8 @@ d.swapElements = (nodeA, nodeB) => {
  * @param  {String}  selector A valid CSS selector
  * @return {Array}   An array containing the removed elements
  */
-d.removeAll = (selector) => {
-  const elements = Array.from(d.$$(selector) || []);
+DOM.removeAll = (selector) => {
+  const elements = Array.from(DOM.$$(selector) || []);
   elements.forEach((element) => element.parentNode.removeChild(element));
   return elements;
 };
@@ -176,7 +175,7 @@ d.removeAll = (selector) => {
  * @param  {Node}   element The element for which to get the computed style
  * @return {CSSStyleDeclaration }
  */
-d.getComputed = (element) => (property) => {
+DOM.getComputed = (element) => (property) => {
   return window.getComputedStyle(TYPES.HTMLNode(element), null)
                .getPropertyValue(TYPES.str(property));
 };
@@ -184,8 +183,8 @@ d.getComputed = (element) => (property) => {
 /**
  * Get ViewPort's Info
  */
-d.getViewPortInfo = () => {
-  const body = d.getBody();
+DOM.getViewPortInfo = () => {
+  const body = DOM.getBody();
   const width = Math.max(body.clientWidth, window.innerWidth || 0);
   const height = Math.max(body.clientHeight, window.innerHeight || 0);
   return {
@@ -197,7 +196,7 @@ d.getViewPortInfo = () => {
 /**
  * Get Page's Info
  */
-d.getPageInfo = () => {
+DOM.getPageInfo = () => {
   const body = document.body;
   const html = document.documentElement;
   const height = Math.max(body.scrollHeight, body.offsetHeight,
@@ -216,7 +215,7 @@ d.getPageInfo = () => {
 /**
  * Get Element's Info
  */
-d.getElemInfo = (element) => TYPES.HTMLNode(element).getBoundingClientRect();
+DOM.getElemInfo = (element) => TYPES.HTMLNode(element).getBoundingClientRect();
 
 /**
  * Generate a document fragment if necessary
@@ -249,7 +248,7 @@ const _generateFragment = (children = []) => {
  *                          understand when the action will be satisfied or not.
  *                         }
  */
-d.appendTo = (parent = document.body) => (...children) => {
+DOM.appendTo = (parent = document.body) => (...children) => {
   const fragment = _generateFragment(children);
   const append = F.asyncAction(Element.prototype.appendChild);
   return new Promise((resolve, reject) => {
@@ -273,7 +272,7 @@ d.appendTo = (parent = document.body) => (...children) => {
  *                          understand when the action will be satisfied or not.
  *                         }
  */
-d.prependTo = (target = document.body.firstChild) => (...children) => {
+DOM.prependTo = (target = document.body.firstChild) => (...children) => {
   const fragment = _generateFragment(children);
   const prepend = F.asyncAction(Element.prototype.insertBefore);
   return new Promise((resolve, reject) => {
@@ -287,4 +286,4 @@ d.prependTo = (target = document.body.firstChild) => (...children) => {
 };
 
 // export public functions
-export default { ...d };
+export default { ...DOM };
