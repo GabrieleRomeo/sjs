@@ -431,7 +431,7 @@ V.lacks = (input, words) => !V.contains.call(this, input, words);
  * @param {Array} words A list of words to check.
  * @example .isComposedOf("10184", ["1", "2", "3", "4", "5", "6" ,"7", "8", "9", "0"]);
  *  // returns true
- * @exmaple .isComposedOf("I am ready.", ["I", "I'm", "am", "not", "ready"]);
+ * @example .isComposedOf("I am ready.", ["I", "I'm", "am", "not", "ready"]);
  *  // returns true
  *
  * @returns {boolean} True or False
