@@ -5,7 +5,7 @@ import ULYF from './functional';
 
 /**
  * The Validators namespace.
- * This namespace contains a set of utility functions used for validate inputs
+ * This namespace contains a set of utility functions used to validate inputs
  * @namespace V
  */
 const V = {};
