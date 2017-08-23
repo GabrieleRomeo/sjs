@@ -19,7 +19,7 @@ const DOM = {};
  * @param {string} selector A valid CSS selector
  * @param {string} [context] The ancestor where to start the research from
  *
- * @returns {object} The HTML object or null
+ * @returns {Node} An HTML node or null
  */
 DOM.$ = (selector, context) => (context || document).querySelector(TYPES.str(selector));
 
@@ -31,7 +31,7 @@ DOM.$ = (selector, context) => (context || document).querySelector(TYPES.str(sel
  * @param {string} selector A valid CSS selector
  * @param {string} [context] The ancestor where to start the research from
  *
- * @returns {object} The HTML object or null
+ * @returns {NodeList} An HTML Nodelist or null
  */
 DOM.$$ = (selector, context) => (context || document).querySelectorAll(TYPES.str(selector));
 
