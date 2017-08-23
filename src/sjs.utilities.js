@@ -4,7 +4,7 @@ import ULYF from './sjs.functional';
 
 'use strict';
 
-const u = {};
+const U = {};
 const math = Math;
 const mathRound = math.round;
 const mathFloor = math.floor;
@@ -20,7 +20,7 @@ const mathRnd = math.random;
  *
  */
 
-u.isArray = Array.isArray || function(arr) {
+U.isArray = Array.isArray || function(arr) {
   return Object.prototype.toString.call(arr) === '[object Array]';
 };
 
@@ -33,7 +33,7 @@ u.isArray = Array.isArray || function(arr) {
  *
  */
 
-u.isFunc = fn => typeof fn === 'function';
+U.isFunc = fn => typeof fn === 'function';
 
 /**
  * Checks if the provided parameter is a String
@@ -44,7 +44,7 @@ u.isFunc = fn => typeof fn === 'function';
  *
  */
 
-u.isString = str => typeof str === 'string';
+U.isString = str => typeof str === 'string';
 
 /**
  * Checks if the provided parameter is a Number
@@ -55,7 +55,7 @@ u.isString = str => typeof str === 'string';
  *
  */
 
-u.isNumber = num => !isNaN(parseFloat(num)) && isFinite(num);
+U.isNumber = num => !isNaN(parseFloat(num)) && isFinite(num);
 
 /**
  * Checks if the provided parameter is an Integer
@@ -66,7 +66,7 @@ u.isNumber = num => !isNaN(parseFloat(num)) && isFinite(num);
  *
  */
 
-u.isInt = num => u.isNumber(num) && (parseFloat(num) === parseInt(num, 10));
+U.isInt = num => U.isNumber(num) && (parseFloat(num) === parseInt(num, 10));
 
 /**
  * Iterates and calls the callback parameter for each element or property
@@ -81,7 +81,7 @@ u.isInt = num => u.isNumber(num) && (parseFloat(num) === parseInt(num, 10));
  * @returns {void}
  */
 
-u.by = (list, n, callback) => {
+U.by = (list, n, callback) => {
   list = TYPES.arr(list);
   callback = TYPES.fun(callback);
 
@@ -115,7 +115,7 @@ const _objExtract = (object, value) => {
  * @returns {Array} An Array containing all the keys of the provided object
  */
 
-u.keys = object => _objExtract(object, 'key');
+U.keys = object => _objExtract(object, 'key');
 
 /**
  * Creates an array of all the value of an object
@@ -126,7 +126,7 @@ u.keys = object => _objExtract(object, 'key');
  *                  object
  */
 
-u.values = object => _objExtract(object, 'value');
+U.values = object => _objExtract(object, 'value');
 
 /**
  * Creates an array of all keys and values of an object in the order of
@@ -141,7 +141,7 @@ u.values = object => _objExtract(object, 'value');
  * // returns ["count", 5, "length", 10, "total", 16]
  */
 
-u.pairs = function(object) {
+U.pairs = function(object) {
   const list = Object.keys(TYPES.obj(object));
   return ULYF.flatten(list.map(v => [v, object[v]]));
 };
@@ -158,7 +158,7 @@ u.pairs = function(object) {
  *  // will output something like: [2,4,5,3,1]
  */
 
-u.shuffle = function(array) {
+U.shuffle = function(array) {
   let result = Array.from(TYPES.arr(array));
   for (let i = result.length; i; i--) {
     let j = Math.floor(Math.random() * i);
@@ -196,7 +196,7 @@ u.shuffle = function(array) {
  *  // "lionesses"
  */
 
-u.pluralize = function(n, word, pluralWord) {
+U.pluralize = function(n, word, pluralWord) {
   n = TYPES.int(n);
   word = TYPES.str(word);
 
@@ -222,7 +222,7 @@ u.pluralize = function(n, word, pluralWord) {
  *
  */
 
-u.toDash = function(str) {
+U.toDash = function(str) {
   let chars = TYPES.str(str).split('');
 
   return chars.map(function(item) {
@@ -244,7 +244,7 @@ u.toDash = function(str) {
  * // returs hotDog, spaceStationComplex
  */
 
-u.toCamel = function(str) {
+U.toCamel = function(str) {
   let chars = TYPES.str(str).split('-');
   const head = ULYF.head(chars).toLowerCase();
 
@@ -267,7 +267,7 @@ u.toCamel = function(str) {
  *
  */
 
-u.has = ULYF.maybe(function(object, search) {
+U.has = ULYF.maybe(function(object, search) {
   object = TYPES.obj(object);
 
   for (let prop in object) {
@@ -304,7 +304,7 @@ u.has = ULYF.maybe(function(object, search) {
     // returns {access: "full"};
  */
 
-u.pick = ULYF.maybe(function(obj, keys) {
+U.pick = ULYF.maybe(function(obj, keys) {
   obj  = TYPES.obj(obj);
   keys = TYPES.arr(keys);
 
@@ -329,7 +329,7 @@ u.pick = ULYF.maybe(function(obj, keys) {
  *
  */
 
-u.replaceAll = (text, search, replace) => TYPES.str(text)
+U.replaceAll = (text, search, replace) => TYPES.str(text)
                                                .split(TYPES.str(search))
                                                .join(TYPES.str(replace));
 
@@ -340,7 +340,7 @@ u.replaceAll = (text, search, replace) => TYPES.str(text)
  * @return {Number}      A random integer from min to max
  */
 
-u.getRandomInt = (max = 10, min = 0) => {
+U.getRandomInt = (max = 10, min = 0) => {
   return mathFloor(mathRnd() * (TYPES.int(max) - TYPES.int(min))) + min;
 }
 
@@ -351,7 +351,7 @@ u.getRandomInt = (max = 10, min = 0) => {
  * @return {Number}      A random integer from min to max
  */
 
-u.getIncRandomInt = (max = 10, min = 0) => {
+U.getIncRandomInt = (max = 10, min = 0) => {
   return mathFloor(mathRnd() * (TYPES.int(max) - TYPES.int(min) + 1)) + min;
 }
 
@@ -362,7 +362,7 @@ u.getIncRandomInt = (max = 10, min = 0) => {
  *                                or undefined
  */
 
-u.getCookie = (name) => {
+U.getCookie = (name) => {
   const decodedCookie = decodeURIComponent(document.cookie);
   const cookies = decodedCookie.split(';');
 
@@ -382,7 +382,7 @@ u.getCookie = (name) => {
  *                      an empty object
  */
 
-u.getCookies = (name) => {
+U.getCookies = (name) => {
   const decodedCookie = decodeURIComponent(document.cookie);
   const cookies = decodedCookie.split(';');
 
@@ -413,7 +413,7 @@ const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substrin
  * Generate a random GUID
  * @return {String}
  */
-u.generateGUID = () => `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4() + s4() + s4()}`;
+U.generateGUID = () => `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4() + s4() + s4()}`;
 
 /**
  * Given a day number it returns the day name
@@ -421,7 +421,7 @@ u.generateGUID = () => `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4() + s4() + s
  * @param      {Number}  dayNumber  The day number
  * @return     {string}  The day name.
  */
-u.getDayName = (dayNumber) => {
+U.getDayName = (dayNumber) => {
   let dayName;
   switch (TYPES.int(dayNumber)) {
   case 0:
