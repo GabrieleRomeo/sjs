@@ -1,12 +1,16 @@
-## sjs - A simple Javascript Utility Library
+## sjs - Super Javascript Utility Library
 
 Hello and Welcome to this repository.
 
 *sjs* is a collection of algorithms and functions wrote during my studies at [Bov Academy](https://www.bovacademy.com).
 
-Unlike many other js libraries, *sjs* is strongly typed which means that each provided parameter is checked against a predefined data type.
 
-Functions are collected and categorized under a specific tag, using namespaces:
+
+Unlike many other js libraries, SJS aims to be **strongly-typed**. Indeed, when you provide an argument to a function, the library checks if it belongs to the expected data type. Otherwise, the system throws an exception.
+
+
+
+Functions are collected and categorized under namespaces using a particula tag:
 
 
 
@@ -17,7 +21,7 @@ Functions are collected and categorized under a specific tag, using namespaces:
 |     E     | Extra Functions            | sjs.E     |
 |     F     | Functional Programming     | sjs.F     |
 |     U     | Utility functions          | sjs.U     |
-|     V     | Validator Functions        | sjs.F     |
+|     V     | Validator Functions        | sjs.V     |
 |   types   | A collection of Data Types | sjs.types |
 
 
