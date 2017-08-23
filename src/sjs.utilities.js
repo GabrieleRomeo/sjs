@@ -189,11 +189,11 @@ U.pluralize = function(n, word, pluralWord) {
   n = TYPES.int(n);
   word = TYPES.str(word);
 
-  if (pluralWord) { return pluralWord };
+  if (pluralWord) { return pluralWord; }
   if (n === 1) { return word; }
 
   return word + 's';
-}
+};
 
 
 /**
