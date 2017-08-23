@@ -318,7 +318,7 @@ F.maybe = (fn)  => {
 };
 
 /**
- * Provides the actual Type of the provided value
+ * Provides the actual dataType of the provided argument
  * @memberof F
  *
  * @param      {value}  value  The value under test
