@@ -3,6 +3,11 @@
 import { types as TYPES } from './sjs.functional';
 import ULYD from './sjs.DOM';
 
+/**
+ * The Animations namespace.
+ * This namespace contains a set of utility functions used for animations.
+ * @namespace A
+ */
 const A = {};
 
 const easings = {
@@ -49,6 +54,7 @@ const easings = {
 
 /**
  * Get an easing function
+ * @memberof A
  * @param  {String} [easingName]  The easing function's name you are looking for
  * @return {Function} The easing function (if any) or linear (default)
  */
@@ -56,6 +62,7 @@ A.getEasing = (easingName = 'linear') => easings[TYPES.str(easingName)];
 
 /**
  * Scroll the window to the element position
+ * @memberof A
  * @param  {Node}   element An HTML node towards which you wish to scroll
                             the window
  * @param  {Object}  options Animation's options (easing type and duration)
@@ -87,8 +94,6 @@ A.scrollTo = (element, options, callback) => {
     const timeFunction = A.getEasing(easingName)(time);
 
     body.scrollTop = (timeFunction * (destination - start)) + start;
-
-    console.log(Math.ceil(body.scrollTop), destination);
 
     if ( Math.ceil(body.scrollTop)  === destination) {
       if (callback) {
