@@ -1,17 +1,18 @@
+'use strict';
+
 import { types as TYPES } from './sjs.functional';
 import ULYU from './sjs.utilities';
 import ULYF from './sjs.functional';
 
-'use strict';
+const E = {};
 
-const e = {};
 const { isArray, indexOf } = ULYU;
 const { not } = ULYF;
 
 /**
  * An Event Emitter which emits events
  */
-e.EventEmitter = class EventEmitter {
+E.EventEmitter = class EventEmitter {
   constructor() {
     this.events = {};
   }
@@ -78,7 +79,7 @@ e.EventEmitter = class EventEmitter {
 /**
  * A Queue object which emits events during its lifetime
  */
-e.Queue = class Queue extends e.EventEmitter {
+E.Queue = class Queue extends e.EventEmitter {
   constructor() {
     super();
     this.arr  = [];
@@ -122,7 +123,7 @@ e.Queue = class Queue extends e.EventEmitter {
 /**
  * A Stack object which emits events during its lifetime
  */
-e.Stack = class Stack extends e.EventEmitter {
+E.Stack = class Stack extends e.EventEmitter {
   constructor() {
     super();
     this.arr  = [];
@@ -170,7 +171,7 @@ e.Stack = class Stack extends e.EventEmitter {
  *                                  operations. Each operation returns a Promise
  *                                  which can be used to follow up with its status
  */
-e.$http = (url) => {
+E.$http = (url) => {
   url = TYPES.str(url);
   const core = {
     ajax: (method, url, args) => {
@@ -220,4 +221,4 @@ e.$http = (url) => {
 
 
 // export public functions
-export default { ...e };
+export default { ...E };
