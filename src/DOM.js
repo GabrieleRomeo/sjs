@@ -42,7 +42,7 @@ DOM.$$ = (selector, context) => (context || document).querySelectorAll(TYPES.str
  * @param {HTMLNode} elem The HTML element to start from
  * @param {string} select The ancestor where to start the research from
  *
- * @returns {object} The HTML object or null
+ * @returns {Node} An HTML Node or null
  */
 DOM.getAncestorBySelector = (elem, selector) => {
     // Element.matches polyfill
