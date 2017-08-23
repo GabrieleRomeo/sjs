@@ -13,8 +13,8 @@ const DOM = {};
 
 
 /**
- * Queries the DOM looking for the first HTML element
- * that matches the CSS query
+ * Queries the DOM in pursuit of the first HTML element that matches the CSS
+ * query selector.
  * @memberof DOM
  * @param {string} selector A valid CSS selector
  * @param {string} [context] The ancestor where to start the research from
@@ -25,8 +25,8 @@ DOM.$ = (selector, context) => (context || document).querySelector(TYPES.str(sel
 
 
 /**
- * Queries the DOM looking for all the HTML elements
- * that match the CSS query
+ * Queries the DOM in pursuit of all the HTML elements that match the CSS
+ * query selector.
  * @memberof DOM
  * @param {string} selector A valid CSS selector
  * @param {string} [context] The ancestor where to start the research from
