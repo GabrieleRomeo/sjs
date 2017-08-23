@@ -32,7 +32,7 @@ const HTMLNode = typeOf('HtmlNode');
 const HTMLFragment = typeOf('DocumentFragment');
 
 // Custom data type
-// @memberof Functional Programming
+// @memberof F
 const allowedTypes = (...types) => typeOf(types);
 
 export const types = {
@@ -69,7 +69,7 @@ export const types = {
  * Takes a Function with {N} parameters and splits it in a series of
  * functions each taking a single argument. It allows you to provide an
  * optional parameter 'n' which sets the function's arity.
- *
+ * @memberof F
  * @param {Function} fn A function to be curried
  * @param {Integer}   n An optional integer representing the arity of the
  *                      fn function
@@ -78,8 +78,6 @@ export const types = {
  *                     single argument.
  *
  */
-
-// @memberof Functional Programming
 F.curry = function(fn, n) {
   const arity = n || fn.length;
 
@@ -100,7 +98,7 @@ F.curry = function(fn, n) {
  * functions each taking a single argument. It allows you to provide an
  * optional parameter 'n' which sets the function's arity. Unlike curry,
  * rcurry curries a function's arguments from right to left.
- *
+ * @memberof F
  * @param {Function} fn A function to be curried
  * @param {Integer}   n An optional integer representing the arity of the
  *                      fn function
@@ -109,21 +107,19 @@ F.curry = function(fn, n) {
  *                     single argument.
  *
  */
-
-// @memberof Functional Programming
 F.rcurry = (fn, n) => F.curry(F.flip(fn), n);
 
 ///////////////////////// FUNCTORS /////////////////////////
 
 // map :: (a -> b) -> [a] -> [b]
-// @memberof Functional Programming
+// @memberof F
 F.map = (fn, a) => arr(a).map(fun(fn));
 
 // arrayOf :: (a -> b) -> ([a] -> [b])
-// @memberof Functional Programming
+// @memberof F
 F.arrayOf = (fn) => (a) => F.map(fun(fn), arr(a));
 
-// @memberof Functional Programming
+// @memberof F
 F.compose = (...args) => {
   // Checks that all the arguments are functions
   let funcs = F.arrayOf(fun)(args);
@@ -144,40 +140,40 @@ F.compose = (...args) => {
 };
 
 // toArray :: a -> [a]
-// @memberof Functional Programming
+// @memberof F
 F.toArray = (...a) => a;
 
 // flip :: Function -> Function
-// @memberof Functional Programming
+// @memberof F
 F.flip = (fn) => (...args) => fn.apply(this, args.reverse());
 
 // rcompose :: Function -> Function
-// @memberof Functional Programming
+// @memberof F
 F.rcompose = F.flip(F.compose);
 
 // toLower :: String -> String
-// @memberof Functional Programming
+// @memberof F
 F.toLower = (s) => s.toLowerCase();
 
 // toUpper :: String -> String
-// @memberof Functional Programming
+// @memberof F
 F.toUpper = (s) => s.toUpperCase();
 
 // capitalize :: String -> String
-// @memberof Functional Programming
+// @memberof F
 F.capitalize = (s) => {
   const a = F.toArray(s);
   return F.toUpper(a[0]) + a.slice(1).join('');
 };
 
-// @memberof Functional Programming
+// @memberof F
 F.unary = (fn) => {
   fn.length === 1
     ? fn
     : (arg) => fn(arg);
 };
 
-// @memberof Functional Programming
+// @memberof F
 F.once = (fn) => {
   let done = false;
   return function() {
@@ -186,10 +182,10 @@ F.once = (fn) => {
 };
 
 // getWith :: String -> String
-// @memberof Functional Programming
+// @memberof F
 F.getWith = property => object => object[property];
 
-// @memberof Functional Programming
+// @memberof F
 F.forEachObject = (obj, fn) => {
   for (let property in obj) {
     if (obj.hasOwnProperty(property)) {
@@ -199,20 +195,20 @@ F.forEachObject = (obj, fn) => {
   }
 };
 
-// @memberof Functional Programming
+// @memberof F
 F.unless = (predicate, fn) => {
   if (!predicate) { fn(); }
 };
 
 // head :: Array -> Value
-// @memberof Functional Programming
+// @memberof F
 F.head = (a) => arr(a)[0];
 
 // tail :: Array :: Integer -> Array
-// @memberof Functional Programming
+// @memberof F
 F.tail = (a, begin = 1) => arr(a).slice(int(begin), a.length);
 
-// @memberof Functional Programming
+// @memberof F
 F.sortBy = (property) => {
   return (a, b) => {
     let r = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
@@ -220,7 +216,7 @@ F.sortBy = (property) => {
   };
 };
 
-// @memberof Functional Programming
+// @memberof F
 F.flatten = (array) => {
   let results = [];
   for (const value of array) {
@@ -229,7 +225,7 @@ F.flatten = (array) => {
   return results;
 };
 
-// @memberof Functional Programming
+// @memberof F
 F.zip = (leftArray, rightArray, fn) => {
   let result = [];
   let leftLength = leftArray.length;
@@ -241,25 +237,25 @@ F.zip = (leftArray, rightArray, fn) => {
   return result;
 };
 
-// @memberof Functional Programming
+// @memberof F
 F.times = (times, fn) => {
   for ( let i=0; i < times; i++ ) {
     fn(i);
   }
 };
 
-// @memberof Functional Programming
+// @memberof F
 F.memoized = (fn) => {
   const lookupTable = {};
   return arg => lookupTable[arg] || (lookupTable[arg] = fn(arg));
 };
 
 // not :: bool -> bool
-// @memberof Functional Programming
+// @memberof F
 F.not = (x) => !bool(x);
 
 // asyncAction :: Function -> Function
-// @memberof Functional Programming
+// @memberof F
 F.asyncAction = action =>  {
   action = fun(action);
   return function(context, ...args) {
@@ -270,7 +266,7 @@ F.asyncAction = action =>  {
 /*
  * Given a data type, it returns a function that, when applied, checks if
  * the provide value is of the intended data type
- * @memberof Functional Programming
+ * @memberof F
  */
 function typeOf(types) {
   return function(x) {
@@ -294,7 +290,7 @@ function typeOf(types) {
 /**
  * It calls the 'fn' function if and only if the provided parameters
  * are neither null nor undefined
- * @memberof Functional Programming
+ * @memberof F
  *
  * @param {Object} fn The function that could be applied
  *
@@ -323,7 +319,7 @@ F.maybe = (fn)  => {
 
 /**
  * Provides the actual Type of the provided value
- * @memberof Functional Programming
+ * @memberof F
  *
  * @param      {value}  value  The value under test
  * @return     {string}  The datatype's name
@@ -336,7 +332,7 @@ F.classOf = (value) => {
 
 /**
  * Check if the provided value is neither Null nor Undefined
- * @memberof Functional Programming
+ * @memberof F
  *
  * @param   {value}  x    The value under test
  * @return  {boolean}
@@ -345,7 +341,7 @@ F.exists = x => F.classOf(x) !== 'Null' && F.classOf(x) !== 'Undefined';
 
 /**
  * Check if the provided value is neither Null nor Undefined
- * @memberof Functional Programming
+ * @memberof F
  *
  * @param   {value}  x    The value under test
  * @return  {boolean}
@@ -354,7 +350,7 @@ F.notExists = x => !F.exists(x);
 
 /**
  * Check if an object contains a key
- * @memberof Functional Programming
+ * @memberof F
  *
  * @param   {Object}  object    The Object under test
  * @param   {String}  x    The value under test
