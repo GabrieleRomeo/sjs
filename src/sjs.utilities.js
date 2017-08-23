@@ -6,9 +6,8 @@ import ULYF from './sjs.functional';
 
 const U = {};
 const math = Math;
-const mathRound = math.round;
+
 const mathFloor = math.floor;
-const mathCeil = math.ceil;
 const mathRnd = math.random;
 
 /**
@@ -342,7 +341,7 @@ U.replaceAll = (text, search, replace) => TYPES.str(text)
 
 U.getRandomInt = (max = 10, min = 0) => {
   return mathFloor(mathRnd() * (TYPES.int(max) - TYPES.int(min))) + min;
-}
+};
 
 /**
  * Get a random integer (inclusive)
@@ -353,7 +352,7 @@ U.getRandomInt = (max = 10, min = 0) => {
 
 U.getIncRandomInt = (max = 10, min = 0) => {
   return mathFloor(mathRnd() * (TYPES.int(max) - TYPES.int(min) + 1)) + min;
-}
+};
 
 /**
  * Retrieve the value of a particular cookie through its name
@@ -452,5 +451,5 @@ U.getDayName = (dayNumber) => {
 };
 
 // export public functions
-export default { ...u };
+export default { ...U };
 
