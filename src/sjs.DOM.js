@@ -3,44 +3,47 @@
 import { types as TYPES } from './sjs.functional';
 import F from './sjs.functional';
 
+/**
+ * The DOM namespace.
+ * This namespace contains a set of utility functions used to access and
+ * manipulate the DOM
+ * @namespace DOM
+ */
 const DOM = {};
 
 
 /**
  * Queries the DOM looking for the first HTML element
  * that matches the CSS query
- *
+ * @memberof DOM
  * @param {string} selector A valid CSS selector
  * @param {string} [context] The ancestor where to start the research from
  *
  * @returns {object} The HTML object or null
  */
-
 DOM.$ = (selector, context) => (context || document).querySelector(TYPES.str(selector));
 
 
 /**
  * Queries the DOM looking for all the HTML elements
  * that match the CSS query
- *
+ * @memberof DOM
  * @param {string} selector A valid CSS selector
  * @param {string} [context] The ancestor where to start the research from
  *
  * @returns {object} The HTML object or null
  */
-
 DOM.$$ = (selector, context) => (context || document).querySelectorAll(TYPES.str(selector));
 
 /**
  * Find the nearest ancestor that matches any CSS selector with respect
  * to a given element
- *
+ * @memberof DOM
  * @param {HTMLNode} elem The HTML element to start from
  * @param {string} select The ancestor where to start the research from
  *
  * @returns {object} The HTML object or null
  */
-
 DOM.getAncestorBySelector = (elem, selector) => {
     // Element.matches polyfill
   if (!Object.prototype.matches) {
@@ -75,9 +78,9 @@ DOM.getAncestorBySelector = (elem, selector) => {
 
 /**
  * Return document.documentElement for Chrome and Safari, document.body otherwise
+ * @memberof DOM
  * @return {Node}      document.documentElement or document.body
  */
-
 DOM.getBody = () => {
   let body;
   document.documentElement.scrollTop += 1;
@@ -90,6 +93,7 @@ DOM.getBody = () => {
 
 /**
  * Get the element's distance from the top of the page
+ * @memberof DOM
  * @param  {Node}  elem  The element
  * @return {Number}      An integer representing the distance from the of the page
  */
@@ -106,6 +110,7 @@ DOM.getElemDistanceFromTop = function(elem) {
 
 /**
  * Get all siblings of an element (if any)
+ * @memberof DOM
  * @param  {String}  selector A valid CSS selector
  * @return {Array}   An array containing the siblings
  */
@@ -126,6 +131,7 @@ DOM.getSiblingsBySelector = (selector) => {
 
 /**
  * Insert a new node after an existing node in the DOM
+ * @memberof DOM
  * @param  {Node}  newNode The element you wish to insert
  * @param  {Node}  refNode The existing node in the DOM
  * @return {Node}  The element that was inserted
@@ -137,6 +143,7 @@ DOM.insertAfter = (newNode, refNode) => {
 
 /**
  * Swap the position of two DOM elements
+ * @memberof DOM
  * @param  {Node}  nodeA The first node
  * @param  {Node}  nodeB The second node
  * @return {Boolean}  It returns true if the swap was successful
@@ -160,6 +167,7 @@ DOM.swapElements = (nodeA, nodeB) => {
 
 /**
  * Remove a number of elements from the page entirely
+ * @memberof DOM
  * @param  {String}  selector A valid CSS selector
  * @return {Array}   An array containing the removed elements
  */
@@ -172,8 +180,9 @@ DOM.removeAll = (selector) => {
 /**
  * Get the values a calculated CSS property for an element after applying
  * the active stylesheets
+ * @memberof DOM
  * @param  {Node}   element The element for which to get the computed style
- * @return {CSSStyleDeclaration }
+ * @return {CSSStyleDeclaration}
  */
 DOM.getComputed = (element) => (property) => {
   return window.getComputedStyle(TYPES.HTMLNode(element), null)
@@ -182,6 +191,8 @@ DOM.getComputed = (element) => (property) => {
 
 /**
  * Get ViewPort's Info
+ * @memberof DOM
+ * @return {Object} An Object containing the viewport's height and width
  */
 DOM.getViewPortInfo = () => {
   const body = DOM.getBody();
@@ -195,6 +206,8 @@ DOM.getViewPortInfo = () => {
 
 /**
  * Get Page's Info
+ * @memberof DOM
+ * @return {Object} An object coontaining the page's height and width
  */
 DOM.getPageInfo = () => {
   const body = document.body;
@@ -214,12 +227,17 @@ DOM.getPageInfo = () => {
 
 /**
  * Get Element's Info
+ * @memberof DOM
+ * @return {Object} a DOMRect object which is the union of the rectangles
+ *                  returned by getClientRects() for the element, i.e.,
+ *                  the CSS border-boxes associated with the element.
  */
 DOM.getElemInfo = (element) => TYPES.HTMLNode(element).getBoundingClientRect();
 
 /**
  * Generate a document fragment if necessary
- *
+ * @memberof DOM
+ * @access private
  * @param      {DocumentFragment | Node | Array}  children  The children to be
  *                                                           appended to the
  *                                                           document fragment
@@ -239,7 +257,7 @@ const _generateFragment = (children = []) => {
 /**
  * It appends asynchronously a Node, or an Array containing nodes, or a
  * documentFragment to a parent Node
- *
+ * @memberof DOM
  * @param      {Node}   parent    The parent node
  * @param      {DocumentFragment | Node | Array}   children  The children that
  *                                                           you wish to append
@@ -263,7 +281,7 @@ DOM.appendTo = (parent = document.body) => (...children) => {
 /**
  * It prepends asynchronously a Node, or an Array containing nodes, or a
  * documentFragment to a target Node
- *
+ * @memberof DOM
  * @param      {Node}   target    The target node
  * @param      {DocumentFragment | Node | Array}   children  The children that
  *                                                           you wish to prepend
