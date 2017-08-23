@@ -1,7 +1,7 @@
 'use strict';
 
-import { types as TYPES } from './sjs.functional';
-import F from './sjs.functional';
+import { types as TYPES } from './functional';
+import F from './functional';
 
 /**
  * The DOM namespace.

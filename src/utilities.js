@@ -1,7 +1,7 @@
 'use strict';
 
-import { types as TYPES } from './sjs.functional';
-import ULYF from './sjs.functional';
+import { types as TYPES } from './functional';
+import ULYF from './functional';
 
 /**
  * The Utilities namespace.

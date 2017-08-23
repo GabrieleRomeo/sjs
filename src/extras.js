@@ -1,8 +1,8 @@
 'use strict';
 
-import { types as TYPES } from './sjs.functional';
-import ULYU from './sjs.utilities';
-import ULYF from './sjs.functional';
+import { types as TYPES } from './functional';
+import ULYU from './utilities';
+import ULYF from './functional';
 
 /**
  * The Extras namespace.
@@ -86,7 +86,7 @@ E.EventEmitter = class EventEmitter {
  * A Queue object which emits events during its lifetime
  * @memberof E
  */
-E.Queue = class Queue extends e.EventEmitter {
+E.Queue = class Queue extends E.EventEmitter {
   constructor() {
     super();
     this.arr  = [];
@@ -131,7 +131,7 @@ E.Queue = class Queue extends e.EventEmitter {
  * A Stack object which emits events during its lifetime
  * @memberof E
  */
-E.Stack = class Stack extends e.EventEmitter {
+E.Stack = class Stack extends E.EventEmitter {
   constructor() {
     super();
     this.arr  = [];

@@ -1,11 +1,11 @@
 
-import { types } from './sjs.functional';
-import A from './sjs.animations';
-import DOM from './sjs.DOM';
-import E from './sjs.extras';
-import F from './sjs.functional';
-import U from './sjs.utilities';
-import V from './sjs.validators';
+import { types } from './functional';
+import A from './animations';
+import DOM from './DOM';
+import E from './extras';
+import F from './functional';
+import U from './utilities';
+import V from './validators';
 
 export {
   types,

@@ -1,7 +1,7 @@
 'use strict';
 
-import { types as TYPES } from './sjs.functional';
-import ULYD from './sjs.DOM';
+import { types as TYPES } from './functional';
+import ULYD from './DOM';
 
 /**
  * The Animations namespace.
