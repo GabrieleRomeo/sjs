@@ -4,6 +4,11 @@ import { types as TYPES } from './sjs.functional';
 import ULYU from './sjs.utilities';
 import ULYF from './sjs.functional';
 
+/**
+ * The Extras namespace.
+ * This namespace contains a set of extras functions
+ * @namespace E
+ */
 const E = {};
 
 const { isArray, indexOf } = ULYU;
@@ -11,6 +16,7 @@ const { not } = ULYF;
 
 /**
  * An Event Emitter which emits events
+ * @memberof E
  */
 E.EventEmitter = class EventEmitter {
   constructor() {
@@ -78,6 +84,7 @@ E.EventEmitter = class EventEmitter {
 
 /**
  * A Queue object which emits events during its lifetime
+ * @memberof E
  */
 E.Queue = class Queue extends e.EventEmitter {
   constructor() {
@@ -122,6 +129,7 @@ E.Queue = class Queue extends e.EventEmitter {
 
 /**
  * A Stack object which emits events during its lifetime
+ * @memberof E
  */
 E.Stack = class Stack extends e.EventEmitter {
   constructor() {
@@ -165,7 +173,7 @@ E.Stack = class Stack extends e.EventEmitter {
 
 /**
  * A convenient way to handle Ajax Requests
- *
+ * @memberof E
  * @param      {(String)}  url     The url
  * @return     {(Object|Promise)}   An object containing the allowed CRUD
  *                                  operations. Each operation returns a Promise
