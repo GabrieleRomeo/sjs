@@ -262,9 +262,9 @@ const _generateFragment = (children = []) => {
  * @param      {DocumentFragment | Node | Array}   children  The children that
  *                                                           you wish to append
  *                                                           to
- * @return     {Promise}  { It returns a Promise that can be exploited to
- *                          understand when the action will be satisfied or not.
- *                         }
+ * @return     {Promise}  It returns a Promise that can be exploited to
+ *                        understand when the action will be satisfied or not.
+ *
  */
 DOM.appendTo = (parent = document.body) => (...children) => {
   const fragment = _generateFragment(children);
@@ -286,9 +286,9 @@ DOM.appendTo = (parent = document.body) => (...children) => {
  * @param      {DocumentFragment | Node | Array}   children  The children that
  *                                                           you wish to prepend
  *                                                           to
- * @return     {Promise}  { It returns a Promise that can be exploited to
- *                          understand when the action will be satisfied or not.
- *                         }
+ * @return     {Promise}  It returns a Promise that can be exploited to
+ *                        understand when the action will be satisfied or not.
+ *
  */
 DOM.prependTo = (target = document.body.firstChild) => (...children) => {
   const fragment = _generateFragment(children);
