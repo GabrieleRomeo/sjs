@@ -323,6 +323,12 @@ F.maybe = (fn)  => {
  *
  * @param      {value}  value  The value under test
  * @return     {string}  The datatype's name
+ * @example
+ * // returns "Number"
+ * sjs.F.classOf(5);
+ * @example
+ * // returns "Object"
+ * sjs.F.classOf({});
  */
 F.classOf = (value) => {
   if ( value === null ) { return 'Null'; }
