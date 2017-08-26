@@ -255,37 +255,79 @@ const _generateFragment = (children = []) => {
 };
 
 /**
- * It appends asynchronously a Node, or an Array containing nodes, or a
- * documentFragment to a parent Node
+ * It returns a reference to a parent Node, then you can exploit this reference
+ * to add asynchronously a node, an Array of nodes, or a documentFragment
+ * to the parent.
  * @memberof DOM
- * @param      {Node}   parent    The parent node
- * @param      {DocumentFragment | Node | Array}   children  The children that
+ * @param      {Node}   [parent=document.body]    The parent node
+ * @return     {function} A function that accepts a documentFragment, a single
+ *                          node, or an Array of Nodes and returns a Promise.
+ *
+ * @param      {DocumentFragment | Node | Array}   children  A document fragment,
+ *                                                           or a single Node,
+ *                                                           or an Array of Nodes
  *                                                           you wish to append
- *                                                           to
+ *                                                           to the target Node.
  * @return     {Promise}  It returns a Promise that can be exploited to
  *                        understand when the action will be satisfied or not.
  *
+ * @example <caption>Append a new document fragment without providing a parent
+ *                    node</caption>
+ * let fragment = document.createDocumentFragment();
+ * let node = document.createElement('DIV');
+ * node.textContent = 'New Node';
+ * fragment.appendChild(node);
+ *
+ * // By default, the parent node is document.body
+ * let append = sjs.appendTo();
+ * append(fragment);
+ * @example <caption>Append a new node to an existing Node</caption>
+ * let parentNode = document.createElement('DIV');
+ * parentNode.textContent = 'The parent Node';
+ * // append synchronously parentNode to document.body
+ * document.body.appendChild(parentNode);
+ *
+ * let child = document.createElement('DIV');
+ * child.textContent = 'A Child Node';
+ *
+ * // Create a reference to the parent node
+ * let appendToParent = sjs.DOM.appendTo(parentNode);
+ * // append asynchronously the child Node to the parent Node
+ * appendToParent(child);
+ *
+ * // create a new child
+ * let anotherChild = document.createElement('DIV');
+ * anotherChild.textContent = 'Another Child Node';
+ *
+ * // Using the previous reference, append the new Node to the parent Node
+ * appendToParent(anotherChild);
  */
 DOM.appendTo = (parent = document.body) => (...children) => {
-  const fragment = _generateFragment(children);
-  const append = F.asyncAction(Element.prototype.appendChild);
-  return new Promise((resolve, reject) => {
-    try {
-      resolve(append(TYPES.HTMLNode(parent), fragment));
-    } catch (e) {
-      reject(e);
-    }
-  });
-};
+    const fragment = _generateFragment(children);
+    const append = F.asyncAction(Element.prototype.appendChild);
+    return new Promise((resolve, reject) => {
+      try {
+        resolve(append(TYPES.HTMLNode(parent), fragment));
+      } catch (e) {
+        reject(e);
+      }
+    });
+  };
+
 
 /**
  * It prepends asynchronously a Node, or an Array containing nodes, or a
  * documentFragment to a target Node
  * @memberof DOM
- * @param      {Node}   target    The target node
- * @param      {DocumentFragment | Node | Array}   children  The children that
+ * @param      {Node}   [target=document.body.firstChild]    The target node
+ * @return     {function} A function that accepts a documentFragment, a single
+ *                          node, or an Array of Nodes and returns a Promise.
+ *
+ * @param      {DocumentFragment | Node | Array}   children  A document fragment,
+ *                                                           or a single Node,
+ *                                                           or an Array of Nodes
  *                                                           you wish to prepend
- *                                                           to
+ *                                                           to the target Node.
  * @return     {Promise}  It returns a Promise that can be exploited to
  *                        understand when the action will be satisfied or not.
  *
