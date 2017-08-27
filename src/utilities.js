@@ -17,57 +17,6 @@ const mathFloor = math.floor;
 const mathRnd = math.random;
 
 /**
- * Checks if the provided argument is an Array
- * @memberof U
- * @param {Array} arr An Array
- *
- * @returns {Boolean} True | False
- *
- */
-U.isArray = Array.isArray || function(arr) {
-  return Object.prototype.toString.call(arr) === '[object Array]';
-};
-
-/**
- * Checks if the provided argument is a Function
- * @memberof U
- * @param {Fun} fn A Function
- *
- * @returns {Boolean} True | False
- *
- */
-U.isFunc = fn => typeof fn === 'function';
-
-/**
- * Checks if the provided argument is a String
- * @memberof U
- * @param {str} str A String
- *
- * @returns {Boolean} True | False
- *
- */
-U.isString = str => typeof str === 'string';
-
-/**
- * Checks if the provided argument is a Number
- * @memberof U
- * @param {Number} num A Number
- *
- * @returns {Boolean} True | False
- *
- */
-U.isNumber = num => !isNaN(parseFloat(num)) && isFinite(num);
-
-/**
- * Checks if the provided argument is an Integer
- * @memberof U
- * @param {Number} num A Number
- * @returns {Boolean} True | False
- *
- */
-U.isInt = num => U.isNumber(num) && (parseFloat(num) === parseInt(num, 10));
-
-/**
  * Iterates and calls the callback parameter for each element or property
  * of a list at the interval specified by the n parameter.
  * It does not call callback on values greater than the list’s number
@@ -301,7 +250,7 @@ U.has = (object, search) => {
   * @param {Object} obj An object
   * @param {Array} keys A list of keys
   *
-  * @returns {Object} An object composed of the provided keys
+  * @returns {Object} An object which is composed by the requested keys
   *
   * @example
   *  var data = {
