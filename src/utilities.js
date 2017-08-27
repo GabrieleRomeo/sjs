@@ -78,6 +78,11 @@ U.isInt = num => U.isNumber(num) && (parseFloat(num) === parseInt(num, 10));
  *                 step
  *
  * @returns {void}
+ * @example
+ * let result = [];
+ * const double = (x) => result.push(x * 2);
+ * sjs.U.by([1, 2, 3, 4, 5, 6], 2, double);
+ * // result now contains [4, 8, 12]
  */
 U.by = (list, n, callback) => {
   list = TYPES.arr(list);
@@ -114,11 +119,18 @@ const _objExtract = (object, value) => {
 U.keys = object => _objExtract(object, 'key');
 
 /**
- * Creates an array of all the value of an object
+ * Creates an array containing all the values of the provided object
  * @memberof U
  * @param {Object} object The object used as a template
  * @returns {Array} An Array containing all the values of the provided
  *                  object
+ * @example
+ * const obj = {
+ *    key1: 'Value one!',
+ *    key2: 'Value two!!!'
+ * };
+ * // returns ['Value one!', 'Value two!!!']
+ * sjs.U.values(obj);
  */
 U.values = object => _objExtract(object, 'value');
 
@@ -130,8 +142,9 @@ U.values = object => _objExtract(object, 'value');
  * @param {Object} object The object used as a template
  * @returns {Array} An Array containing all keys and values pairs of the provided
  *                  object
- * @example pairs({count: 5, length: 10, total: 16});
+ * @example
  * // returns ["count", 5, "length", 10, "total", 16]
+ * pairs({count: 5, length: 10, total: 16});
  */
 U.pairs = function(object) {
   const list = Object.keys(TYPES.obj(object));
@@ -144,9 +157,10 @@ U.pairs = function(object) {
  * @memberof U
  * @param {Array} object The Array used as a template
  * @returns {Array} A randomly re-arranged copy of the original Array
- *  @example var arr = [1,2,3,4,5];
- *           utilities.shuffle(arr);
- *  // will output something like: [2,4,5,3,1]
+ *  @example
+ *  let arr = [1,2,3,4,5];
+ *  // returns a new array containing shuffled elements like: [2,4,5,3,1]
+ *  sjs.U.shuffle(arr);
  */
 U.shuffle = function(array) {
   let result = Array.from(TYPES.arr(array));
@@ -170,20 +184,27 @@ U.shuffle = function(array) {
  *
  * @returns {String} A pluralized string
  *
- * @example utilities.pluralize(1, "lion");
- *  // returns "lion"
- * @example utilities.pluralize(2, "lion");
- *  // returns "lions"
- * @example utilities.pluralize(5, "lion");
- *  // returns "lions"
- * @example utilities.pluralize(0, "lion");
- *  // returns "lions"
- * @example utilities.pluralize(1, "lioness");
- *  // returns "lioness"
- * @example utilities.pluralize(2, "lioness");
- *  // returns "lionesss"
- * @example utilities.pluralize(2, "lioness", "lionesses);
- *  // "lionesses"
+ * @example
+ * // returns "lion"
+ * sjs.U.pluralize(1, "lion");
+ * @example
+ * // returns "lions"
+ * sjs.U.pluralize(2, "lion");
+ * @example
+ * // returns "lions"
+ * sjs.U.pluralize(5, "lion");
+ * @example
+ * // returns "lions"
+ * sjs.U.pluralize(0, "lion");
+ * @example
+ * // returns "lioness"
+ * sjs.U.pluralize(1, "lioness");
+ * @example
+ * // returns "lionesss"
+ * sjs.U.pluralize(2, "lioness");
+ * @example
+ * // "lionesses"
+ * sjs.U.pluralize(2, "lioness", "lionesses);
  */
 U.pluralize = function(n, word, pluralWord) {
   n = TYPES.int(n);
@@ -205,8 +226,15 @@ U.pluralize = function(n, word, pluralWord) {
  * @param {string} str A camelCase string
  * @returns {String} A dashed string
  *
- * @example toDash(hotDog), toDash(spaceStationComplex), toDash(myFirstFunction)
- * // returs hot-dog, space-station-complex, my-first-function
+ * @example
+ * // returs hot-dog
+ * toDash(hotDog);
+ * @example
+ * // returs space-station-complex
+ * toDash(spaceStationComplex);
+ * @example
+ * // returns my-first-function
+ * toDash(myFirstFunction);
  *
  */
 U.toDash = function(str) {
@@ -226,8 +254,12 @@ U.toDash = function(str) {
  * @param {string} str A dashed string
  * @returns {String} A camelCase string
  *
- * @example toCamel(hot-dog), toCamel(space-station-complex)
- * // returs hotDog, spaceStationComplex
+ * @example
+ * // returns hot-dog
+ * toCamel(hot-dog);
+ * @example
+ * // returns spaceStationComplex
+ *  toCamel(space-station-complex);
  */
 U.toCamel = function(str) {
   let chars = TYPES.str(str).split('-');
@@ -241,14 +273,13 @@ U.toCamel = function(str) {
 };
 
 /**
- * Searches all values of the parameter obj and returns “true” if any are
- * equal to the search parameter.
- * Otherwise it returns “false.”
+ * Searches through all the [values] of the provided object and returns “true”
+ * if any of them matches the query string. Otherwise it returns “false”.
  * @memberof U
  * @param {Object} obj An object
- * @param {string} search The string you are looking for
+ * @param {String} search The string you are looking for
  *
- * @returns {Boolean} True | False
+ * @returns {boolean} {{true|false)} A boolean value
  *
  */
 U.has = ULYF.maybe(function(object, search) {
@@ -264,29 +295,32 @@ U.has = ULYF.maybe(function(object, search) {
 });
 
 /**
- * Returns a new object by picking all key/value pairs from the parameter
- * obj.
- * The keys that are picked will be determined by the array parameter keys.
- * @memberof U
- * @param {Object} obj An object
- * @param {Array} keys A list of keys
- *
- * @returns {Object} An object composed of the provided keys
- *
- *  var data = {
-      type: "transformer",
-      index: 19,
-      siblings: 19,
-      access: "full"
-    };
-
-  * @example utilities.pick(data, ["type", "index"]);
-    // returns {type: "transformer", index: 19};
-  * @example utilities.pick(data, ["siblings", "index"]);
-    // returns {siblings: 19, index: 19};
-  * @example utilities.pick(data, ["access", "animals"]);
-    // returns {access: "full"};
- */
+  * Returns a new object by picking all key/value pairs from the parameter
+  * obj.
+  * The keys that are picked will be determined by the array parameter keys.
+  * @memberof U
+  * @param {Object} obj An object
+  * @param {Array} keys A list of keys
+  *
+  * @returns {Object} An object composed of the provided keys
+  *
+  * @example
+  *  var data = {
+  *     type: "transformer",
+  *     index: 19,
+  *     siblings: 19,
+  *     access: "full"
+  * };
+  *
+  * // returns {type: "transformer", index: 19};
+  * sjs.U.pick(data, ["type", "index"]);
+  *
+  * // returns {siblings: 19, index: 19};
+  * sjs.U.pick(data, ["siblings", "index"]);
+  *
+  * // returns {access: "full"};
+  * sjs.U.pick(data, ["access", "animals"]);
+  */
 U.pick = ULYF.maybe(function(obj, keys) {
   obj  = TYPES.obj(obj);
   keys = TYPES.arr(keys);
@@ -304,6 +338,9 @@ U.pick = ULYF.maybe(function(obj, keys) {
  * Replaces all occurencies of a particular search string with another
  * string
  * @memberof U
+ * @example
+ * // returns Hell? W?rld!
+ * sjs.U.replaceAll('Hello World!', 'o', '?');
  * @param {String} text A string used as a base for the search
  * @param {String} search A string you are looking for the replace
  * @param {String} replace A string used as replacing
@@ -394,13 +431,28 @@ const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substrin
 /**
  * Generate a random GUID
  * @memberof U
+ * @example
+ * // returns a string like "171d531b-54b1-cd9b-11b0-7951130e68d4"
+ * sjs.U.generateGUID();
  * @return {String}
  */
 U.generateGUID = () => `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4() + s4() + s4()}`;
 
 /**
- * Given a day number it returns the day name
+ * Given a day number it returns the day name or "Unknown".
+ * (0 - Sunday || 6 - Saturday)
+ *
  * @memberof U
+ * @example
+ * // returns "Sunday"
+ * sjs.U.getDayName(0);
+ *
+ * // returns "Wednesday"
+ * sjs.U.getDayName(3);
+ *
+ * // returns "Unknown"
+ * sjs.U.getDayName(7);
+ *
  * @param      {Number}  dayNumber  The day number
  * @return     {string}  The day name.
  */
@@ -432,6 +484,25 @@ U.getDayName = (dayNumber) => {
     dayName = 'Unknown';
   }
   return dayName;
+};
+
+/**
+ * Given two dates it returns the difference between them in days
+ * @memberof U
+ * @param  {d1} Date The first date
+ * @param  {d2} Date The second date
+ *
+ * @returns {int} The difference in days
+ * @example
+ * // returns 9
+ * sjs.U.getDiffInDays(new Date('2017-05-10'), new Date('2017-05-01'));
+ */
+U.getDiffInDays = (d1, d2) => {
+
+  let diffInMilliSec = d1.getTime() - d2.getTime();
+  const milliSecInAday = 24 * 60 * 60 * 1000; //total milli-seconds in a day
+
+  return Math.floor(diffInMilliSec / milliSecInAday);
 };
 
 // export public functions
