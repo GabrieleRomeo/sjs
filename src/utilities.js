@@ -294,7 +294,7 @@ U.has = (object, search) => {
 };
 
 /**
-  * Returns a new object by picking all key/value pairs from the parameter
+  * Returns a new object by picking all key/value pairs from the argument
   * obj.
   * The keys that are picked will be determined by the array parameter keys.
   * @memberof U
@@ -320,7 +320,7 @@ U.has = (object, search) => {
   * // returns {access: "full"};
   * sjs.U.pick(data, ["access", "animals"]);
   */
-U.pick = ULYF.maybe(function(obj, keys) {
+U.pick = (obj, keys) => {
   obj  = TYPES.obj(obj);
   keys = TYPES.arr(keys);
 
@@ -331,7 +331,7 @@ U.pick = ULYF.maybe(function(obj, keys) {
     return result;
   }, {});
 
-});
+};
 
 /**
  * Replaces all occurencies of a particular search string with another
