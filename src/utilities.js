@@ -279,20 +279,19 @@ U.toCamel = function(str) {
  * @param {Object} obj An object
  * @param {String} search The string you are looking for
  *
- * @returns {boolean} {{true|false)} A boolean value
- *
+ * @returns {boolean} {(True|False)} True if any of the values match the query
+ *                                    string. False otherwise.
  */
-U.has = ULYF.maybe(function(object, search) {
-  object = TYPES.obj(object);
-
-  for (let prop in object) {
+U.has = (object, search) => {
+  search = TYPES.str(search);
+  for (const prop in TYPES.obj(object)) {
     if (object.hasOwnProperty(prop) && object[prop] === search) {
       return true;
     }
   }
 
   return false;
-});
+};
 
 /**
   * Returns a new object by picking all key/value pairs from the parameter
