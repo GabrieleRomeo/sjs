@@ -16,25 +16,226 @@ const F = {};
  **********************************************************************/
 
 // Primitives
+
+/**
+ * Checks if the provided Data Type is a String. Otherwise the System throws a
+ * TypeError
+ * @memberof F.types
+ * @function
+ * @param {String} arg -  A string
+ * @returns {String} The same value without any changes.
+ * @example
+ * // returns 'Hello World'
+ * sjs.types.str('Hello World');
+ *
+ * // throws TypeError - Error: expected STRING but provided ARRAY
+ * sjs.types.str([]);
+ *
+ * // returns 'hello world'
+ * sjs.types.str('Hello World').toLowerCase();
+ */
 const str  = typeOf('string');
+
+/**
+ * Checks if the provided Data Type is a Number. Otherwise the System throws a
+ * TypeError
+ * @memberof F.types
+ * @function
+ * @param {Number} arg -  A Number (an Integer or a Float)
+ * @returns {Number} The same value without any changes.
+ * @example
+ * // returns 123.100
+ * sjs.types.num(123.100);
+ *
+ * // returns 5
+ * sjs.types.num(5);
+ *
+ * // throws TypeError - Error: expected NUMBER but provided ARRAY
+ * sjs.types.num([]);
+ */
 const num  = typeOf('number');
+
+/**
+ * Checks if the provided Data Type is an Integer. Otherwise the System throws a
+ * TypeError
+ * @memberof F.types
+ * @function
+ * @param {Integer} arg -  An Integer
+ * @returns {Integer} The same value without any changes.
+ * @example
+ * // returns 1
+ * sjs.types.int(1);
+ *
+ * // throws TypeError - Error: expected INTEGER but provided NUMBER
+ * sjs.types.int(2.2);
+ */
 const int  = typeOf('integer');
+
+/**
+ * Checks if the provided Data Type is a Function. Otherwise the System throws a
+ * TypeError
+ * @memberof F.types
+ * @function
+ * @param {Function} arg -  A Function
+ * @returns {Function} The same value without any changes.
+ * @example
+ * // returns function callback() {}
+ * sjs.types.fun(function callback() {});
+ *
+ * // throws TypeError - Error: expected FUNCTION but provided NUMBER
+ * sjs.types.fun(2);
+ */
 const fun  = typeOf('function');
+
+/**
+ * Checks if the provided Data Type is a Boolean. Otherwise the System throws a
+ * TypeError
+ * @memberof F.types
+ * @function
+ * @param {Boolean} arg -  A Boolean
+ * @returns {Boolean} The same value without any changes.
+ * @example
+ * // returns true
+ * sjs.types.bool(true);
+ *
+ * // throws TypeError - Error: expected BOOLEAN but provided STRING
+ * sjs.types.bool('Hi!');
+ */
 const bool = typeOf('boolean');
 
-// Object data type
+/**
+ * Checks if the provided Data Type is a Date. Otherwise the System throws a
+ * TypeError
+ * @memberof F.types
+ * @function
+ * @param {Date} arg -  A Date
+ * @returns {Date} The same value without any changes.
+ * @example
+ * // returns Tue Jan 31 2017 01:00:00 GMT+0100 (CET)
+ * sjs.types.date(new Date('2017-01-31'));
+ *
+ * // throws TypeError - Error: expected DATE but provided STRING
+ * sjs.types.date('hello');
+ */
 const date = typeOf('Date');
+
+/**
+ * Checks if the provided Data Type is an Object. Otherwise the System throws a
+ * TypeError
+ * @memberof F.types
+ * @function
+ * @param {Object} arg -  An Object
+ * @returns {Object} The same value without any changes.
+ * @example
+ * // returns {number: 10, color: 'red'}
+ * sjs.types.obj({number: 10, color: 'red'});
+ *
+ * // throws TypeError - Error: expected OBJECT but provided DATE
+ * sjs.types.obj(new Date());
+ */
 const obj = typeOf('Object');
+
+/**
+ * Checks if the provided Data Type is an Array. Otherwise the System throws a
+ * TypeError
+ * @memberof F.types
+ * @function
+ * @param {Array} arg -  An Array
+ * @returns {Array} The same value without any changes.
+ * @example
+ * // returns [1, 2, 4]
+ * sjs.types.arr([1, 2, 4]);
+ *
+ * // throws TypeError - Error: expected ARRAY but provided DATE
+ * sjs.types.arr(new Date());
+ */
 const arr = typeOf('Array');
+
+/**
+ * Checks if the provided Data Type is a Symbol. Otherwise the System throws a
+ * TypeError
+ * @memberof F.types
+ * @function
+ * @param {Symbol} arg -  A Symbol
+ * @returns {Symbol} The same value without any changes.
+ * @example
+ * // returns Symbol(foo)
+ * sjs.types.sym(Symbol('foo'));
+ *
+ * // throws TypeError - Error: expected SYMBOL but provided STRING
+ * sjs.types.sym('symbol');
+ */
 const sym = typeOf('Symbol');
+
+/**
+ * Checks if the provided Data Type is a Regular Expression. Otherwise the
+ * System throws a TypeError
+ * @memberof F.types
+ * @function
+ * @param {RegExp} arg -  A RegExp
+ * @returns {RegExp} The same value without any changes.
+ * @example
+ * // returns /abc/i
+ * sjs.types.regex(/abc/i);
+ *
+ * // throws TypeError - Error: expected REGEXP but provided NUMBER
+ * sjs.types.regex(000);
+ */
 const regex = typeOf('RegExp');
+
+/**
+ * Checks if the provided Data Type is an HTML Node. Otherwise the
+ * System throws a TypeError
+ * @memberof F.types
+ * @function
+ * @param {Node} arg -  An HTML Node
+ * @returns {Node} The same value without any changes.
+ * @example
+ * // returns <body>...</body>
+ * sjs.types.HTMLNode(document.querySelector('body'));
+ *
+ * // throws TypeError - Error: expected HTMLNODE but provided NUMBER
+ * sjs.types.HTMLNode(10);
+ */
 const HTMLNode = typeOf('HtmlNode');
+
+/**
+ * Checks if the provided Data Type is a DocumentFragment. Otherwise the System
+ * throws a TypeError
+ * @memberof F.types
+ * @function
+ * @param {DocumentFragment} arg -  A DocumentFragment
+ * @returns {DocumentFragment} The same value without any changes.
+ * @example
+ * // returns #document-fragment
+ * sjs.types.HTMLFragment(document.createDocumentFragment());
+ *
+ * // throws TypeError - Error: expected DOCUMENTFRAGMENT but provided STRING
+ * sjs.types.HTMLFragment('document');
+ */
 const HTMLFragment = typeOf('DocumentFragment');
 
-// Custom data type
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 const allowedTypes = (...types) => typeOf(types);
 
+/**
+ * This namespace provides a list of identity functions for common Data Types.
+ * You may use the available utilities to validate the argument(s) of a function.
+ * @namespace F.types
+ * @example <caption>Argument validation - Integer Data Type</caption>
+ * // The expected data type of a and b is an Integer
+ * function add(a, b) {
+ *    return sjs.F.types.int(a) + sjs.F.types.int(b);
+ * }
+ * @example <caption>Argument validation - Array Data Type</caption>
+ * // The expected data type is of the a argument is an Array
+ * function myFunc(a) {
+ *    return sjs.F.types.arr(a).reduce((prev, curr) => prev + curr, 0);
+ * }
+ */
 export const types = {
   str,
   num,
@@ -112,14 +313,23 @@ F.rcurry = (fn, n) => F.curry(F.flip(fn), n);
 ///////////////////////// FUNCTORS /////////////////////////
 
 // map :: (a -> b) -> [a] -> [b]
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.map = (fn, a) => arr(a).map(fun(fn));
 
 // arrayOf :: (a -> b) -> ([a] -> [b])
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.arrayOf = (fn) => (a) => F.map(fun(fn), arr(a));
 
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.compose = (...args) => {
   // Checks that all the arguments are functions
   let funcs = F.arrayOf(fun)(args);
@@ -140,40 +350,64 @@ F.compose = (...args) => {
 };
 
 // toArray :: a -> [a]
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.toArray = (...a) => a;
 
 // flip :: Function -> Function
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.flip = (fn) => (...args) => fn.apply(this, args.reverse());
 
 // rcompose :: Function -> Function
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.rcompose = F.flip(F.compose);
 
 // toLower :: String -> String
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.toLower = (s) => s.toLowerCase();
 
 // toUpper :: String -> String
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.toUpper = (s) => s.toUpperCase();
 
 // capitalize :: String -> String
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.capitalize = (s) => {
   const a = F.toArray(s);
   return F.toUpper(a[0]) + a.slice(1).join('');
 };
 
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.unary = (fn) => {
   fn.length === 1
     ? fn
     : (arg) => fn(arg);
 };
 
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.once = (fn) => {
   let done = false;
   return function() {
@@ -182,10 +416,16 @@ F.once = (fn) => {
 };
 
 // getWith :: String -> String
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.getWith = property => object => object[property];
 
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.forEachObject = (obj, fn) => {
   for (let property in obj) {
     if (obj.hasOwnProperty(property)) {
@@ -195,20 +435,32 @@ F.forEachObject = (obj, fn) => {
   }
 };
 
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.unless = (predicate, fn) => {
   if (!predicate) { fn(); }
 };
 
 // head :: Array -> Value
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.head = (a) => arr(a)[0];
 
 // tail :: Array :: Integer -> Array
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.tail = (a, begin = 1) => arr(a).slice(int(begin), a.length);
 
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.sortBy = (property) => {
   return (a, b) => {
     let r = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
@@ -216,7 +468,10 @@ F.sortBy = (property) => {
   };
 };
 
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.flatten = (array) => {
   let results = [];
   for (const value of array) {
@@ -225,7 +480,10 @@ F.flatten = (array) => {
   return results;
 };
 
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.zip = (leftArray, rightArray, fn) => {
   let result = [];
   let leftLength = leftArray.length;
@@ -237,25 +495,37 @@ F.zip = (leftArray, rightArray, fn) => {
   return result;
 };
 
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.times = (times, fn) => {
   for ( let i=0; i < times; i++ ) {
     fn(i);
   }
 };
 
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.memoized = (fn) => {
   const lookupTable = {};
   return arg => lookupTable[arg] || (lookupTable[arg] = fn(arg));
 };
 
 // not :: bool -> bool
-// @memberof F
+/**
+  * @memberof F
+  * @function
+  */
 F.not = (x) => !bool(x);
 
-// asyncAction :: Function -> Function
-// @memberof F
+/**
+  * asyncAction :: Function -> Function
+  * @memberof F
+  * @function
+  */
 F.asyncAction = action =>  {
   action = fun(action);
   return function(context, ...args) {
@@ -355,12 +625,19 @@ F.exists = x => F.classOf(x) !== 'Null' && F.classOf(x) !== 'Undefined';
 F.notExists = x => !F.exists(x);
 
 /**
- * Check if an object contains a key
+ * Check if an object contains a specific key
  * @memberof F
  *
  * @param   {Object}  object    The Object under test
  * @param   {String}  x    The value under test
  * @return  {String| Undefined}
+ * @example
+ * let obj = {
+ *  color: 'red'
+ * };
+ *
+ * // returns true
+ * sjs.F.contains(obj, 'color');
  */
 F.contains = (object, x) => F.exists(obj(object)[x]);
 
