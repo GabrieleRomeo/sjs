@@ -234,7 +234,19 @@ const HTMLFragment = typeOf('DocumentFragment');
 /**
   * Allows the User to define a new identity function for a custom Data Type
   * @memberof F.types
+  * @param {String} - The Data Type's name
+  * @returns {Function} - A function which validates the custom Data Type
   * @function
+  * @example
+  * const mutObserver = sjs.types.defineType('MutationObserver');
+  *
+  * // Somewhere in your code, you can check if the provided argument is
+  * // of the intended type
+  * function list(Array, Observer) {
+  *   Array = sjs.types.arr(Array);
+  *   Observer = mutObserver(Observer);
+  *   // ...
+  * }
   */
 const defineType = (t) => typeOf(t);
 
@@ -243,6 +255,8 @@ const defineType = (t) => typeOf(t);
   * argument.
   * @memberof F.types
   * @function
+  * @param {String} - A list of allowed Data Types
+  * @returns {Function} - A function which validates the allowed Data Types
   * @example
   * function checkDate(value) {
   *   const types = sjs.allowedTypes('String', 'Date');
