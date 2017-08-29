@@ -1,4 +1,4 @@
-## sjs - Super Javascript Utility Library
+## sjs - Strongly Javascript - Utility Library
 
 Hello and Welcome to this repository.
 
@@ -10,19 +10,19 @@ Unlike many other js libraries, SJS aims to be **strongly-typed**. Indeed, when 
 
 
 
-Functions are collected and categorized under namespaces using a particula tag:
+Functions are collected and categorized under various *namespaces* using dedicated tags:
 
 
 
-| Namespace | Description                | Access    |
-| :-------: | -------------------------- | --------- |
-|     A     | Animations                 | sjs.A     |
-|    DOM    | Access to the DOM          | sjs.DOM   |
-|     E     | Extra Functions            | sjs.E     |
-|     F     | Functional Programming     | sjs.F     |
-|     U     | Utility functions          | sjs.U     |
-|     V     | Validator Functions        | sjs.V     |
-|   types   | A collection of Data Types | sjs.types |
+| Namespace | Description              | Access    |
+| :-------: | ------------------------ | --------- |
+|     A     | Animations               | sjs.A     |
+|    DOM    | Access to the DOM        | sjs.DOM   |
+|     E     | Extra Functions          | sjs.E     |
+|     F     | Functional Programming   | sjs.F     |
+|     U     | Utility functions        | sjs.U     |
+|     V     | Validator Functions      | sjs.V     |
+|   types   | Collection of Data Types | sjs.types |
 
 
 
