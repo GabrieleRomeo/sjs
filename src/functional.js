@@ -231,7 +231,7 @@ const defineType = (t) => typeOf(t);
   * function checkDate(value) {
   *   const types = sjs.allowedTypes('String', 'Date');
   *   // value must be a String or a Date
-  *   const date = new Date(customType(value));
+  *   const date = new Date(types(value));
   *   return date;
   * }
   */
