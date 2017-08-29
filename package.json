@@ -1,8 +1,8 @@
 {
-  "name": "uly",
+  "name": "sjs",
   "version": "1.0.0",
-  "description": "A set of useful Js functions",
-  "main": "uly.js",
+  "description": "A JS Library with special attention to Data Types.",
+  "main": "sjs.js",
   "private": true,
   "dependencies": {
     "babel-polyfill": "^6.23.0",
