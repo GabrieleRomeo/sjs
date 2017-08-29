@@ -303,16 +303,16 @@ const _generateFragment = (children = []) => {
  * appendToParent(anotherChild);
  */
 DOM.appendTo = (parent = document.body) => (...children) => {
-    const fragment = _generateFragment(children);
-    const append = F.asyncAction(Element.prototype.appendChild);
-    return new Promise((resolve, reject) => {
-      try {
-        resolve(append(TYPES.HTMLNode(parent), fragment));
-      } catch (e) {
-        reject(e);
-      }
-    });
-  };
+  const fragment = _generateFragment(children);
+  const append = F.asyncAction(Element.prototype.appendChild);
+  return new Promise((resolve, reject) => {
+    try {
+      resolve(append(TYPES.HTMLNode(parent), fragment));
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 
 
 /**
