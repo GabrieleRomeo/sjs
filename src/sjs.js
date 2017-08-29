@@ -1,5 +1,5 @@
 
-import { types } from './functional';
+import { types } from './types';
 import A from './animations';
 import DOM from './DOM';
 import E from './extras';

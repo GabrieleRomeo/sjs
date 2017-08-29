@@ -1,6 +1,6 @@
 'use strict';
 
-import { types as TYPES } from './functional';
+import { types as TYPES } from './types';
 import F from './functional';
 
 /**
