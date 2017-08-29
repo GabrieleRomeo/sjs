@@ -223,8 +223,17 @@ const HTMLFragment = typeOf('DocumentFragment');
 const defineType = (t) => typeOf(t);
 
 /**
-  * @memberof F
+  * Provides the User s way to specify a list of allowed Data Types for a specific
+  * argument.
+  * @memberof F.types
   * @function
+  * @example
+  * function checkDate(value) {
+  *   const types = sjs.allowedTypes('String', 'Date');
+  *   // value must be a String or a Date
+  *   const date = new Date(customType(value));
+  *   return date;
+  * }
   */
 const allowedTypes = (...types) => typeOf(types);
 
