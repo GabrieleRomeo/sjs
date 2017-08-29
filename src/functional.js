@@ -216,6 +216,13 @@ const HTMLNode = typeOf('HtmlNode');
 const HTMLFragment = typeOf('DocumentFragment');
 
 /**
+  * Allows the User to define a new identity function for a custom Data Type
+  * @memberof F.types
+  * @function
+  */
+const defineType = (t) => typeOf(t);
+
+/**
   * @memberof F
   * @function
   */
@@ -249,6 +256,7 @@ export const types = {
   regex,
   HTMLNode,
   HTMLFragment,
+  defineType,
   allowedTypes,
 };
 
