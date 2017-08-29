@@ -200,6 +200,22 @@ const regex = typeOf('RegExp');
 const HTMLNode = typeOf('HtmlNode');
 
 /**
+ * Checks if the provided Data Type is an HTML NodeList. Otherwise the
+ * System throws a TypeError
+ * @memberof F.types
+ * @function
+ * @param {NodeList} arg -  An HTML NodeList
+ * @returns {NodeList} The same value without any changes.
+ * @example
+ * // returns a NodeList containing all the page's DIVs
+ * sjs.types.HTMLNodeList(document.querySelectorAll('DIV'));
+ *
+ * // throws TypeError - Error: expected NODELIST but provided NUMBER
+ * sjs.types.HTMLNodeList(10);
+ */
+const HTMLNodeList = typeOf('NodeList');
+
+/**
  * Checks if the provided Data Type is a DocumentFragment. Otherwise the System
  * throws a TypeError
  * @memberof F.types
@@ -264,6 +280,7 @@ export const types = {
   sym,
   regex,
   HTMLNode,
+  HTMLNodeList,
   HTMLFragment,
   defineType,
   allowedTypes,
