@@ -1,7 +1,7 @@
 'use strict';
 
 import 'babel-polyfill';
-import { types as TYPES } from '../src/sjs.functional';
+import { types as TYPES } from '../src/types';
 
 const assert = require('assert');
 
