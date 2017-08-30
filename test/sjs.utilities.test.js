@@ -503,4 +503,31 @@ describe('Utilities - U', () => {
     });
   });
 
+  describe('.getDiffInDays( d1, d2 )', () => {
+    const d1 = new Date('2017-08-01');
+    const d2 = new Date();
+    it('should throw an expection when d1 or d2 is not a Date', () => {
+      assert.throws(
+        () => {
+          u.getDiffInDays();
+          u.getDiffInDays([]);
+          u.getDiffInDays(true, true);
+          u.getDiffInDays(123, 123);
+          u.getDiffInDays(undefined, undefined);
+          u.getDiffInDays(null, null);
+        },
+        /Error: expected DATE but provided/
+        );
+    });
+    it('should return a Number', () => {
+      u.getDiffInDays(d1, d2).should.be.an('number');
+    });
+    it('should return a negative number if d2 comes after d1', () => {
+      u.getDiffInDays(d1, d2).should.be.equal(-30);
+    });
+    it('should return a positive number if d2 comes before d1', () => {
+      u.getDiffInDays(d1, d2).should.be.equal(-30);
+    });
+  });
+
 });
