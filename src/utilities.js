@@ -445,8 +445,7 @@ U.getDayName = (dayNumber) => {
  * sjs.U.getDiffInDays(new Date('2017-05-10'), new Date('2017-05-01'));
  */
 U.getDiffInDays = (d1, d2) => {
-
-  let diffInMilliSec = d1.getTime() - d2.getTime();
+  let diffInMilliSec = TYPES.date(d1).getTime() - TYPES.date(d2).getTime();
   const milliSecInAday = 24 * 60 * 60 * 1000; //total milli-seconds in a day
 
   return Math.floor(diffInMilliSec / milliSecInAday);
