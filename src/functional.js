@@ -43,8 +43,7 @@ F.curry = function(fn, n) {
 
     return  args.length >= arity    ?
             fn.apply(context, args) :
-            function() {
-              let remain = F.toArray(arguments);
+            function(...remain) {
               return curried.apply(this, args.concat(remain));
             };
   };
