@@ -1,4 +1,5 @@
 'use strict';
+ /*eslint-env mocha*/
 
 import 'babel-polyfill';
 import u from '../src/utilities';
@@ -9,8 +10,8 @@ const should = require('chai').should();
 describe('Utilities - U', () => {
 
   before(function () {
-    this.jsdom = require('jsdom-global')()
-  })
+    this.jsdom = require('jsdom-global')();
+  });
 
   describe('by( list, n, callback )', () => {
     it('should throw an expection when the provided list is not an Array', () => {
@@ -278,11 +279,11 @@ describe('Utilities - U', () => {
         );
     });
     it('should pass when there exists a value which is equal to the search parameter', () => {
-      assert.deepEqual(u.pick(data, ["type", "index"]), {type: "transformer", index: 19});
-      assert.deepEqual(u.pick(data, ["siblings", "index"]), {siblings: 19, index: 19});
+      assert.deepEqual(u.pick(data, ['type', 'index']), {type: 'transformer', index: 19});
+      assert.deepEqual(u.pick(data, ['siblings', 'index']), {siblings: 19, index: 19});
     });
     it('should return an empty obj when the object is empty', () => {
-      assert.deepEqual(u.pick({}, ["siblings", "index"]), {});
+      assert.deepEqual(u.pick({}, ['siblings', 'index']), {});
     });
     it('should return an empty obj when the keys array is empty', () => {
       assert.deepEqual(u.pick(data, []), {});
