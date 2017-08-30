@@ -232,7 +232,6 @@ U.toCamel = function(str) {
  *                                    string. False otherwise.
  */
 U.has = (object, search) => {
-  search = TYPES.str(search);
   for (const prop in TYPES.obj(object)) {
     if (object.hasOwnProperty(prop) && object[prop] === search) {
       return true;
