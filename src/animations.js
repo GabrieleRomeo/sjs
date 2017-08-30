@@ -55,7 +55,12 @@ const easings = {
 /**
  * Get an easing function
  * @memberof A
- * @param  {String} [easingName]  The easing function's name you are looking for
+ * @param  {String} [easingName]  The easing function's name you are looking for.
+ *                                Available easing functions: 'linear', 'easeInQuad',
+ *                                'easeOutQuad', 'easeInOutQuad', 'easeInCubic',
+ *                                'easeOutCubic', 'easeInOutCubic', 'easeInQuart',
+ *                                'easeOutQuart', 'easeInOutQuart', 'easeInQuint',
+ *                                'easeOutQuint', 'easeInOutQuint'
  * @return {Function} The easing function (if any) or linear (default)
  */
 A.getEasing = (easingName = 'linear') => easings[TYPES.str(easingName)];
