@@ -161,8 +161,20 @@ F.unary = (fn) => {
 };
 
 /**
+  * Executes a function just once
   * @memberof F
   * @function
+  * @example
+  * // sjs.U.generateGUID generates a unique GUID
+  * const uniqueID = sjs.F.once(sjs.U.generateGUID);
+  * // returns a string like "63651124-d561-1897-36c8-53058d87519c"
+  * uniqueID();
+  *
+  * // return undefined
+  * uniqueID();
+  *
+  * // return undefined
+  * uniqueID();
   */
 F.once = (fn) => {
   let done = false;
