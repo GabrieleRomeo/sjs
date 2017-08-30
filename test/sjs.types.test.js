@@ -1,5 +1,7 @@
 'use strict';
 
+ /*eslint-env mocha*/
+
 import 'babel-polyfill';
 import { types as TYPES } from '../src/types';
 
@@ -8,7 +10,7 @@ const assert = require('assert');
 describe('Types - F', () => {
 
   before(function () {
-    this.jsdom = require('jsdom-global')()
+    this.jsdom = require('jsdom-global')();
   });
 
   describe('str( x )', () => {

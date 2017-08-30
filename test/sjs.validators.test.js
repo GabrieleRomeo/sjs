@@ -1,5 +1,7 @@
 'use strict';
 
+ /*eslint-env mocha*/
+
 import 'babel-polyfill';
 import v from '../src/validators';
 
