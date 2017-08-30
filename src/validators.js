@@ -2,6 +2,7 @@
 
 import { types as TYPES } from './types';
 import ULYF from './functional';
+import ULYU from './utilities';
 
 /**
  * The Validators namespace.
@@ -354,7 +355,7 @@ V.isBeforeToday = (input) => {
 
   if (!V.isDate(d1)) throw 'Invalid Date';
 
-  days = V.diffInDays(d1, d2);
+  days = ULYU.getDiffInDays(d1, d2);
 
   return days < 0;
 };
@@ -378,7 +379,7 @@ V.isAfterToday = (input) => {
 
   if (!V.isDate(d1)) throw 'Invalid Date';
 
-  days = V.diffInDays(d1, d2);
+  days = ULYU.getDiffInDays(d1, d2);
 
   return days > 0;
 };
