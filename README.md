@@ -1,4 +1,7 @@
-## sjs - Strongly Javascript - Utility Library
+​                           <img src="assets/img/hero_min.png" />
+  <img src="assets/img/logo.png" />
+
+## sjs - Safety Javascript - Utility Library
 
 Hello and Welcome to this repository.
 
