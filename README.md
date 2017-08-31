@@ -1,15 +1,19 @@
-​                           <img src="assets/img/hero_min.png" />
+​                           <img src="assets/img/hero_m.png" />
   <img src="assets/img/logo.png" />
 
 ## sjs - Safety Javascript - Utility Library
 
 Hello and Welcome to this repository.
 
-*sjs* is a collection of algorithms and functions wrote during my studies at [Bov Academy](https://www.bovacademy.com).
+*Sjs* is a collection of algorithms and functions wrote during my studies at [Bov Academy](https://www.bovacademy.com).
 
 
 
-Unlike many other js libraries, SJS aims to be **strongly-typed**. Indeed, when you provide an argument to a function, the library checks if it belongs to the expected data type. Otherwise, the system throws an exception.
+Unlike many other js libraries, Sjs aims to be **strongly-typed**. The main benefit to being *strongly-type* is that 
+
+when you pass an argument to a function, the Library checks if it belongs to an expected *data type*. 
+
+If this is not the case, the System throws a *TypeError* Exception.
 
 
 
