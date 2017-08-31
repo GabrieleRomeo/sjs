@@ -39,7 +39,7 @@
     "preprod": "npm run test:silent",
     "prod": "webpack -p --env=prod --progress",
     "dox": "doxdox 'src/*.js' --layout markdown --output DOCUMENTATION.md",
-    "generate-docs": "node_modules/.bin/jsdoc --readme assets/HOMEDOCS.md -c jsdoc.json",
+    "generate-docs": "node_modules/.bin/jsdoc --readme docs/assets/HOMEDOCS.md -c jsdoc.json",
     "postgenerate-docs": "npm run dox"
   },
   "author": "Gabriele Romeo",

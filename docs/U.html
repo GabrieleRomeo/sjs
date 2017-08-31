@@ -1,0 +1,3173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>U - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="E.EventEmitter.html">EventEmitter</a><ul class='methods'><li data-type='method'><a href="E.EventEmitter.html#emit">emit</a></li><li data-type='method'><a href="E.EventEmitter.html#on">on</a></li><li data-type='method'><a href="E.EventEmitter.html#once">once</a></li><li data-type='method'><a href="E.EventEmitter.html#removeListener">removeListener</a></li></ul></li><li><a href="E.Queue.html">Queue</a><ul class='methods'><li data-type='method'><a href="E.Queue.html#dequeue">dequeue</a></li><li data-type='method'><a href="E.Queue.html#enqueue">enqueue</a></li><li data-type='method'><a href="E.Queue.html#isEmpty">isEmpty</a></li></ul></li><li><a href="E.Stack.html">Stack</a><ul class='methods'><li data-type='method'><a href="E.Stack.html#isEmpty">isEmpty</a></li><li data-type='method'><a href="E.Stack.html#pop">pop</a></li><li data-type='method'><a href="E.Stack.html#push">push</a></li></ul></li></ul><h3>Events</h3><ul><li><a href="E.Queue.html#event:dequeue">dequeue</a></li><li><a href="E.Queue.html#event:empty">empty</a></li><li><a href="E.Queue.html#event:enqueue">enqueue</a></li><li><a href="E.Stack.html#event:empty">empty</a></li><li><a href="E.Stack.html#event:pop">pop</a></li><li><a href="E.Stack.html#event:push">push</a></li></ul><h3>Namespaces</h3><ul><li><a href="A.html">A</a><ul class='methods'><li data-type='method'><a href="A.html#.getEasing">getEasing</a></li><li data-type='method'><a href="A.html#.scrollTo">scrollTo</a></li></ul></li><li><a href="DOM.html">DOM</a><ul class='methods'><li data-type='method'><a href="DOM.html#.$">$</a></li><li data-type='method'><a href="DOM.html#.$$">$$</a></li><li data-type='method'><a href="DOM.html#.appendTo">appendTo</a></li><li data-type='method'><a href="DOM.html#.getAncestorBySelector">getAncestorBySelector</a></li><li data-type='method'><a href="DOM.html#.getBody">getBody</a></li><li data-type='method'><a href="DOM.html#.getComputed">getComputed</a></li><li data-type='method'><a href="DOM.html#.getElemDistanceFromTop">getElemDistanceFromTop</a></li><li data-type='method'><a href="DOM.html#.getElemInfo">getElemInfo</a></li><li data-type='method'><a href="DOM.html#.getPageInfo">getPageInfo</a></li><li data-type='method'><a href="DOM.html#.getSiblingsBySelector">getSiblingsBySelector</a></li><li data-type='method'><a href="DOM.html#.getViewPortInfo">getViewPortInfo</a></li><li data-type='method'><a href="DOM.html#.insertAfter">insertAfter</a></li><li data-type='method'><a href="DOM.html#.prependTo">prependTo</a></li><li data-type='method'><a href="DOM.html#.removeAll">removeAll</a></li><li data-type='method'><a href="DOM.html#.swapElements">swapElements</a></li></ul></li><li><a href="E.html">E</a><ul class='methods'><li data-type='method'><a href="E.html#.$http">$http</a></li></ul></li><li><a href="F.html">F</a><ul class='methods'><li data-type='method'><a href="F.html#.arrayOf">arrayOf</a></li><li data-type='method'><a href="F.html#.asyncAction">asyncAction</a></li><li data-type='method'><a href="F.html#.capitalize">capitalize</a></li><li data-type='method'><a href="F.html#.classOf">classOf</a></li><li data-type='method'><a href="F.html#.compose">compose</a></li><li data-type='method'><a href="F.html#.contains">contains</a></li><li data-type='method'><a href="F.html#.curry">curry</a></li><li data-type='method'><a href="F.html#.exists">exists</a></li><li data-type='method'><a href="F.html#.flatten">flatten</a></li><li data-type='method'><a href="F.html#.flip">flip</a></li><li data-type='method'><a href="F.html#.forEachObject">forEachObject</a></li><li data-type='method'><a href="F.html#.getWith">getWith</a></li><li data-type='method'><a href="F.html#.head">head</a></li><li data-type='method'><a href="F.html#.map">map</a></li><li data-type='method'><a href="F.html#.maybe">maybe</a></li><li data-type='method'><a href="F.html#.memoized">memoized</a></li><li data-type='method'><a href="F.html#.not">not</a></li><li data-type='method'><a href="F.html#.notExists">notExists</a></li><li data-type='method'><a href="F.html#.once">once</a></li><li data-type='method'><a href="F.html#.rcompose">rcompose</a></li><li data-type='method'><a href="F.html#.rcurry">rcurry</a></li><li data-type='method'><a href="F.html#.sortBy">sortBy</a></li><li data-type='method'><a href="F.html#.tail">tail</a></li><li data-type='method'><a href="F.html#.times">times</a></li><li data-type='method'><a href="F.html#.toArray">toArray</a></li><li data-type='method'><a href="F.html#.toLower">toLower</a></li><li data-type='method'><a href="F.html#.toUpper">toUpper</a></li><li data-type='method'><a href="F.html#.unary">unary</a></li><li data-type='method'><a href="F.html#.unless">unless</a></li><li data-type='method'><a href="F.html#.zip">zip</a></li></ul></li><li><a href="types.html">types</a><ul class='methods'><li data-type='method'><a href="types.html#.allowedTypes">allowedTypes</a></li><li data-type='method'><a href="types.html#.arr">arr</a></li><li data-type='method'><a href="types.html#.arrayOf">arrayOf</a></li><li data-type='method'><a href="types.html#.bool">bool</a></li><li data-type='method'><a href="types.html#.date">date</a></li><li data-type='method'><a href="types.html#.defineType">defineType</a></li><li data-type='method'><a href="types.html#.fun">fun</a></li><li data-type='method'><a href="types.html#.HTMLFragment">HTMLFragment</a></li><li data-type='method'><a href="types.html#.HTMLNode">HTMLNode</a></li><li data-type='method'><a href="types.html#.HTMLNodeList">HTMLNodeList</a></li><li data-type='method'><a href="types.html#.int">int</a></li><li data-type='method'><a href="types.html#.num">num</a></li><li data-type='method'><a href="types.html#.obj">obj</a></li><li data-type='method'><a href="types.html#.regex">regex</a></li><li data-type='method'><a href="types.html#.str">str</a></li><li data-type='method'><a href="types.html#.sym">sym</a></li></ul></li><li><a href="U.html">U</a><ul class='methods'><li data-type='method'><a href="U.html#.by">by</a></li><li data-type='method'><a href="U.html#.generateGUID">generateGUID</a></li><li data-type='method'><a href="U.html#.getCookie">getCookie</a></li><li data-type='method'><a href="U.html#.getDayName">getDayName</a></li><li data-type='method'><a href="U.html#.getDiffInDays">getDiffInDays</a></li><li data-type='method'><a href="U.html#.getIncRandomInt">getIncRandomInt</a></li><li data-type='method'><a href="U.html#.getRandomInt">getRandomInt</a></li><li data-type='method'><a href="U.html#.has">has</a></li><li data-type='method'><a href="U.html#.keys">keys</a></li><li data-type='method'><a href="U.html#.pairs">pairs</a></li><li data-type='method'><a href="U.html#.pick">pick</a></li><li data-type='method'><a href="U.html#.pluralize">pluralize</a></li><li data-type='method'><a href="U.html#.replaceAll">replaceAll</a></li><li data-type='method'><a href="U.html#.shuffle">shuffle</a></li><li data-type='method'><a href="U.html#.toCamel">toCamel</a></li><li data-type='method'><a href="U.html#.toDash">toDash</a></li><li data-type='method'><a href="U.html#.values">values</a></li></ul></li><li><a href="V.html">V</a><ul class='methods'><li data-type='method'><a href="V.html#.contains">contains</a></li><li data-type='method'><a href="V.html#.countWords">countWords</a></li><li data-type='method'><a href="V.html#.isAfterDate">isAfterDate</a></li><li data-type='method'><a href="V.html#.isAfterToday">isAfterToday</a></li><li data-type='method'><a href="V.html#.isBeforeDate">isBeforeDate</a></li><li data-type='method'><a href="V.html#.isBeforeToday">isBeforeToday</a></li><li data-type='method'><a href="V.html#.isBetween">isBetween</a></li><li data-type='method'><a href="V.html#.isColor">isColor</a></li><li data-type='method'><a href="V.html#.isComposedOf">isComposedOf</a></li><li data-type='method'><a href="V.html#.isConsecutive">isConsecutive</a></li><li data-type='method'><a href="V.html#.isCreditCard">isCreditCard</a></li><li data-type='method'><a href="V.html#.isDate">isDate</a></li><li data-type='method'><a href="V.html#.isEmailAddress">isEmailAddress</a></li><li data-type='method'><a href="V.html#.isEmpty">isEmpty</a></li><li data-type='method'><a href="V.html#.isFunc">isFunc</a></li><li data-type='method'><a href="V.html#.isHex">isHex</a></li><li data-type='method'><a href="V.html#.isHSL">isHSL</a></li><li data-type='method'><a href="V.html#.isInt">isInt</a></li><li data-type='method'><a href="V.html#.isLength">isLength</a></li><li data-type='method'><a href="V.html#.isNumber">isNumber</a></li><li data-type='method'><a href="V.html#.isOfLength">isOfLength</a></li><li data-type='method'><a href="V.html#.isPhoneNumber">isPhoneNumber</a></li><li data-type='method'><a href="V.html#.isRGB">isRGB</a></li><li data-type='method'><a href="V.html#.isString">isString</a></li><li data-type='method'><a href="V.html#.isTrimmed">isTrimmed</a></li><li data-type='method'><a href="V.html#.lacks">lacks</a></li><li data-type='method'><a href="V.html#.lessWordsThan">lessWordsThan</a></li><li data-type='method'><a href="V.html#.moreWordsThan">moreWordsThan</a></li><li data-type='method'><a href="V.html#.withoutSymbols">withoutSymbols</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">U</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+        U
+        </h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utilities.js.html">utilities.js</a>, <a href="utilities.js.html#line6">line 6</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+        
+            <div class="description"><p>The Utilities namespace.
+This namespace contains a set of utility functions used for a variety of things.
+For example the evaluation of arguments or the generation of random integer
+or Guid</p></div>
+        
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".by"><span class="type-signature">(static) </span>by<span class="signature">(list, n, n)</span><span class="type-signature"> &rarr; {void}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utilities.js.html">utilities.js</a>, <a href="utilities.js.html#line36">line 36</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Iterates and calls the callback parameter for each element or property
+of a list at the interval specified by the n parameter.
+It does not call callback on values greater than the list’s number</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>let result = [];
+const double = (x) => result.push(x * 2);
+sjs.U.by([1, 2, 3, 4, 5, 6], 2, double);
+// result now contains [4, 8, 12]</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>list</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The list of values</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>n</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>An interval used as step of the iteration</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>n</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Func</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A callback function applied on the elements within the
+                step</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".generateGUID"><span class="type-signature">(static) </span>generateGUID<span class="signature">()</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utilities.js.html">utilities.js</a>, <a href="utilities.js.html#line386">line 386</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Generate a random GUID</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// returns a string like "171d531b-54b1-cd9b-11b0-7951130e68d4"
+sjs.U.generateGUID();</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getCookie"><span class="type-signature">(static) </span>getCookie<span class="signature">(name)</span><span class="type-signature"> &rarr; {string|undefined}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utilities.js.html">utilities.js</a>, <a href="utilities.js.html#line331">line 331</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Retrieve the value of a particular cookie through its name</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The cookie's name</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Returns the value of the intended cookie
+                               or undefined</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+|
+
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getDayName"><span class="type-signature">(static) </span>getDayName<span class="signature">(dayNumber)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utilities.js.html">utilities.js</a>, <a href="utilities.js.html#line406">line 406</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Given a day number it returns the day name or &quot;Unknown&quot;.
+(0 - Sunday || 6 - Saturday)</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// returns "Sunday"
+sjs.U.getDayName(0);
+
+// returns "Wednesday"
+sjs.U.getDayName(3);
+
+// returns "Unknown"
+sjs.U.getDayName(7);</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dayNumber</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The day number</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The day name.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getDiffInDays"><span class="type-signature">(static) </span>getDiffInDays<span class="signature">(Date, Date)</span><span class="type-signature"> &rarr; {int}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utilities.js.html">utilities.js</a>, <a href="utilities.js.html#line447">line 447</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Given two dates it returns the difference between them in days</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// returns 9
+sjs.U.getDiffInDays(new Date('2017-05-10'), new Date('2017-05-01'));</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Date</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">d1</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The first date</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Date</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">d2</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The second date</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The difference in days</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">int</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getIncRandomInt"><span class="type-signature">(static) </span>getIncRandomInt<span class="signature">(max<span class="signature-attributes">opt</span>, min<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utilities.js.html">utilities.js</a>, <a href="utilities.js.html#line320">line 320</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get a random integer (inclusive)</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>max</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The upper limit (defualt 10 - included)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>min</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The lower limit (default 0 - included)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A random integer from min to max</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getRandomInt"><span class="type-signature">(static) </span>getRandomInt<span class="signature">(max<span class="signature-attributes">opt</span>, min<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Number}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utilities.js.html">utilities.js</a>, <a href="utilities.js.html#line309">line 309</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Get a random integer</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>max</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The upper limit (defualt 10 - not included)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>min</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The lower limit (default 0 - included)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A random integer from min to max</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".has"><span class="type-signature">(static) </span>has<span class="signature">(obj, search)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utilities.js.html">utilities.js</a>, <a href="utilities.js.html#line234">line 234</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Searches through all the [values] of the provided object and returns “true”
+if any of them matches the query string. Otherwise it returns “false”.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>obj</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>An object</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>search</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The string you are looking for</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>{(True|False)} True if any of the values match the query
+                                   string. False otherwise.</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".keys"><span class="type-signature">(static) </span>keys<span class="signature">(object)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utilities.js.html">utilities.js</a>, <a href="utilities.js.html#line68">line 68</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Creates an array of all the keys of an object</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>object</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The object used as a template</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An Array containing all the keys of the provided object</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".pairs"><span class="type-signature">(static) </span>pairs<span class="signature">(object)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utilities.js.html">utilities.js</a>, <a href="utilities.js.html#line98">line 98</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Creates an array of all keys and values of an object in the order of
+[key, value, key, value] for as many key/value pairs as exist in the
+object.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// returns ["count", 5, "length", 10, "total", 16]
+pairs({count: 5, length: 10, total: 16});</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>object</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The object used as a template</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An Array containing all keys and values pairs of the provided
+                 object</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".pick"><span class="type-signature">(static) </span>pick<span class="signature">(obj, keys)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utilities.js.html">utilities.js</a>, <a href="utilities.js.html#line271">line 271</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns a new object by picking all key/value pairs from the argument
+obj.
+The keys that are picked will be determined by the array parameter keys.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>var data = {
+    type: "transformer",
+    index: 19,
+    siblings: 19,
+    access: "full"
+};
+
+// returns {type: "transformer", index: 19};
+sjs.U.pick(data, ["type", "index"]);
+
+// returns {siblings: 19, index: 19};
+sjs.U.pick(data, ["siblings", "index"]);
+
+// returns {access: "full"};
+sjs.U.pick(data, ["access", "animals"]);</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>obj</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>An object</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>keys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A list of keys</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An object which is composed by the requested keys</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".pluralize"><span class="type-signature">(static) </span>pluralize<span class="signature">(n, word, pluralWord)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utilities.js.html">utilities.js</a>, <a href="utilities.js.html#line158">line 158</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns the plural of a word depending on the value of the n parameter.
+If n is 1, return the non-plural word (parameter word);
+otherwise, add an “s” to the plural word.
+If the pluralWord parameter is provided, instead of adding an “s,”
+return the pluralWord.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>// returns "lion"
+sjs.U.pluralize(1, "lion");</code></pre>
+
+    <pre class="prettyprint"><code>// returns "lions"
+sjs.U.pluralize(2, "lion");</code></pre>
+
+    <pre class="prettyprint"><code>// returns "lions"
+sjs.U.pluralize(5, "lion");</code></pre>
+
+    <pre class="prettyprint"><code>// returns "lions"
+sjs.U.pluralize(0, "lion");</code></pre>
+
+    <pre class="prettyprint"><code>// returns "lioness"
+sjs.U.pluralize(1, "lioness");</code></pre>
+
+    <pre class="prettyprint"><code>// returns "lionesss"
+sjs.U.pluralize(2, "lioness");</code></pre>
+
+    <pre class="prettyprint"><code>// "lionesses"
+sjs.U.pluralize(2, "lioness", "lionesses);</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>n</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The number of &quot;s&quot;</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>word</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A non-plural word</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pluralWord</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>An optional plural word</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A pluralized string</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".replaceAll"><span class="type-signature">(static) </span>replaceAll<span class="signature">(text, search, replace)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utilities.js.html">utilities.js</a>, <a href="utilities.js.html#line298">line 298</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Replaces all occurencies of a particular search string with another
+string</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// returns Hell? W?rld!
+sjs.U.replaceAll('Hello World!', 'o', '?');</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>text</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A string used as a base for the search</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>search</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A string you are looking for the replace</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>replace</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A string used as replacing</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A new string with all occurrencies replaced</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".shuffle"><span class="type-signature">(static) </span>shuffle<span class="signature">(object)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utilities.js.html">utilities.js</a>, <a href="utilities.js.html#line114">line 114</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns a randomly re-arranged copy of the elements in its parameter
+array.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>let arr = [1,2,3,4,5];
+ // returns a new array containing shuffled elements like: [2,4,5,3,1]
+ sjs.U.shuffle(arr);</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>object</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The Array used as a template</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A randomly re-arranged copy of the original Array</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".toCamel"><span class="type-signature">(static) </span>toCamel<span class="signature">(str)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utilities.js.html">utilities.js</a>, <a href="utilities.js.html#line213">line 213</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Converts a dashed string to a camel case string.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>// returns hot-dog
+toCamel(hot-dog);</code></pre>
+
+    <pre class="prettyprint"><code>// returns spaceStationComplex
+ toCamel(space-station-complex);</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>str</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A dashed string</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A camelCase string</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".toDash"><span class="type-signature">(static) </span>toDash<span class="signature">(str)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utilities.js.html">utilities.js</a>, <a href="utilities.js.html#line189">line 189</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Converts a camelCase string to a dashed string.
+Camel case presents words with no spaces separating them and with
+each word’s first letter capitalized except the first word,
+which is lower case.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>// returs hot-dog
+toDash(hotDog);</code></pre>
+
+    <pre class="prettyprint"><code>// returs space-station-complex
+toDash(spaceStationComplex);</code></pre>
+
+    <pre class="prettyprint"><code>// returns my-first-function
+toDash(myFirstFunction);</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>str</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A camelCase string</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A dashed string</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".values"><span class="type-signature">(static) </span>values<span class="signature">(object)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utilities.js.html">utilities.js</a>, <a href="utilities.js.html#line84">line 84</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Creates an array containing all the values of the provided object</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const obj = {
+   key1: 'Value one!',
+   key2: 'Value two!!!'
+};
+// returns ['Value one!', 'Value two!!!']
+sjs.U.values(obj);</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>object</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The object used as a template</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An Array containing all the values of the provided
+                 object</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.4</a> on Thu Aug 31 2017 17:47:11 GMT+0200 (CEST) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

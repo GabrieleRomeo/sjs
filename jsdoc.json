@@ -11,7 +11,7 @@
         "plugins/markdown"
     ],
     "opts": {
-        "template": "assets/template/docdash/",
+        "template": "docs/assets/template/docdash/",
         "encoding": "utf8",
         "destination": "./docs/",
         "recurse": true,
