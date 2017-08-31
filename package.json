@@ -26,16 +26,19 @@
     "jsdom": "11.1.0",
     "jsdom-global": "3.0.2",
     "mocha": "^3.4.2",
+    "mocha-silent-reporter": "^1.0.0",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5",
     "webpack-merge": "^4.1.0"
   },
   "scripts": {
-    "test:mocha": "mocha --compilers js:babel-register --require babel-polyfill",
-    "test:mocha:watch": "webpack-dev-server --hot --config webpack.mocha.js",
+    "test": "mocha --compilers js:babel-register --require babel-polyfill",
+    "test:silent": "mocha -R mocha-silent-reporter --compilers js:babel-register --require babel-polyfill",
+    "test:watch": "webpack-dev-server --hot --config webpack.mocha.js",
     "dev": "webpack-dev-server --port 3000 --inline --colors --watch --hot --progress",
+    "preprod": "npm run test:silent",
     "prod": "webpack -p --env=prod --progress",
-    "generate-docs": "node_modules/.bin/jsdoc --readme README.md -c jsdoc.json"
+    "generate-docs": "node_modules/.bin/jsdoc --readme assets/HOMEDOCS.md -c jsdoc.json"
   },
   "author": "Gabriele Romeo",
   "license": "ISC"
