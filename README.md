@@ -1,5 +1,5 @@
-​                           <img src="assets/img/hero_m.png" />
-  <img src="assets/img/logo.png" />
+​                           <img src="docs/assets/img/hero_m.png" />
+  <img src="docs/assets/img/logo.png" />
 
 ## sjs - Safety Javascript - Utility Library
 
