@@ -831,6 +831,59 @@ optional parameter 'n' which sets the function's arity.
 
 
 
+##### Examples
+
+```javascript
+<caption>Provides the arguments to myFunction in 3 different steps</caption> const myFunction = (a, b, c) => 'a = ' + a + '; b = ' + b + '; c = ' + c;
+
+// Make myFunction a curried function
+const curriedFunction = sjs.F.curry(myFunction);
+
+var result = '';
+
+// Provide the first argument to the curried function
+result = curriedFunction('Hello');
+
+// Provide the second argument to the curried function
+result = result('World');
+
+// Provide the last argument to the curried function
+result = result('!!!');
+
+// returns "a = Hello; b = World; c = !!!"
+```
+```javascript
+<caption>Provides the arguments in two steps</caption> 
+var result = curriedFunction('Have', 'a');
+// returns "a = Have; b = a; c = good day!"
+result('good day!');
+```
+```javascript
+<caption>Provides all the arguments in a single step</caption> 
+// returns "a = Wow; b = It's; c = wonderful!"
+curriedFunction('Wow')('It\'s')('wonderful!');
+```
+```javascript
+<caption>Specifies the Function's arity</caption> // The following function is Variadic because it takes a variable number of
+// arguments and returns the sum of them
+const sum = (...args) => args.reduce((a, b) => a + b, 0);
+// returns 49
+sum(3, 4, 5, 6, 10, 21);
+
+
+// The curried function will be applied when we provide at least 2 arguments
+// to it.
+const curriedSum = sjs.F.curry(sum);
+const curriedSumArity = sjs.F.curry(sum, 2);
+
+// returns TypeError
+curriedSum(3)(4);
+
+// returns 7
+curriedSumArity(3)(4);
+```
+
+
 ##### Returns
 
 
@@ -865,45 +918,116 @@ rcurry curries a function's arguments from right to left.
 
 
 
-#### F.map() 
+#### F.map(fn, a) 
+
+Take a Function and an Array an applies the Function to each Array's item.
 
 
 
 
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| fn | `Function`  | The function to be applied | &nbsp; |
+| a | `Array`  | An array of items | &nbsp; |
 
 
+
+
+##### Examples
+
+```javascript
+const multiplyBy2 = n => n * 2;
+// returns [2, 4, 8, 12]
+sjs.F.map(multiplyBy2, [1, 2, 4, 6]);
+```
 
 
 ##### Returns
 
 
-- `Void`
+- `Array`  An array containing the mapped items
 
 
 
-#### F.arrayOf() 
+#### F.arrayOf(fn, a) 
+
+Checks if all the items of an Array are of a particular DataType. If one of them
+is not valid, the function throws a TypeError
 
 
 
 
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| fn | `Function`  | - A type validation function | &nbsp; |
+| a | `Array`  | - An Array of items | &nbsp; |
 
 
+
+
+##### Examples
+
+```javascript
+// Since all items are numbers, it returns [1, 2, 3]
+sjs.F.arrayOf(sjs.types.num)([1, 2, 3]);
+
+// Since the last Array's item is the Null value,
+// it throws TypeError - Error: expected NUMBER but provided NULL
+sjs.F.arrayOf(sjs.types.num)([1, 2, 3, null]);
+```
+```javascript
+<caption>Defining a list of Allowed Data Types</caption> const allowedTypes = sjs.types.allowedTypes('String', 'Integer');
+// Since all items satisfy the requirement, it returns [1, 2, 3, 'Hello World']
+sjs.F.arrayOf(allowedTypes)([1, 2, 3, 'Hello World']);
+
+// Since the second Array's item is a float number,
+// it throws TypeError - Error: expected STRING or INTEGER but provided NUMBER
+sjs.F.arrayOf(allowedTypes)([1, 2.2, 3, 'Hello World']);
+
+// Since the last Array's item is a nested Array,
+// it throws TypeError - Error: expected STRING or INTEGER but provided ARRAY
+sjs.F.arrayOf(allowedTypes)([1, 2, 3, 'Hello World', ['hi']]);
+```
 
 
 ##### Returns
 
 
-- `Void`
+- `Function`  Takes an Array and validate each item's datatype
+- `Array`  The provided Array
 
 
 
 #### F.compose() 
 
+It allows to build complex functions from many simple functions.
+Through composition, a function can be viewed as a building block for other
+functions.
 
 
 
 
 
+
+##### Examples
+
+```javascript
+const add = (a, b) => a + b;
+const mul = (a, b) => a * b;
+
+const addAndMul = sjs.F.compose(add, mul);
+// returns 7 because mul is applied first, then 1 is added to the result
+// 2 * 3 = 6
+// 6 + 1
+addAndMul(2, 3)(1);
+
+// returns 5
+addAndMul(2, 3)(1);
+```
 
 
 ##### Returns
@@ -931,11 +1055,25 @@ rcurry curries a function's arguments from right to left.
 
 #### F.flip() 
 
+Take a function and returns another function which takes a list of arguments
+and applies the first function to the arguments swapped in reverse order.
 
 
 
 
 
+
+##### Examples
+
+```javascript
+const sub = (a, b) => a - b;
+// returns 2 (5 - 3)
+sub(5, 3);
+
+const flippedSub = sjs.F.flip(sub);
+// returns -2 (3 - 5)
+flippedSub(5, 3);
+```
 
 
 ##### Returns
@@ -947,43 +1085,32 @@ rcurry curries a function's arguments from right to left.
 
 #### F.rcompose() 
 
+As compose, It allows to build complex functions from many simple functions.
+Unlike compose, rcompose applies each composing functions from left to right.
 
 
 
 
 
 
+##### Examples
 
-##### Returns
+```javascript
+const add = (a, b) => a + b;
+const mul = (a, b) => a * b;
 
+// Standard compose
+const addAndMul = sjs.F.compose(mul, add);
+// returns 5 because the add function is applied first then
+// the mul function. ((2 + 3) * 1)
+addAndMul(2, 3)(1);
 
-- `Void`
-
-
-
-#### F.toLower() 
-
-
-
-
-
-
-
-
-##### Returns
-
-
-- `Void`
-
-
-
-#### F.toUpper() 
-
-
-
-
-
-
+// Right compose
+const revMul = sjs.F.rcompose(mul, add);
+// returns 5 because the mul function is applied first then
+// the add function. ((2 * 3) + 1)
+revMul(2, 3)(1);
+```
 
 
 ##### Returns
@@ -993,27 +1120,18 @@ rcurry curries a function's arguments from right to left.
 
 
 
-#### F.capitalize() 
+#### F.toLower(s) 
+
+Tranform a String into Lowercase
 
 
 
 
+##### Parameters
 
-
-
-
-##### Returns
-
-
-- `Void`
-
-
-
-#### F.unary() 
-
-
-
-
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| s | `String`  | The text to be transformed | &nbsp; |
 
 
 
@@ -1021,7 +1139,88 @@ rcurry curries a function's arguments from right to left.
 ##### Returns
 
 
-- `Void`
+- `String`  The text in Lowercase
+
+
+
+#### F.toUpper(s) 
+
+Tranform a String into Uppercase
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| s | `String`  | The text to be transformed | &nbsp; |
+
+
+
+
+##### Returns
+
+
+- `String`  The text in Uppercase
+
+
+
+#### F.capitalize(s) 
+
+Take a String and capitalize its first word.
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| s | `String`  | The text to be transformed | &nbsp; |
+
+
+
+
+##### Returns
+
+
+- `String`  The capitalized text
+
+
+
+#### F.unary(fn) 
+
+Convert a function which takes n arguments into a function which takes
+just one argument
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| fn | `Function`  | A function taking n arguments | &nbsp; |
+
+
+
+
+##### Examples
+
+```javascript
+// returns [2, NaN];
+['2', '4'].map(parseInt);
+
+// returns [2, 4];
+['2', '4'].map(sjs.F.unary(parseInt));
+```
+
+
+##### Returns
+
+
+- `Function`  A function which takes just one argument
 
 
 
@@ -1089,11 +1288,61 @@ uniqueID();
 
 
 
-#### F.unless() 
+#### F.unless(predicate, fn) 
+
+Take a predicate and a Function and Apply the function only when the predicate
+is false
 
 
 
 
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| predicate | `Bool`  | The predicate | &nbsp; |
+| fn | `Function`  | A function to be applied when the predicate is false | &nbsp; |
+
+
+
+
+##### Examples
+
+```javascript
+const list = [
+  { disabled: false, name: 'Action 1' },
+  { disabled: true, name: 'Action 2' },
+  { disabled: false, name: 'Action 3' },
+];
+
+// returns
+// {disabled: false, name: "Action 1"} "is disabled"
+// {disabled: false, name: "Action 3"} "is disabled"
+list.forEach(item => {
+  sjs.F.unless(item.disabled, () => console.log(item, 'is disabled'));
+});
+```
+
+
+##### Returns
+
+
+- `Any`  The result of the applied function
+
+
+
+#### F.head(a) 
+
+Returns the first item of an Array
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| a | `Array`  | An Array | &nbsp; |
 
 
 
@@ -1101,31 +1350,24 @@ uniqueID();
 ##### Returns
 
 
-- `Void`
+- `Any`  The first item
 
 
 
-#### F.head() 
+#### F.tail(a[, begin]) 
 
-
-
-
-
-
-
-
-##### Returns
-
-
-- `Void`
-
-
-
-#### F.tail() 
+Returns an Array containing all the items starting from the second item
+(default).
 
 
 
 
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| a | `Array`  | An Array | &nbsp; |
+| begin | `Integer`  | = 1] The first item of the resulting array | *Optional* |
 
 
 
@@ -1133,15 +1375,109 @@ uniqueID();
 ##### Returns
 
 
-- `Void`
+- `Array`  An array containing a portion of the original array
 
 
 
-#### F.sortBy() 
+#### F.sortBy(property, a, b) 
+
+Given a property's name and a two object, it returns:<br>
+-1 if the property's length of the object 1 is lesser than that of object 2<br>
+1  if both the lengths are equal<br>
+0 if the property's length of the object 1 is grather than that of object 2<br>
 
 
 
 
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| property | `String`  | The property's name | &nbsp; |
+| a | `Object`  | The first object | &nbsp; |
+| b | `Object`  | The second object | &nbsp; |
+
+
+
+
+##### Examples
+
+```javascript
+const cars = [
+  { name: 'Ferrari', color: 'red' },
+  { name: 'Lamborghini', color: 'black' },
+  { name: 'Porsche', color: 'green' }
+];
+
+// returns [
+//  { name: 'Lamborghini', color: 'black' },
+//  { name: 'Porsche', color: 'green' },
+//  { name: 'Ferrari', color: 'red' }
+// ];
+cars.sort(sjs.F.sortBy('color'));
+
+// returns [
+//  { name: 'Ferrari', color: 'red' }
+//  { name: 'Lamborghini', color: 'black' },
+//  { name: 'Porsche', color: 'green' },
+// ];
+cars.sort(sjs.F.sortBy('name'));
+```
+
+
+##### Returns
+
+
+- `Function`  A function which takes two object
+- `Integer`  -1, 1, 0
+
+
+
+#### F.flatten(a) 
+
+Concatenate nested arrays (1 level depth) into a single array
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| a | `Array`  | An array containing nested arrays | &nbsp; |
+
+
+
+
+##### Examples
+
+```javascript
+// returns [1, 2, 3]
+sjs.F.flatten([[1], 2, 3]);
+```
+
+
+##### Returns
+
+
+- `Array`  An flatten array
+
+
+
+#### F.zip(leftArray, rightArray, fn) 
+
+Merge two arrays and apply a callback function
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| leftArray | `Array`  | The left array | &nbsp; |
+| rightArray | `Array`  | The right array | &nbsp; |
+| fn | `Function`  | A callback function | &nbsp; |
 
 
 
@@ -1149,49 +1485,26 @@ uniqueID();
 ##### Returns
 
 
-- `Void`
-
-
-
-#### F.flatten() 
-
-
-
-
-
-
-
-
-##### Returns
-
-
-- `Void`
-
-
-
-#### F.zip() 
-
-
-
-
-
-
-
-
-##### Returns
-
-
-- `Void`
+- `Array`  A merged array
 
 
 
 #### F.times() 
 
+Apply a function n times.
 
 
 
 
 
+
+##### Examples
+
+```javascript
+sjs.F.times(10, n => {
+  console.log(n % 2);
+});
+```
 
 
 ##### Returns
@@ -1217,11 +1530,18 @@ uniqueID();
 
 
 
-#### F.not() 
+#### F.not(x) 
+
+Negate a predicate
 
 
 
 
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| x | `Bool`  | A predicate | &nbsp; |
 
 
 
@@ -1229,7 +1549,7 @@ uniqueID();
 ##### Returns
 
 
-- `Void`
+- `Bool`  The negation of x
 
 
 
@@ -1310,7 +1630,7 @@ sjs.F.classOf({});
 
 #### F.exists(x) 
 
-Check if the provided value is neither Null nor Undefined
+Checks if the provided value is neither Null nor Undefined.
 
 
 
@@ -1319,7 +1639,7 @@ Check if the provided value is neither Null nor Undefined
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| x | `value`  | The value under test | &nbsp; |
+| x | `Any`  | The value under test | &nbsp; |
 
 
 
@@ -1333,7 +1653,7 @@ Check if the provided value is neither Null nor Undefined
 
 #### F.notExists(x) 
 
-Check if the provided value is neither Null nor Undefined
+Check if the provided value is either Null or Undefined.
 
 
 
@@ -1342,7 +1662,7 @@ Check if the provided value is neither Null nor Undefined
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| x | `value`  | The value under test | &nbsp; |
+| x | `Any`  | The value under test | &nbsp; |
 
 
 
