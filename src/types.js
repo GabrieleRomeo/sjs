@@ -270,7 +270,7 @@ const allowedTypes = (...types) => typeOf(types);
 function typeOf(types) {
   return function(x) {
     const HTMLTest = /HTML.*Element/i;
-    const INTEGERTest = /^[0-9]*$/g;
+    const INTEGERTest = /^-?[0-9]*$/g;
     const expected = [].concat(types).map(F.capitalize);
     const provided = F.capitalize(F.classOf(x));
 
