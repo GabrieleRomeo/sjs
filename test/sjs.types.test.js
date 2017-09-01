@@ -65,9 +65,13 @@ describe('Types - F', () => {
         /Error: expected INTEGER but provided/
         );
     });
-    it('should pass when the provided parameter is an INTEGER', () => {
+    it('should pass when the provided parameter is a positive INTEGER', () => {
       assert.deepEqual(TYPES.int(4), 4);
       assert.deepEqual(TYPES.int(10000), 10000);
+    });
+    it('should pass when the provided parameter is a negative INTEGER', () => {
+      assert.deepEqual(TYPES.int(-4), -4);
+      assert.deepEqual(TYPES.int(-10000), -10000);
     });
   });
 
