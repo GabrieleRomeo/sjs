@@ -539,8 +539,9 @@ F.asyncAction = action =>  {
  * It calls the 'fn' function if and only if the provided parameters
  * are neither null nor undefined
  * @memberof F
+ * @signature maybe :: b -> (a -> b) -> Maybe a -> b
  *
- * @param {Object} fn The function that could be applied
+ * @param {Function} fn The function that could be applied
  *
  * @returns {(value | undefined)} The fn's evalutation or undefined
  */
