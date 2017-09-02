@@ -438,7 +438,7 @@ F.sortBy = (property) => {
   * // returns [1, 2, 3]
   * sjs.F.flatten([[1], 2, 3]);
   */
-F.flatten = (array) => array.reduce((p, n) => p.concat(n));
+F.flatten = (array) => array.reduce((p, n) => p.concat(n), []);
 
 /**
   * Merge two arrays and apply a callback function
