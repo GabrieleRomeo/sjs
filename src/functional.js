@@ -213,7 +213,7 @@ F.toArray = (...a) => a;
   * and applies the first function to the arguments swapped in reverse order.
   * @memberof F
   * @function
-  * @signature flip :: Function -> a* -> f a
+  * @signature flip :: (a -> b -> c) -> b -> a -> c
   * @example
   * const sub = (a, b) => a - b;
   * // returns 2 (5 - 3)
