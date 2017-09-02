@@ -38,7 +38,7 @@
     "test:watch": "webpack-dev-server --hot --config webpack.mocha.js",
     "dev": "webpack-dev-server --port 3000 --inline --colors --watch --hot --progress",
     "preprod": "npm run test:silent",
-    "prod": "webpack -p --env=prod --progress",
+    "prod": "NODE_ENV='production' webpack --progress",
     "dox": "doxdox 'src/*.js' --layout markdown --output DOCUMENTATION.md",
     "generate-docs": "node_modules/.bin/jsdoc --readme docs/assets/HOMEDOCS.md -c jsdoc.json",
     "postgenerate-docs": "npm run dox",
