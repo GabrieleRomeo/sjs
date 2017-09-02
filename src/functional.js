@@ -27,7 +27,7 @@ const F = {};
  * functions each taking a single argument. It allows you to provide an
  * optional parameter 'n' which sets the function's arity.
  * @memberof F
- * @signature curry :: (Function, Integer) -> Function* -> a
+ * @signature curry :: ((a, b) -> c) -> a -> b -> c
  * @param {Function} fn A function to be curried
  * @param {Integer}   n An optional integer representing the arity of the
  *                      fn function
