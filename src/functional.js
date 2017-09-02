@@ -464,7 +464,7 @@ F.zip = (leftArray, rightArray, fn) => {
   * Apply a function n times.
   * @memberof F
   * @function
-  * @signature times :: (Integer, Function) -> f i
+  * @signature times :: (Integer, (Integer -> b)) -> b
   * @example
   * sjs.F.times(10, n => {
   *   console.log(n % 2);
@@ -477,12 +477,18 @@ F.times = (times, fn) => {
 };
 
 /**
+  * Allow a Function to remember or memorize its result.
   * @memberof F
   * @function
+  * @signature memoized :: Function -> (a) -> a
+  * @param {Function} fn The Function you wish to work with
+  * @returns {Function} A Function
+  * @param {Any} arg An argument to memorize
+  * @returns {Any} The result of applying the argument to the fn Function
   */
 F.memoized = (fn) => {
   const lookupTable = {};
-  return arg => lookupTable[arg] || (lookupTable[arg] = fn(arg));
+  return (arg) => lookupTable[arg] || (lookupTable[arg] = fn(arg));
 };
 
 
