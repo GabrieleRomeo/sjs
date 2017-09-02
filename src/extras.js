@@ -1,17 +1,24 @@
-import { types as TYPES } from './sjs.functional';
-import ULYU from './sjs.utilities';
-import ULYF from './sjs.functional';
-
 'use strict';
 
-const e = {};
+import { types as TYPES } from './types';
+import ULYU from './utilities';
+import ULYF from './functional';
+
+/**
+ * The Extras namespace.
+ * This namespace contains a set of extras functions
+ * @namespace E
+ */
+const E = {};
+
 const { isArray, indexOf } = ULYU;
 const { not } = ULYF;
 
 /**
  * An Event Emitter which emits events
+ * @memberof E
  */
-e.EventEmitter = class EventEmitter {
+E.EventEmitter = class EventEmitter {
   constructor() {
     this.events = {};
   }
@@ -77,8 +84,12 @@ e.EventEmitter = class EventEmitter {
 
 /**
  * A Queue object which emits events during its lifetime
+ * @memberof E
+ * @fires E.Queue#enqueue
+ * @fires E.Queue#dequeue
+ * @fires E.Queue#empty
  */
-e.Queue = class Queue extends e.EventEmitter {
+E.Queue = class Queue extends E.EventEmitter {
   constructor() {
     super();
     this.arr  = [];
@@ -87,23 +98,40 @@ e.Queue = class Queue extends e.EventEmitter {
   /**
    * Add an item at the end of the queue.
    * It emits the `enqueue` event
-   *
+   * @fires E.Queue#enqueue
    * @param      {Value}  item    The item to be added into the Queue
    */
   enqueue(item) {
     this.arr.push(item);
+    /**
+     * Enqueue event
+     * @event E.Queue#enqueue
+     * @return {Value} The item that has been enqueued into the Queue
+     */
     this.emit('enqueue', item);
   }
 
   /**
-   * Remove the item at the head of the queue
-   * It emits the `dequeue` and the `empty` events
+   * Remove the item at the head of the queue and emits the `dequeue` event.
+   * If the removed item is the last one into the Queue, it also emits the `empty`
+   *  event.
+   * @fires E.Queue#dequeue
+   * @fires E.Queue#empty
    * @return     {Value}  The first item of the Queue
    */
   dequeue() {
     const item = this.arr.shift();
+    /**
+     * Dequeue event
+     * @event E.Queue#dequeue
+     * @return {Value} The item that has been dequeued from the Queue
+     */
     this.emit('dequeue', item);
     if (this.isEmpty()) {
+      /**
+       * Empty event - Reports that the Queue is empty
+       * @event E.Queue#empty
+       */
       this.emit('empty');
     }
     return item;
@@ -121,32 +149,53 @@ e.Queue = class Queue extends e.EventEmitter {
 
 /**
  * A Stack object which emits events during its lifetime
+ * @memberof E
+ * @fires E.Stack#push
+ * @fires E.Stack#pop
+ * @fires E.Stack#empty
  */
-e.Stack = class Stack extends e.EventEmitter {
+E.Stack = class Stack extends E.EventEmitter {
   constructor() {
     super();
     this.arr  = [];
   }
 
   /**
-   * Add an item onto the Stack
-   * It emits the `push` event
+   * Add an item onto the Stack and emits the `push` event
+   * @fires E.Stack#push
    * @param      {Value}  item    The item to be added onto the Stack
    */
   push(item) {
     this.arr.push(item);
+    /**
+     * Push event
+     * @event E.Stack#push
+     * @return {Value} The item that has been pushed onto the Stack
+     */
     this.emit('push', item);
   }
 
   /**
-   * Remove the last item of the Stack
-   * It emits the `pop` and the `empty`  events
+   * Remove the last item of the Stack and emits the `pop` event.
+   * If the removed item is the last one into the Stack, it also emits the `empty`
+   *  event.
+   * @fires E.Stack#pop
+   * @fires E.Stack#empty
    * @return     {Value}  The last item of the Stack
    */
   pop() {
     const item = this.arr.pop();
+    /**
+     * Pop event
+     * @event E.Stack#pop
+     * @return {Value} The item that has been popped from the head of the Stack
+     */
     this.emit('pop', item);
     if (this.isEmpty()) {
+      /**
+       * Empty event - Reports that the Stack is empty
+       * @event E.Stack#empty
+       */
       this.emit('empty');
     }
     return item;
@@ -164,13 +213,13 @@ e.Stack = class Stack extends e.EventEmitter {
 
 /**
  * A convenient way to handle Ajax Requests
- *
+ * @memberof E
  * @param      {(String)}  url     The url
  * @return     {(Object|Promise)}   An object containing the allowed CRUD
  *                                  operations. Each operation returns a Promise
  *                                  which can be used to follow up with its status
  */
-e.$http = (url) => {
+E.$http = (url) => {
   url = TYPES.str(url);
   const core = {
     ajax: (method, url, args) => {
@@ -220,4 +269,4 @@ e.$http = (url) => {
 
 
 // export public functions
-export default { ...e };
+export default { ...E };

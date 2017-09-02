@@ -1,48 +1,50 @@
-import { types as TYPES } from './sjs.functional';
-import U from './sjs.utilities';
-import F from './sjs.functional';
-
 'use strict';
 
-const d = {};
+import { types as TYPES } from './types';
+import F from './functional';
+
+/**
+ * The DOM namespace.
+ * This namespace contains a set of utility functions used to access and
+ * manipulate the DOM
+ * @namespace DOM
+ */
+const DOM = {};
 
 
 /**
- * Queries the DOM looking for the first HTML element
- * that matches the CSS query
- *
+ * Queries the DOM in pursuit of the first HTML element that matches the CSS
+ * query selector.
+ * @memberof DOM
  * @param {string} selector A valid CSS selector
  * @param {string} [context] The ancestor where to start the research from
  *
- * @returns {object} The HTML object or null
+ * @returns {Node} An HTML node or null
  */
-
-d.$ = (selector, context) => (context || document).querySelector(TYPES.str(selector));
+DOM.$ = (selector, context) => (context || document).querySelector(TYPES.str(selector));
 
 
 /**
- * Queries the DOM looking for all the HTML elements
- * that match the CSS query
- *
+ * Queries the DOM in pursuit of all the HTML elements that match the CSS
+ * query selector.
+ * @memberof DOM
  * @param {string} selector A valid CSS selector
  * @param {string} [context] The ancestor where to start the research from
  *
- * @returns {object} The HTML object or null
+ * @returns {NodeList} An HTML Nodelist or null
  */
-
-d.$$ = (selector, context) => (context || document).querySelectorAll(TYPES.str(selector));
+DOM.$$ = (selector, context) => (context || document).querySelectorAll(TYPES.str(selector));
 
 /**
  * Find the nearest ancestor that matches any CSS selector with respect
  * to a given element
- *
+ * @memberof DOM
  * @param {HTMLNode} elem The HTML element to start from
  * @param {string} select The ancestor where to start the research from
  *
- * @returns {object} The HTML object or null
+ * @returns {Node} An HTML Node or null
  */
-
-d.getAncestorBySelector = (elem, selector) => {
+DOM.getAncestorBySelector = (elem, selector) => {
     // Element.matches polyfill
   if (!Object.prototype.matches) {
     if (!Element.prototype.matches) {
@@ -76,10 +78,10 @@ d.getAncestorBySelector = (elem, selector) => {
 
 /**
  * Return document.documentElement for Chrome and Safari, document.body otherwise
+ * @memberof DOM
  * @return {Node}      document.documentElement or document.body
  */
-
-d.getBody = () => {
+DOM.getBody = () => {
   let body;
   document.documentElement.scrollTop += 1;
   body = ( document.documentElement.scrollTop !== 0 ) ?
@@ -91,10 +93,11 @@ d.getBody = () => {
 
 /**
  * Get the element's distance from the top of the page
+ * @memberof DOM
  * @param  {Node}  elem  The element
  * @return {Number}      An integer representing the distance from the of the page
  */
-d.getElemDistanceFromTop = function(elem) {
+DOM.getElemDistanceFromTop = function(elem) {
   let location = 0;
   if ( TYPES.HTMLNode(elem).offsetParent ) {
     do {
@@ -107,10 +110,11 @@ d.getElemDistanceFromTop = function(elem) {
 
 /**
  * Get all siblings of an element (if any)
+ * @memberof DOM
  * @param  {String}  selector A valid CSS selector
  * @return {Array}   An array containing the siblings
  */
-d.getSiblingsBySelector = (selector) => {
+DOM.getSiblingsBySelector = (selector) => {
   const siblings = [];
   const elem = document.querySelector(TYPES.str(selector));
   let sibling = elem.parentNode.firstChild;
@@ -127,23 +131,25 @@ d.getSiblingsBySelector = (selector) => {
 
 /**
  * Insert a new node after an existing node in the DOM
+ * @memberof DOM
  * @param  {Node}  newNode The element you wish to insert
  * @param  {Node}  refNode The existing node in the DOM
  * @return {Node}  The element that was inserted
  */
-d.insertAfter = (newNode, refNode) => {
+DOM.insertAfter = (newNode, refNode) => {
   const p = refNode.parentNode;
   return p.insertBefore(TYPES.HTMLNode(newNode), TYPES.HTMLNode(refNode.nextSibling));
 };
 
 /**
  * Swap the position of two DOM elements
+ * @memberof DOM
  * @param  {Node}  nodeA The first node
  * @param  {Node}  nodeB The second node
  * @return {Boolean}  It returns true if the swap was successful
  *                    and false otherwise
  */
-d.swapElements = (nodeA, nodeB) => {
+DOM.swapElements = (nodeA, nodeB) => {
   const parentA = TYPES.HTMLNode(nodeA).parentNode;
   const parentB = TYPES.HTMLNode(nodeB).parentNode;
   let success = null;
@@ -161,11 +167,12 @@ d.swapElements = (nodeA, nodeB) => {
 
 /**
  * Remove a number of elements from the page entirely
+ * @memberof DOM
  * @param  {String}  selector A valid CSS selector
  * @return {Array}   An array containing the removed elements
  */
-d.removeAll = (selector) => {
-  const elements = Array.from(d.$$(selector) || []);
+DOM.removeAll = (selector) => {
+  const elements = Array.from(DOM.$$(selector) || []);
   elements.forEach((element) => element.parentNode.removeChild(element));
   return elements;
 };
@@ -173,19 +180,22 @@ d.removeAll = (selector) => {
 /**
  * Get the values a calculated CSS property for an element after applying
  * the active stylesheets
+ * @memberof DOM
  * @param  {Node}   element The element for which to get the computed style
- * @return {CSSStyleDeclaration }
+ * @return {CSSStyleDeclaration}
  */
-d.getComputed = (element) => (property) => {
+DOM.getComputed = (element) => (property) => {
   return window.getComputedStyle(TYPES.HTMLNode(element), null)
                .getPropertyValue(TYPES.str(property));
 };
 
 /**
  * Get ViewPort's Info
+ * @memberof DOM
+ * @return {Object} An Object containing the viewport's height and width
  */
-d.getViewPortInfo = () => {
-  const body = d.getBody();
+DOM.getViewPortInfo = () => {
+  const body = DOM.getBody();
   const width = Math.max(body.clientWidth, window.innerWidth || 0);
   const height = Math.max(body.clientHeight, window.innerHeight || 0);
   return {
@@ -196,8 +206,10 @@ d.getViewPortInfo = () => {
 
 /**
  * Get Page's Info
+ * @memberof DOM
+ * @return {Object} An object coontaining the page's height and width
  */
-d.getPageInfo = () => {
+DOM.getPageInfo = () => {
   const body = document.body;
   const html = document.documentElement;
   const height = Math.max(body.scrollHeight, body.offsetHeight,
@@ -215,12 +227,17 @@ d.getPageInfo = () => {
 
 /**
  * Get Element's Info
+ * @memberof DOM
+ * @return {Object} a DOMRect object which is the union of the rectangles
+ *                  returned by getClientRects() for the element, i.e.,
+ *                  the CSS border-boxes associated with the element.
  */
-d.getElemInfo = (element) => TYPES.HTMLNode(element).getBoundingClientRect();
+DOM.getElemInfo = (element) => TYPES.HTMLNode(element).getBoundingClientRect();
 
 /**
  * Generate a document fragment if necessary
- *
+ * @memberof DOM
+ * @access private
  * @param      {DocumentFragment | Node | Array}  children  The children to be
  *                                                           appended to the
  *                                                           document fragment
@@ -238,18 +255,54 @@ const _generateFragment = (children = []) => {
 };
 
 /**
- * It appends asynchronously a Node, or an Array containing nodes, or a
- * documentFragment to a parent Node
+ * It returns a reference to a parent Node, then you can exploit this reference
+ * to add asynchronously a node, an Array of nodes, or a documentFragment
+ * to the parent.
+ * @memberof DOM
+ * @param      {Node}   [parent=document.body]    The parent node
+ * @return     {function} A function that accepts a documentFragment, a single
+ *                          node, or an Array of Nodes and returns a Promise.
  *
- * @param      {Node}   parent    The parent node
- * @param      {DocumentFragment | Node | Array}   children  The children that
+ * @param      {DocumentFragment | Node | Array}   children  A document fragment,
+ *                                                           or a single Node,
+ *                                                           or an Array of Nodes
  *                                                           you wish to append
- *                                                           to
- * @return     {Promise}  { It returns a Promise that can be exploited to
- *                          understand when the action will be satisfied or not.
- *                         }
+ *                                                           to the target Node.
+ * @return     {Promise}  It returns a Promise that can be exploited to
+ *                        understand when the action will be satisfied or not.
+ *
+ * @example <caption>Append a new document fragment without providing a parent
+ *                    node</caption>
+ * let fragment = document.createDocumentFragment();
+ * let node = document.createElement('DIV');
+ * node.textContent = 'New Node';
+ * fragment.appendChild(node);
+ *
+ * // By default, the parent node is document.body
+ * let append = sjs.appendTo();
+ * append(fragment);
+ * @example <caption>Append a new node to an existing Node</caption>
+ * let parentNode = document.createElement('DIV');
+ * parentNode.textContent = 'The parent Node';
+ * // append synchronously parentNode to document.body
+ * document.body.appendChild(parentNode);
+ *
+ * let child = document.createElement('DIV');
+ * child.textContent = 'A Child Node';
+ *
+ * // Create a reference to the parent node
+ * let appendToParent = sjs.DOM.appendTo(parentNode);
+ * // append asynchronously the child Node to the parent Node
+ * appendToParent(child);
+ *
+ * // create a new child
+ * let anotherChild = document.createElement('DIV');
+ * anotherChild.textContent = 'Another Child Node';
+ *
+ * // Using the previous reference, append the new Node to the parent Node
+ * appendToParent(anotherChild);
  */
-d.appendTo = (parent = document.body) => (...children) => {
+DOM.appendTo = (parent = document.body) => (...children) => {
   const fragment = _generateFragment(children);
   const append = F.asyncAction(Element.prototype.appendChild);
   return new Promise((resolve, reject) => {
@@ -261,19 +314,25 @@ d.appendTo = (parent = document.body) => (...children) => {
   });
 };
 
+
 /**
  * It prepends asynchronously a Node, or an Array containing nodes, or a
  * documentFragment to a target Node
+ * @memberof DOM
+ * @param      {Node}   [target=document.body.firstChild]    The target node
+ * @return     {function} A function that accepts a documentFragment, a single
+ *                          node, or an Array of Nodes and returns a Promise.
  *
- * @param      {Node}   target    The target node
- * @param      {DocumentFragment | Node | Array}   children  The children that
+ * @param      {DocumentFragment | Node | Array}   children  A document fragment,
+ *                                                           or a single Node,
+ *                                                           or an Array of Nodes
  *                                                           you wish to prepend
- *                                                           to
- * @return     {Promise}  { It returns a Promise that can be exploited to
- *                          understand when the action will be satisfied or not.
- *                         }
+ *                                                           to the target Node.
+ * @return     {Promise}  It returns a Promise that can be exploited to
+ *                        understand when the action will be satisfied or not.
+ *
  */
-d.prependTo = (target = document.body.firstChild) => (...children) => {
+DOM.prependTo = (target = document.body.firstChild) => (...children) => {
   const fragment = _generateFragment(children);
   const prepend = F.asyncAction(Element.prototype.insertBefore);
   return new Promise((resolve, reject) => {
@@ -287,4 +346,4 @@ d.prependTo = (target = document.body.firstChild) => (...children) => {
 };
 
 // export public functions
-export default { ...d };
+export default { ...DOM };

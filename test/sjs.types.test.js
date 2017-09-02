@@ -1,14 +1,16 @@
 'use strict';
 
+ /*eslint-env mocha*/
+
 import 'babel-polyfill';
-import { types as TYPES } from '../src/sjs.functional';
+import { types as TYPES } from '../src/types';
 
 const assert = require('assert');
 
 describe('Types - F', () => {
 
   before(function () {
-    this.jsdom = require('jsdom-global')()
+    this.jsdom = require('jsdom-global')();
   });
 
   describe('str( x )', () => {
@@ -63,9 +65,13 @@ describe('Types - F', () => {
         /Error: expected INTEGER but provided/
         );
     });
-    it('should pass when the provided parameter is an INTEGER', () => {
+    it('should pass when the provided parameter is a positive INTEGER', () => {
       assert.deepEqual(TYPES.int(4), 4);
       assert.deepEqual(TYPES.int(10000), 10000);
+    });
+    it('should pass when the provided parameter is a negative INTEGER', () => {
+      assert.deepEqual(TYPES.int(-4), -4);
+      assert.deepEqual(TYPES.int(-10000), -10000);
     });
   });
 
