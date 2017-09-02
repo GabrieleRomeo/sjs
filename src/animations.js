@@ -1,10 +1,14 @@
-import { types as TYPES } from './sjs.functional';
-import ULYF from './sjs.functional';
-import ULYD from './sjs.DOM';
-
 'use strict';
 
-const a = {};
+import { types as TYPES } from './types';
+import ULYD from './DOM';
+
+/**
+ * The Animations namespace.
+ * This namespace contains a set of utility functions used for animations.
+ * @namespace A
+ */
+const A = {};
 
 const easings = {
   'linear': (t) => {
@@ -50,20 +54,27 @@ const easings = {
 
 /**
  * Get an easing function
- * @param  {String} [easingName]  The easing function's name you are looking for
+ * @memberof A
+ * @param  {String} [easingName]  The easing function's name you are looking for.
+ *                                Available easing functions: 'linear', 'easeInQuad',
+ *                                'easeOutQuad', 'easeInOutQuad', 'easeInCubic',
+ *                                'easeOutCubic', 'easeInOutCubic', 'easeInQuart',
+ *                                'easeOutQuart', 'easeInOutQuart', 'easeInQuint',
+ *                                'easeOutQuint', 'easeInOutQuint'
  * @return {Function} The easing function (if any) or linear (default)
  */
-a.getEasing = (easingName = 'linear') => easings[TYPES.str(easingName)];
+A.getEasing = (easingName = 'linear') => easings[TYPES.str(easingName)];
 
 /**
  * Scroll the window to the element position
+ * @memberof A
  * @param  {Node}   element An HTML node towards which you wish to scroll
                             the window
  * @param  {Object}  options Animation's options (easing type and duration)
  * @param {Function} callback An optional callback
  */
 
-a.scrollTo = (element, options, callback) => {
+A.scrollTo = (element, options, callback) => {
   options = options || {};
   callback = callback && TYPES.fun(callback);
 
@@ -85,11 +96,9 @@ a.scrollTo = (element, options, callback) => {
   function scroll() {
     const now = Date.now();
     const time = Math.min(1, ((now - startTime) / duration));
-    const timeFunction = a.getEasing(easingName)(time);
+    const timeFunction = A.getEasing(easingName)(time);
 
     body.scrollTop = (timeFunction * (destination - start)) + start;
-
-    console.log(Math.ceil(body.scrollTop), destination);
 
     if ( Math.ceil(body.scrollTop)  === destination) {
       if (callback) {
@@ -105,4 +114,4 @@ a.scrollTo = (element, options, callback) => {
 };
 
 
-export default { ...a };
+export default { ...A };

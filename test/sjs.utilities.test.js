@@ -1,7 +1,8 @@
 'use strict';
+ /*eslint-env mocha*/
 
 import 'babel-polyfill';
-import u from '../src/sjs.utilities';
+import u from '../src/utilities';
 
 const assert = require('assert');
 const should = require('chai').should();
@@ -9,8 +10,8 @@ const should = require('chai').should();
 describe('Utilities - U', () => {
 
   before(function () {
-    this.jsdom = require('jsdom-global')()
-  })
+    this.jsdom = require('jsdom-global')();
+  });
 
   describe('by( list, n, callback )', () => {
     it('should throw an expection when the provided list is not an Array', () => {
@@ -278,11 +279,11 @@ describe('Utilities - U', () => {
         );
     });
     it('should pass when there exists a value which is equal to the search parameter', () => {
-      assert.deepEqual(u.pick(data, ["type", "index"]), {type: "transformer", index: 19});
-      assert.deepEqual(u.pick(data, ["siblings", "index"]), {siblings: 19, index: 19});
+      assert.deepEqual(u.pick(data, ['type', 'index']), {type: 'transformer', index: 19});
+      assert.deepEqual(u.pick(data, ['siblings', 'index']), {siblings: 19, index: 19});
     });
     it('should return an empty obj when the object is empty', () => {
-      assert.deepEqual(u.pick({}, ["siblings", "index"]), {});
+      assert.deepEqual(u.pick({}, ['siblings', 'index']), {});
     });
     it('should return an empty obj when the keys array is empty', () => {
       assert.deepEqual(u.pick(data, []), {});
@@ -500,6 +501,33 @@ describe('Utilities - U', () => {
       u.getDayName(7).should.be.equal('Unknown');
       u.getDayName(8).should.be.equal('Unknown');
       u.getDayName(100000).should.be.equal('Unknown');
+    });
+  });
+
+  describe('.getDiffInDays( d1, d2 )', () => {
+    const d1 = new Date('2017-08-01');
+    const d2 = new Date('2017-08-30');
+    it('should throw an expection when d1 or d2 is not a Date', () => {
+      assert.throws(
+        () => {
+          u.getDiffInDays();
+          u.getDiffInDays([]);
+          u.getDiffInDays(true, true);
+          u.getDiffInDays(123, 123);
+          u.getDiffInDays(undefined, undefined);
+          u.getDiffInDays(null, null);
+        },
+        /Error: expected DATE but provided/
+        );
+    });
+    it('should return a Number', () => {
+      u.getDiffInDays(d1, d2).should.be.an('number');
+    });
+    it('should return a negative number if d2 comes after d1', () => {
+      u.getDiffInDays(d1, d2).should.be.equal(-29);
+    });
+    it('should return a positive number if d2 comes before d1', () => {
+      u.getDiffInDays(d2, d1).should.be.equal(29);
     });
   });
 

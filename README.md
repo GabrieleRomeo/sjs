@@ -1,24 +1,35 @@
-## sjs - A simple Javascript Utility Library
+​                           <img src="docs/assets/img/hero_m.png" />
+  <img src="docs/assets/img/logo.png" />
+
+## sjs - Safety Javascript - Utility Library
 
 Hello and Welcome to this repository.
 
-*sjs* is a collection of algorithms and functions wrote during my studies at [Bov Academy](https://www.bovacademy.com).
-
-Unlike many other js libraries, *sjs* is strongly typed which means that each provided parameter is checked against a predefined data type.
-
-Functions are collected and categorized under a specific tag, using namespaces:
+*Sjs* is a collection of algorithms and functions wrote during my studies at [Bov Academy](https://www.bovacademy.com).
 
 
 
-| Namespace | Description                | Access    |
-| :-------: | -------------------------- | --------- |
-|     A     | Animations                 | sjs.A     |
-|    DOM    | Access to the DOM          | sjs.DOM   |
-|     E     | Extra Functions            | sjs.E     |
-|     F     | Functional Programming     | sjs.F     |
-|     U     | Utility functions          | sjs.U     |
-|     V     | Validator Functions        | sjs.F     |
-|   types   | A collection of Data Types | sjs.types |
+Unlike many other js libraries, Sjs aims to be **strongly-typed**. The main benefit to being *strongly-type* is that 
+
+when you pass an argument to a function, the Library checks if it belongs to an expected *data type*. 
+
+If this is not the case, the System throws a *TypeError* Exception.
+
+
+
+Functions are collected and categorized under various *namespaces* using dedicated tags:
+
+
+
+| Namespace | Description              | Access    |
+| :-------: | ------------------------ | --------- |
+|     A     | Animations               | sjs.A     |
+|    DOM    | Access to the DOM        | sjs.DOM   |
+|     E     | Extra Functions          | sjs.E     |
+|     F     | Functional Programming   | sjs.F     |
+|     U     | Utility functions        | sjs.U     |
+|     V     | Validator Functions      | sjs.V     |
+|   types   | Collection of Data Types | sjs.types |
 
 
 

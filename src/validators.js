@@ -1,11 +1,69 @@
-import { types as TYPES } from './sjs.functional';
-import ULYF from './sjs.functional';
-
 'use strict';
 
-var v = {};
+import { types as TYPES } from './types';
+import ULYF from './functional';
+import ULYU from './utilities';
+
+/**
+ * The Validators namespace.
+ * This namespace contains a set of Utility Functions useful to validate inputs,
+ * check data type, check Dates, etc..
+ * @namespace V
+ */
+const V = {};
 
 const _ALPHA  = 'abcdefghijklmnopqrstuvwxyz0123456789';
+
+
+
+/**
+ * Checks if the provided argument is an Array
+ * @memberof V
+ * @param {Array} arr An Array
+ *
+ * @returns {Boolean} True | False
+ *
+ */
+V.isArray = Array.isArray || (arr => ULYF.classOf(arr) === 'Array');
+
+/**
+ * Checks if the provided argument is a Function
+ * @memberof V
+ * @param {Fun} fn A Function
+ *
+ * @returns {Boolean} True | False
+ *
+ */
+V.isFunc = fn => typeof fn === 'function';
+
+/**
+ * Checks if the provided argument is a String
+ * @memberof V
+ * @param {str} str A String
+ *
+ * @returns {Boolean} True | False
+ *
+ */
+V.isString = str => typeof str === 'string';
+
+/**
+ * Checks if the provided argument is a Number
+ * @memberof V
+ * @param {Number} num A Number
+ *
+ * @returns {Boolean} True | False
+ *
+ */
+V.isNumber = num => !isNaN(parseFloat(num)) && isFinite(num);
+
+/**
+ * Checks if the provided argument is an Integer
+ * @memberof V
+ * @param {Number} num A Number
+ * @returns {Boolean} True | False
+ *
+ */
+V.isInt = num => V.isNumber(num) && (parseFloat(num) === parseInt(num, 10));
 
 /**
  * Checks if the provided input is a valid email address
@@ -13,19 +71,18 @@ const _ALPHA  = 'abcdefghijklmnopqrstuvwxyz0123456789';
  * It checks for the presence of duplicated dots inside the local and domain
  * parts.
  * This function does not use Regular Expressions
- *
+ * @memberof V
  * @param  {string} input The string representing a valid email address.
  *
  * @returns {boolean} True or False
  */
-
-v.isEmailAddress = (input) => {
+V.isEmailAddress = (input) => {
   const parts = TYPES.str(input).split('@');
 
   const minLength = parts.length === 2 || false;
   const local     = parts[0] && (parts[0].length > 0) &&
-                    !v.isConsecutive(parts[0], '.')  || false;
-  const domain    = parts[1] && !v.isConsecutive(parts[1], '.') || false;
+                    !V.isConsecutive(parts[0], '.')  || false;
+  const domain    = parts[1] && !V.isConsecutive(parts[1], '.') || false;
 
   return minLength && local && domain;
 };
@@ -47,13 +104,12 @@ v.isEmailAddress = (input) => {
  *      Mobile   : 333-1111111, +39333-1111111, 0039333-1111111
  *
  * This function does not use Regular Expressions
- *
+ * @memberof V
  * @param  {string} input The string representing a valid phone number.
  *
  * @returns {boolean} True or False
  */
-
-v.isPhoneNumber = function(input) {
+V.isPhoneNumber = function(input) {
 
   const COUNTRY_CODE        = '39',
         INTERNATIONAL_PRFX  = '00',
@@ -198,34 +254,33 @@ v.isPhoneNumber = function(input) {
  * Symbols refer to any non-alphanumeric character. A character is
  * considered alphanumeric if it matches one of the following:
  * a—z, A—Z, or 0—9. It ignores whitespace.
- *
+ * @memberof V
  * @param  {string} input The string to analyze.
  *
- *  @example .withoutSymbols("Hi, john.doe@live.com., is that you?/");
- *  // returns "Hi johndoelivecom, is that you"
+ * @example
+ * // returns "Hi johndoelivecom, is that you"
+ * sjs.V.withoutSymbols("Hi, john.doe@live.com., is that you?/");
  *
  * @returns {string} The input parameter text with all symbols removed
  */
-
-v.withoutSymbols = (input) => {
+V.withoutSymbols = (input) => {
   return TYPES.str(input).split('').map((item) => {
     const char = item.toLowerCase();
     return ((_ALPHA.indexOf(char) === -1) && item !== ' ') ? '' : item;
   }).join('');
-}
+};
 
 /**
  * Checks if the input parameter text is a valid date.
  * For your purposes, a valid date is any string that can be turned into
  * a JavaScript Date Object.
- *
+ * @memberof V
  * @param   {string | Date}  input A string or a Date object
  *
  *
  * @returns {boolean} True or False
  */
-
-v.isDate = (input) => {
+V.isDate = (input) => {
   const customType = TYPES.allowedTypes('String', 'Date');
   const date = new Date(customType(input));
   return !isNaN(date.getDate());
@@ -236,7 +291,7 @@ v.isDate = (input) => {
  * date. Both the input and the reference can be strings or Date Objects.
  * This function relies on two valid dates; if two are not found,
  * it should throw a new error.
- *
+ * @memberof V
  * @param {string} or {date} input A value representing a valid Javascript
  *                                 date.
  * @param {string} or {date} reference A value representing a valid
@@ -244,13 +299,12 @@ v.isDate = (input) => {
  *
  * @returns {boolean} True or False
  */
-
-v.isBeforeDate = (input, reference) => {
+V.isBeforeDate = (input, reference) => {
   const customType = TYPES.allowedTypes('String', 'Date');
   const d1 = new Date(customType(input));
   const d2 = new Date(customType(reference));
 
-  if (!v.isDate(d1) || !v.isDate(d2)) {
+  if (!V.isDate(d1) || !V.isDate(d2)) {
     throw 'Invalid Date';
   }
 
@@ -262,7 +316,7 @@ v.isBeforeDate = (input, reference) => {
  * date. Both the input and the reference can be strings or Date Objects.
  * This function relies on two valid dates; if two are not found,
  * it should throw a new error.
- *
+ * @memberof V
  * @param {string} or {date} input A value representing a valid Javascript
  *                                 date.
  * @param {string} or {date} reference A value representing a valid
@@ -270,13 +324,12 @@ v.isBeforeDate = (input, reference) => {
  *
  * @returns {boolean} True or False
  */
-
-v.isAfterDate = (input, reference) => {
+V.isAfterDate = (input, reference) => {
   const customType = TYPES.allowedTypes('String', 'Date');
   const d1 = new Date(customType(input));
   const d2 = new Date(customType(reference));
 
-  if (!v.isDate(d1) || !v.isDate(d2)) {
+  if (!V.isDate(d1) || !V.isDate(d2)) {
     throw 'Invalid Date';
   }
 
@@ -288,22 +341,21 @@ v.isAfterDate = (input, reference) => {
  * The input can be either a string or a Date Object.
  * This function relies on two valid dates; if two are not found,
  * it should throw a new error.
- *
+ * @memberof V
  * @param {string} or {date} input A value representing a valid Javascript
  *                                 date.
  *
  * @returns {boolean} True or False
  */
-
-v.isBeforeToday = (input) => {
+V.isBeforeToday = (input) => {
   const customType = TYPES.allowedTypes('String', 'Date');
   const d1 = new Date(customType(input));
   const d2 = new Date();
   let days;
 
-  if (!v.isDate(d1)) throw 'Invalid Date';
+  if (!V.isDate(d1)) throw 'Invalid Date';
 
-  days = v.diffInDays(d1, d2);
+  days = ULYU.getDiffInDays(d1, d2);
 
   return days < 0;
 };
@@ -313,22 +365,21 @@ v.isBeforeToday = (input) => {
  * The input can be either a string or a Date Object.
  * This function relies on two valid dates; if two are not found,
  * it should throw a new error.
- *
+ * @memberof V
  * @param {string} or {date} input A value representing a valid Javascript
  *                                 date.
  *
  * @returns {boolean} True or False
  */
-
-v.isAfterToday = (input) => {
+V.isAfterToday = (input) => {
   const customType = TYPES.allowedTypes('String', 'Date');
   const d1 = new Date(customType(input));
   const d2 = new Date();
   let days;
 
-  if (!v.isDate(d1)) throw 'Invalid Date';
+  if (!V.isDate(d1)) throw 'Invalid Date';
 
-  days = v.diffInDays(d1, d2);
+  days = ULYU.getDiffInDays(d1, d2);
 
   return days > 0;
 };
@@ -337,20 +388,22 @@ v.isAfterToday = (input) => {
  * Checks the input parameter and returns true if it is an empty string
  * a string with no length or characters that is represented as ""
  * or only contains whitespace(s).
- *
+ * @memberof V
  * @param {string} input The string to analyze.
  *
- * @example .isEmpty("Visiting new places is fun.");
- *  // returns false
- * @example .isEmpty(" ");
- *  // returns true
- * @example .isEmpty(null);
- *  // returns false
+ * @example
+ * // returns false
+ * sjs.V.isEmpty("Visiting new places is fun.");
+ * @example
+ * // returns true
+ * sjs.V.isEmpty(" ");
+ * @example
+ * // returns false
+ * sjs.V.isEmpty(null);
  *
  * @returns {boolean} True or False
  */
-
-v.isEmpty = (input) => {
+V.isEmpty = (input) => {
   if (ULYF.notExists(input) || input.trim().length > 0) {
     return false;
   } else {
@@ -363,23 +416,26 @@ v.isEmpty = (input) => {
  * within the words array. A word is defined as the following:
  * having undefined, whitespace, or punctuation before and after it.
  * The function is case-insensitive.
- *
+ * @memberof V
  * @param {string} input The string to analyze.
  * @param {Array} words A list of words to check.
  *
- * @example .contains("Visiting new places is fun.", ["coconut"]);
- *  // returns false
- * @example .contains("Visiting new places is fun.", ["aces"]);
- *  // returns false
- * @example .contains("Visiting new places is fun.", ["places"]);
- *  // returns true
- * @example .contains('"Definitely," he said in a matter-of-fact tone.', ["matter", "definitely"]);
- *  // returns true
+ * @example
+ * // returns false
+ * sjs.V.contains("Visiting new places is fun.", ["coconut"]);
+ * @example
+ * // returns false
+ * sjs.V.contains("Visiting new places is fun.", ["aces"]);
+ * @example
+ * // returns true
+ * sjs.V.contains("Visiting new places is fun.", ["places"]);
+ * @example
+ * // returns true
+ * sjs.V.contains('"Definitely," he said in a matter-of-fact tone.', ["matter", "definitely"]);
  *
  * @returns {boolean} True or False
  */
-
-v.contains = (input, words) => {
+V.contains = (input, words) => {
   let wlen;
   let inputList;
   let i;
@@ -407,23 +463,26 @@ v.contains = (input, words) => {
  * having undefined, whitespace, or punctuation before and after it.
  * The function is case-insensitive.
  * A function like this could be used for checking blacklisted words.
- *
+ * @memberof V
  * @param {string} input The string to analyze.
  * @param {Array} words A list of words to check.
  *
- * @example .lacks("Visiting new places is fun.", ["coconut"]);
+ * @example
  *  // returns true
- * @example .lacks("Visiting new places is fun.", ["aces"]);
+ *  sjs.V.lacks("Visiting new places is fun.", ["coconut"]);
+ * @example
  *  // returns true
- * @example .lacks("Visiting new places is fun.", ["places"]);
- *  // returns false
- * @example .lacks('"Definitely," he said in a matter-of-fact tone.', ["matter", "definitely"]);
- *  // returns false
+ *  sjs.V.lacks("Visiting new places is fun.", ["aces"]);
+ * @example
+ *  // returns true
+ *  sjs.V.lacks("Visiting new places is fun.", ["places"]);
+ * @example
+ * // returns false
+ * sjs.V.lacks('"Definitely," he said in a matter-of-fact tone.', ["matter", "definitely"]);
  *
  * @returns {boolean} True or False
  */
-
-v.lacks = (input, words) => !v.contains.call(this, input, words);
+V.lacks = (input, words) => !V.contains.call(this, input, words);
 
 
 /**
@@ -432,18 +491,19 @@ v.lacks = (input, words) => !v.contains.call(this, input, words);
  * This function doesn’t use a strong word definition the way .contains and
  * .lacks does.
  * The function is case-insensitive.
- *
+ * @memberof V
  * @param {string} input The string to analyze.
  * @param {Array} words A list of words to check.
- * @example .isComposedOf("10184", ["1", "2", "3", "4", "5", "6" ,"7", "8", "9", "0"]);
- *  // returns true
- * @exmaple .isComposedOf("I am ready.", ["I", "I'm", "am", "not", "ready"]);
- *  // returns true
+ * @example
+ * // returns true
+ * sjs.V.isComposedOf("10184", ["1", "2", "3", "4", "5", "6" ,"7", "8", "9", "0"]);
+ * @example
+ * // returns true
+ * sjs.V.isComposedOf("I am ready.", ["I", "I'm", "am", "not", "ready"]);
  *
  * @returns {boolean} True or False
  */
-
-v.isComposedOf = function(input, strings) {
+V.isComposedOf = function(input, strings) {
   let result = TYPES.arr(strings).map(item => item.toString().toLowerCase())
                   .reduce((prev, curr) => {
                     return prev.toLowerCase().split(curr).join('');
@@ -455,65 +515,74 @@ v.isComposedOf = function(input, strings) {
 /**
  * Checks if the input parameter’s character count is less than or
  * equal to the n parameter.
- *
+ * @memberof V
  * @param {string} input The string to analyze.
  * @param {integer} n The upper threshold
  *
- * @example .isLength("123456789", 6);
- *  // false
- * @example .isLength("123456789", 20);
- *  // true
- * @example .isLength("AHHHH", 25);
- *  // true
- * @example .isLength("This could be a tweet!", 140);
- *  // true
+ * @example
+ * // false
+ * sjs.V.isLength("123456789", 6);
+ * @example
+ * // true
+ * sjs.V.isLength("123456789", 20);
+ * @example
+ * // true
+ * sjs.V.isLength("AHHHH", 25);
+ * @example
+ * // true
+ * sjs.V.isLength("This could be a tweet!", 140);
  *
  * @returns {boolean} True or False
  */
-
-v.isLength = (input, n) => TYPES.str(input).length <= TYPES.int(n);
+V.isLength = (input, n) => TYPES.str(input).length <= TYPES.int(n);
 
 
 /**
  * Checks if the input parameter’s character count is greater than or
  * equal to the n parameter.
- *
+ * @memberof V
  * @param {string} input The string to analyze.
  * @param {integer} n The lower threshold
  *
- * @example .isOfLength("123456789", 6);
- *  // true
- * @example .isOfLength("123456789", 20);
- *  // false
- * @example .isOfLength("AHHHH", 25);
- *  // false
- * @example .isOfLength("This could be a tweet!", 140);
- *  // false
+ * @example
+ * // true
+ * sjs.V.isOfLength("123456789", 6);
+ * @example
+ * // false
+ * sjs.V.isOfLength("123456789", 20);
+ * @example
+ * // false
+ * sjs.V.isOfLength("AHHHH", 25);
+ * @example
+ * // false
+ * sjs.V.isOfLength("This could be a tweet!", 140);
  *
  * @returns {boolean} True or False
  */
-
-v.isOfLength = (input, n) => TYPES.str(input).length >= TYPES.int(n);
+V.isOfLength = (input, n) => TYPES.str(input).length >= TYPES.int(n);
 
 
 /**
  * Counts the number of words in the input parameter.
- *
+ * @memberof V
  * @param {string} input The string to analyze.
  *
- * @example .countWords("Hello.");
- *  // returns 1
- * @example .countWords("Hard-to-type-really-fast!");
- *  // returns 5
- * @example .countWords("");
- *  // returns 0
- * @example .countWords("supercalifragilisticexpialidocious");
- *  // returns 1
+ * @example
+ * // returns 1
+ * sjs.V.countWords("Hello.");
+ * @example
+ * // returns 5
+ * sjs.V.countWords("Hard-to-type-really-fast!");
+ * @example
+ * // returns 0
+ * sjs.V.countWords("");
+ * @example
+ * // returns 1
+ * sjs.V.countWords("supercalifragilisticexpialidocious");
  *
  * @returns {integer} The number of contained words
  */
-
-v.countWords = (input) => {
+V.countWords = (input) => {
   input = TYPES.str(input).replace(/[^a-zA-Z\d\s\-:]/g, '');
 
   if (input.length === 0) {
@@ -528,26 +597,24 @@ v.countWords = (input) => {
 /**
  * Checks if the input parameter has a word count less than or equal
  * to the n parameter.
- *
+ * @memberof V
  * @param {string} input The string to analyze.
  * @param {integer} n The upper threshold
  *
  * @returns {boolean} True or False
  */
-
-v.lessWordsThan = (input, n) => v.countWords(input) <= TYPES.int(n);
+V.lessWordsThan = (input, n) => V.countWords(input) <= TYPES.int(n);
 
 /**
  * Checks if the input parameter has a word count greater than or equal to
  * the n parameter.
- *
+ * @memberof V
  * @param {string} input The string to analyze.
  * @param {integer} n The lower threshold
  *
  * @returns {boolean} True or False
  */
-
-v.moreWordsThan = (input, n) => v.countWords(input) >= TYPES.int(n);
+V.moreWordsThan = (input, n) => V.countWords(input) >= TYPES.int(n);
 
 
 /**
@@ -555,15 +622,14 @@ v.moreWordsThan = (input, n) => v.countWords(input) >= TYPES.int(n);
  *
  * - input is greater than or equal to the floor parameter
  * - input is less than or equal to the ceil parameter.
- *
+ * @memberof V
  * @param {Number | String } input The value to analyze.
  * @param {Number | String} floor The lower threshold
  * @param {Number | String} ceil The upper threshold
  *
  * @returns {boolean} True or False
  */
-
-v.isBetween = function(input, floor, ceil) {
+V.isBetween = function(input, floor, ceil) {
   const customType = TYPES.allowedTypes('String', 'NUMBER');
   input = customType(input);
   floor = customType(floor);
@@ -575,26 +641,30 @@ v.isBetween = function(input, floor, ceil) {
 /**
  * Checks that the input parameter string is only composed of the following
  * characters:  a—z, A—Z, or 0—9.
- *
+ * @memberof V
  * Unicode characters are intentionally disregarded.
  *
  * @param {string | Integer} input The value to be analyzed.
  *
- * @example .isAlphanumeric("Hello.");
- *  // returns false
- * @example .isAlphanumeric("slam poetry");
- *  // returns false
- * @example .isAlphanumeric("");
- *  // returns true
- * @example .isAlphanumeric("ArTᴉ$ʰARd");
- *  // returns false
- * @example .isAlphanumeric("supercalifragilisticexpialidocious");
- *  // returns true
+ * @example
+ * // returns false
+ * sjs.V.isAlphanumeric("Hello.");
+ * @example
+ * // returns false
+ * sjs.V.isAlphanumeric("slam poetry");
+ * @example
+ * // returns true
+ * sjs.V.isAlphanumeric("");
+ * @example
+ * // returns false
+ * sjs.V.isAlphanumeric("ArTᴉ$ʰARd");
+ * @example
+ * // returns true
+ * sjs.V.isAlphanumeric("supercalifragilisticexpialidocious");
  *
  * @returns {boolean} True or False
  */
-
-v.isAlphanumeric = function(input) {
+V.isAlphanumeric = function(input) {
   const customType = TYPES.allowedTypes('String', 'INTEGER');
   return customType(input).toString().split('').reduce((prev, curr) => {
     return (_ALPHA.indexOf(curr.toLowerCase()) === -1) ? false : prev;
@@ -606,35 +676,40 @@ v.isAlphanumeric = function(input) {
  * A credit card number will be defined as four sets of four alphanumeric
  * characters separated by hyphens (-), or a single string of alphanumeric
  * characters (without hyphens).
- *
+ * @memberof V
  * @param {string} input A valid credit card number
  *
- * @example .isCreditCard("1234-5678-9101-1121");
- *  // returns true
- * @example .isCreditCard("1234567891011121");
- *  // returns true
- * @example .isCreditCard("4427A693CF324D14");
- *  // returns true
- * @example .isCreditCard("4427-A693-CF32-4D14");
- *  // returns true
- * @example .isCreditCard("----------------");
- *  // returns false
- * @example .isCreditCard("testcard");
- *  // returns false
+ * @example
+ * // returns true
+ * sjs.V.isCreditCard("1234-5678-9101-1121");
+ * @example
+ * // returns true
+ * sjs.V.isCreditCard("1234567891011121");
+ * @example
+ * // returns true
+ * sjs.V.isCreditCard("4427A693CF324D14");
+ * @example
+ * // returns true
+ * sjs.V.isCreditCard("4427-A693-CF32-4D14");
+ * @example
+ * // returns false
+ * sjs.V.isCreditCard("----------------");
+ * @example
+ * // returns false
+ * sjs.V.isCreditCard("testcard");
  *
  * @returns {boolean} True or False
  */
-
-v.isCreditCard = function isCreditCard(input) {
+V.isCreditCard = function isCreditCard(input) {
   input = TYPES.str(input);
 
-  const firstT = v.countWords(input) === 4 && input.indexOf('-') !== -1;
+  const firstT = V.countWords(input) === 4 && input.indexOf('-') !== -1;
 
   if (firstT) {
-    input = v.withoutSymbols(input);
+    input = V.withoutSymbols(input);
   }
 
-  if (!v.isAlphanumeric(input) || input.length !== 16) {
+  if (!V.isAlphanumeric(input) || input.length !== 16) {
     return false;
   }
 
@@ -647,28 +722,34 @@ v.isCreditCard = function isCreditCard(input) {
  * using the characters 0—9 and A—F. isHex should also work on shorthand
  * hexadecimal colors, such as #333.
  * The input must start with a # to be considered valid.
- *
+ * @memberof V
  * @param {string} input A valid Hexadecimal color
  *
- * @example .isHex("#abcdef");
- *  // returns true
- * @example .isHex("#bcdefg");
- *  // returns false
- * @example .isHex("#bbb");
- *  // returns true
- * @example .isHex("#1cf");
- *  // returns true
- * @example .isHex("#1234a6");
- *  // returns true
- * @example .isHex("#1234a68");
- *  // returns false
- * @example .isHex("cc4488");
- *  // returns false
+ * @example
+ * // returns true
+ * sjs.V.isHex("#abcdef");
+ * @example
+ * // returns false
+ * sjs.V.isHex("#bcdefg");
+ * @example
+ * // returns true
+ * sjs.V.isHex("#bbb");
+ * @example
+ * // returns true
+ * sjs.V.isHex("#1cf");
+ * @example
+ * // returns true
+ * sjs.V.isHex("#1234a6");
+ * @example
+ * // returns true
+ * sjs.V.isHex("#1234a68");
+ * @example
+ * // returns true
+ * sjs.V.isHex("cc4488");
  *
  * @returns {boolean} True or False
  */
-
-v.isHex = (input) => {
+V.isHex = (input) => {
   const len = TYPES.str(input).length;
   const chars = input.substr(1).split('');
 
@@ -676,8 +757,8 @@ v.isHex = (input) => {
   if (len !== 4 && len !== 7) return false;
 
   return chars.reduce(function(prev, curr) {
-    const chk1 = v.isBetween(curr, 'a', 'f');
-    const chk2 = v.isBetween(curr, '0', '9');
+    const chk1 = V.isBetween(curr, 'a', 'f');
+    const chk2 = V.isBetween(curr, '0', '9');
     return (chk1 || chk2) ? prev : false;
   }, true);
 
@@ -689,33 +770,38 @@ v.isHex = (input) => {
  * - Three numbers between 0 and 255
  * - A comma between each number
  * - The three numbers should be contained within “rgb(” and “)“.
- *
+ * @memberof V
  * @param {string} input A valid RGB color
  *
- * @example .isRGB("rgb(0,0,0)");
- *  // returns true
- * @example .isRGB("rgb(0, 0, 0)");
- *  // returns true
- * @example .isRGB("rgb(255, 255, 112)");
- *  // returns true
- * @example .isRGB("rgba(0,0,0, 0)");
- *  // returns false
- * @example .isRGB("rgb(0,300,0)");
- *  // returns false
- * @example .isRGB("rgb(0,-14,0)");
- *  // returns false
+ * @example
+ * // returns true
+ * sjs.V.isRGB("rgb(0,0,0)");
+ * @example
+ * // returns true
+ * sjs.V.isRGB("rgb(0, 0, 0)");
+ * @example
+ * // returns true
+ * sjs.V.isRGB("rgb(255, 255, 112)");
+ * @example
+ * // returns false
+ * sjs.V.isRGB("rgba(0,0,0, 0)");
+ * @example
+ * // returns false
+ * sjs.V.isRGB("rgb(0,300,0)");
+ * @example
+ * // returns false
+ * sjs.V.isRGB("rgb(0,-14,0)");
  *
  * @returns {boolean} True or False
  */
-
-v.isRGB = (input) => {
+V.isRGB = (input) => {
   const sanitized = TYPES.str(input).split('rgb(').join('').split(')').join('');
   const values   = sanitized.split(',');
 
   if (values.length !== 3) return false;
 
   return values.reduce(function(prev, curr) {
-    return (v.isBetween(curr.trim(), '0', '255')) ? prev : false;
+    return (V.isBetween(curr.trim(), '0', '255')) ? prev : false;
   }, true);
 };
 
@@ -728,47 +814,51 @@ v.isRGB = (input) => {
  *     are between 0 and 1
  * - A comma between each number
  * - The three numbers should be contained within “hsl(” and “)“.
- *
+ * @memberof V
  * @param {string} input A valid HSL color
  *
  * @returns {boolean} True or False
  */
-
-v.isHSL = (input) => {
+V.isHSL = (input) => {
   const sanitized = TYPES.str(input).split('hsl(').join('').split(')').join('');
   const values   = sanitized.split(',');
 
   if (values.length !== 3) return false;
 
-  if (!(v.isBetween(values[0].trim(), 0, 360))) return false;
-  if (!(v.isBetween(values[1].trim(), 0, 1))) return false;
-  if (!(v.isBetween(values[2].trim(), 0, 1))) return false;
+  if (!(V.isBetween(values[0].trim(), 0, 360))) return false;
+  if (!(V.isBetween(values[1].trim(), 0, 1))) return false;
+  if (!(V.isBetween(values[2].trim(), 0, 1))) return false;
 
   return true;
 };
 
 /**
  * Checks if the input parameter is a hex, RGB, or HSL color type.
- *
+ * @memberof V
  * @param {string} input A valid color (Hex, RGB, HSL)
  *
- * @example .isColor("#ccccff");
- *  // returns true
- * @example .isColor("rgb(255,255,200)");
- *  // returns true
- * @example .isColor("hsl(46,0.66,0.21)");
- *  // returns true
- * @example .isColor("hla(255,255,255)");
- *  // returns false
- * @example .isColor("abc345");
- *  // returns false
- * @example .isColor("#363");
- *  // returns true
+ * @example
+ * // returns true
+ * sjs.V.isColor("#ccccff");
+ * @example
+ * // returns true
+ * sjs.V.isColor("rgb(255,255,200)");
+ * @example
+ * // returns true
+ * sjs.V.isColor("hsl(46,0.66,0.21)");
+ * @example
+ * // returns false
+ * sjs.V.isColor("hla(255,255,255)");
+ * @example
+ * // returns false
+ * sjs.V.isColor("abc345");
+ * @example
+ * // returns true
+ * sjs.V.isColor("#363");
  *
  * @returns {boolean} True or False
  */
-
-v.isColor = (input) => v.isHex(input) || v.isRGB(input) || v.isHSL(input);
+V.isColor = (input) => V.isHex(input) || V.isRGB(input) || V.isHSL(input);
 
 
 /**
@@ -777,22 +867,25 @@ v.isColor = (input) => v.isHex(input) || v.isRGB(input) || v.isHSL(input);
  * Leading refers to before while trailing refers to after.
  * This function will help validate cases where extra spaces were added
  * accidentally by the user.
- *
+ * @memberof V
  * @param {string} input A string to analyze
  *
- * @example .isTrimmed("   harmony and irony");
- *  // returns false
- * @example .isTrimmed("harmony and irony      ");
- *  // returns false
- * @example .isTrimmed("harmony  and  irony");
- *  // returns false
- * @example .isTrimmed("harmony and irony");
- *  // returns true
+ * @example
+ * // returns false
+ * sjs.V.isTrimmed("   harmony and irony");
+ * @example
+ * // returns false
+ * sjs.V.isTrimmed("harmony and irony      ");
+ * @example
+ * // returns false
+ * sjs.V.isTrimmed("harmony  and  irony");
+ * @example
+ * // returns true
+ * sjs.V.isTrimmed("harmony and irony");
  *
  * @returns {boolean} True or False
  */
-
-v.isTrimmed = function isTrimmed(input) {
+V.isTrimmed = function isTrimmed(input) {
   const chars = TYPES.str(input).split(' ');
 
   return chars.reduce(function(prev, curr) {
@@ -801,36 +894,21 @@ v.isTrimmed = function isTrimmed(input) {
 };
 
 /**
- *  Given two date it returns the difference between them in days
- *
- * @param  {d1} Date The first date
- * @param  {d2} Date The second date
- *
- * @returns {int} The difference in days
- */
-
-v.diffInDays = (d1, d2) => {
-
-  let diffInMilliSec = d1.getTime() - d2.getTime();
-  const milliSecInAday = 24 * 60 * 60 * 1000; //total milli-seconds in a day
-
-  return Math.floor(diffInMilliSec / milliSecInAday);
-};
-
-/**
  *  Check if the word arg is repeated within string
- *
+ * @memberof V
  * @param  {string} string The string where you want to search for
  * @param  {string} word The character or word you are looking for
  *
- * @example .isConsecutive("apollo Cred", 'pol');
- *  // returns false
- * @example .isConsecutive("apollo Cred", 'apoll');
- *  // returns true
+ * @example
+ * // returns false
+ * sjs.V.isConsecutive("apollo Cred", 'pol');
+ * @example
+ * // returns true
+ * sjs.V.isConsecutive("apollo Cred", 'apoll');
  *
  * @returns {boolean} True if word is consecutive, False otherwise
  */
-v.isConsecutive = (string, word) => {
+V.isConsecutive = (string, word) => {
   const substrings = TYPES.str(string).split(TYPES.str(word));
 
   for(var item in substrings) {
@@ -841,4 +919,4 @@ v.isConsecutive = (string, word) => {
 
 
 // export public functions
-export default { ...v };
+export default { ...V };
