@@ -446,9 +446,12 @@ F.flatten = (array) => array.reduce((p, n) => p.concat(n), []);
   * @signature unfold :: Array -> Array
   * @param {Array} a An array containing possible nested arrays in multiple levels
   * @returns {Array} A flatten array
-  * @example
+  * @example <caption>On level depth</caption>
   * // returns [1, 2, 3]
-  * sjs.F.flatten([[1], 2, 3]);
+  * sjs.F.unfold([[1], 2, 3]);
+  * @example <caption>Multiple levels</caption>
+  * // returns [1, 2, 3, 4, 5]
+  * sjs.F.unfold([1, 2, [3, [4, [5]]]]);
   */
 F.unfold = (array) => {
   const inner = (a) => F.hold(a, Array.isArray)
