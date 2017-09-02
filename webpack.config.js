@@ -5,11 +5,11 @@ const libraryName = 'sjs';
 
 module.exports = {
 
-  devtool: debug ? 'inline-sourcemap' : null,
+  devtool: debug ? 'inline-sourcemap' : 'cheap-module-source-map',
   entry: path.join(__dirname, 'src/sjs.js'),
   output: {
     path: path.join(__dirname, 'build/'),
-    filename: 'build.js',
+    filename: debug ? 'sjs.js' : 'sjs.min.js',
     publicPath: '/build/',
     library: libraryName,
     libraryTarget: 'umd',
@@ -30,8 +30,7 @@ module.exports = {
   },
 
   plugins: debug ? [] : [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
   ],
 
