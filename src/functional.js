@@ -168,7 +168,7 @@ F.arrayOf = (fn) => (a) => F.map(TYPES.fun(fn), TYPES.arr(a));
   * functions.
   * @memberof F
   * @function
-  * @signature Function* -> a
+  * @signature compose :: (b -> c) -> (a -> b) -> a -> c
   * @example
   * const add = (a, b) => a + b;
   * const mul = (a, b) => a * b;
