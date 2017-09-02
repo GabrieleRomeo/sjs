@@ -33,6 +33,10 @@ Functions are collected and categorized under various *namespaces* using dedicat
 
 
 
+The API documentation can be found here: [http://api.sjs.surge.sh/](http://api.sjs.surge.sh/)
+
+
+
 ### Build from source
 
 To clone this repository to your local machine run the following command(s):
