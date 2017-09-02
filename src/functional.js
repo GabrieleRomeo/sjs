@@ -612,6 +612,12 @@ F.notExists = x => !F.exists(x);
  * @param   {Array}  arr   An Array
  * @param   {Function}  predicate   An predicate function
  * @return  {boolean}
+ * @example
+ * // returns true
+ * sjs.F.hold([1, 2, [], 'a'], Array.isArray);
+ *
+ * // returns false
+ * sjs.F.hold([1, 2, [], 'a'], i => Object.prototype.toString.call(i) === '[object Null]');
  */
 F.hold = (arr, predicate) => {
   for(const value of arr) {
