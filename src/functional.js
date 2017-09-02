@@ -433,12 +433,30 @@ F.sortBy = (property) => {
   * @memberof F
   * @signature flatten :: Array -> Array
   * @param {Array} a An array containing nested arrays
-  * @returns {Array} An flatten array
+  * @returns {Array} A flatten array
   * @example
   * // returns [1, 2, 3]
   * sjs.F.flatten([[1], 2, 3]);
   */
 F.flatten = (array) => array.reduce((p, n) => p.concat(n), []);
+
+/**
+  * Concatenate multiple nested arrays into a single array
+  * @memberof F
+  * @signature unfold :: Array -> Array
+  * @param {Array} a An array containing possible nested arrays in multiple levels
+  * @returns {Array} A flatten array
+  * @example
+  * // returns [1, 2, 3]
+  * sjs.F.flatten([[1], 2, 3]);
+  */
+F.unfold = (array) => {
+  const inner = (a) => F.hold(a, Array.isArray)
+                       ? inner(F.flatten(a))
+                       : a;
+  return inner(array);
+};
+
 
 /**
   * Merge two arrays and apply a callback function
@@ -582,6 +600,22 @@ F.exists = x => F.classOf(x) !== 'Null' && F.classOf(x) !== 'Undefined';
  * @return  {boolean}
  */
 F.notExists = x => !F.exists(x);
+
+/**
+ * Evaluate if a predicate holds for at least one item of an Array
+ * @memberof F
+ * @signature hold :: (Array, (a -> bool)) -> bool
+ *
+ * @param   {Array}  arr   An Array
+ * @param   {Function}  predicate   An predicate function
+ * @return  {boolean}
+ */
+F.hold = (arr, predicate) => {
+  for(const value of arr) {
+    if (predicate(value)) return true;
+  }
+  return false;
+};
 
 /**
  * Check if an object contains a specific key
