@@ -1460,7 +1460,42 @@ sjs.F.flatten([[1], 2, 3]);
 ##### Returns
 
 
-- `Array`  An flatten array
+- `Array`  A flatten array
+
+
+
+#### F.unfold(a) 
+
+Concatenate multiple nested arrays into a single array
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| a | `Array`  | An array containing possible nested arrays in multiple levels | &nbsp; |
+
+
+
+
+##### Examples
+
+```javascript
+<caption>On level depth</caption> // returns [1, 2, 3]
+sjs.F.unfold([[1], 2, 3]);
+```
+```javascript
+<caption>Multiple levels</caption> // returns [1, 2, 3, 4, 5]
+sjs.F.unfold([1, 2, [3, [4, [5]]]]);
+```
+
+
+##### Returns
+
+
+- `Array`  A flatten array
 
 
 
@@ -1514,11 +1549,19 @@ sjs.F.times(10, n => {
 
 
 
-#### F.memoized() 
+#### F.memoized(fn, arg) 
+
+Allow a Function to remember or memorize its result.
 
 
 
 
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| fn | `Function`  | The Function you wish to work with | &nbsp; |
+| arg | `Any`  | An argument to memorize | &nbsp; |
 
 
 
@@ -1526,7 +1569,8 @@ sjs.F.times(10, n => {
 ##### Returns
 
 
-- `Void`
+- `Function`  A Function
+- `Any`  The result of applying the argument to the fn Function
 
 
 
@@ -1581,7 +1625,7 @@ are neither null nor undefined
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| fn | `Object`  | The function that could be applied | &nbsp; |
+| fn | `Function`  | The function that could be applied | &nbsp; |
 
 
 
@@ -1665,6 +1709,41 @@ Check if the provided value is either Null or Undefined.
 | x | `Any`  | The value under test | &nbsp; |
 
 
+
+
+##### Returns
+
+
+- `boolean`  
+
+
+
+#### F.hold(arr, predicate) 
+
+Evaluate if a predicate holds for at least one item of an Array
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| arr | `Array`  | An Array | &nbsp; |
+| predicate | `Function`  | An predicate function | &nbsp; |
+
+
+
+
+##### Examples
+
+```javascript
+// returns true
+sjs.F.hold([1, 2, [], 'a'], Array.isArray);
+
+// returns false
+sjs.F.hold([1, 2, [], 'a'], i => Object.prototype.toString.call(i) === '[object Null]');
+```
 
 
 ##### Returns
