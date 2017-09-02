@@ -1,6 +1,6 @@
 {
   "name": "sjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A JS Library with special attention to Data Types.",
   "main": "sjs.js",
   "private": true,
