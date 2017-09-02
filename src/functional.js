@@ -231,7 +231,7 @@ F.flip = (fn) => (...args) => fn.apply(this, args.reverse());
   * @memberof F
   * @function
   * @signature Function* -> a
-  * @signature rcompose :: Function -> Function
+  * @signature rcompose :: (a -> b) -> (b -> c) -> a -> c
   * @example
   * const add = (a, b) => a + b;
   * const mul = (a, b) => a * b;
