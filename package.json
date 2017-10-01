@@ -12,6 +12,7 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-loader": "^7.0.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-node6": "^11.0.0",
     "babel-preset-stage-2": "^6.24.1",
@@ -22,9 +23,20 @@
     "compression-webpack-plugin": "^0.4.0",
     "git-revision-webpack-plugin": "^2.5.1",
     "html-webpack-plugin": "^2.29.0",
+    "istanbul-instrumenter-loader": "^0.2.0",
     "jsdoc": "^3.5.4",
     "jsdom": "11.1.0",
     "jsdom-global": "3.0.2",
+    "karma-chai-plugins": "^0.9.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.0.1",
+    "karma-mocha": "^1.3.0",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-safari-launcher": "^1.0.0",
+    "karma-spec-reporter": "0.0.31",
+    "karma-virtualbox-ie11-launcher": "^1.1.6",
+    "karma-webpack": "^2.0.4",
     "mocha": "^3.4.2",
     "mocha-silent-reporter": "^1.0.0",
     "surge": "^0.19.0",
@@ -33,16 +45,15 @@
     "webpack-merge": "^4.1.0"
   },
   "scripts": {
-    "test": "mocha --compilers js:babel-register --require babel-polyfill",
-    "test:silent": "mocha -R mocha-silent-reporter --compilers js:babel-register --require babel-polyfill",
-    "test:watch": "webpack-dev-server --hot --config webpack.mocha.js",
+    "test": "karma start karma.config.js",
     "dev": "webpack-dev-server --port 3000 --inline --colors --watch --hot --progress",
     "preprod": "npm run test:silent",
     "prod": "NODE_ENV='production' webpack --progress",
     "dox": "doxdox 'src/*.js' --layout markdown --output DOCUMENTATION.md",
     "generate-docs": "node_modules/.bin/jsdoc --readme docs/assets/HOMEDOCS.md -c jsdoc.json",
     "postgenerate-docs": "npm run dox",
-    "deployAPI": "surge docs/ api.sjs.surge.sh"
+    "deployAPI": "surge docs/ api.sjs.surge.sh",
+    "coverage": "open coverage/index.html"
   },
   "author": "Gabriele Romeo",
   "license": "ISC"
