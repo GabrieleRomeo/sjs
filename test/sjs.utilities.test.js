@@ -1,7 +1,6 @@
 'use strict';
  /*eslint-env mocha*/
 
-import 'babel-polyfill';
 import u from '../src/utilities';
 
 const assert = require('assert');
