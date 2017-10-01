@@ -2,7 +2,6 @@
 
  /*eslint-env mocha*/
 
-import 'babel-polyfill';
 import v from '../src/validators';
 
 const assert = require('assert');
