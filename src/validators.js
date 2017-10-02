@@ -282,6 +282,12 @@ V.withoutSymbols = (input) => {
  */
 V.isDate = (input) => {
   const customType = TYPES.allowedTypes('String', 'Date');
+  // Chrome and Ie allow dates to be in the format DD-MM-YYYY
+  // Safari, Firefox don't
+  if (/\d{2}-\d{2}-\d{4}\b/.test(input)) {
+    return false;
+  }
+
   const date = new Date(customType(input));
   return !isNaN(date.getDate());
 };
