@@ -6,8 +6,8 @@ import v from '../src/validators';
 
 const assert = require('assert');
 
-const dec25_2015 = new Date('12-25-2015');
-const oct31_2017 = new Date('10-31-2017');
+const dec25_2015 = new Date('2015-12-25');
+const oct31_2017 = new Date('2017-10-31');
 
 describe('Validators - V', () => {
 
@@ -136,10 +136,10 @@ describe('Validators - V', () => {
         );
     });
     it('should return false when the provided value is not a valid date', () => {
-      assert.equal(v.isDate('test'), false);
+      assert.equal(v.isDate('12-25-2017'), false);
     });
     it('should pass when the provided value is a valid date', () => {
-      assert.equal(v.isDate('12-25-2017'), true);
+      assert.equal(v.isDate('2017-12-25'), true);
     });
   });
 
@@ -177,10 +177,10 @@ describe('Validators - V', () => {
         );
     });
     it('should pass when the first date comes before the second date', () => {
-      assert.equal(v.isBeforeDate('10-10-2016', '10-12-2016'), true);
+      assert.equal(v.isBeforeDate('2016-10-10', '2016-10-12'), true);
     });
     it('should return false if the first date doesn\'t come before the second date', () => {
-      assert.equal(v.isBeforeDate('10-10-2016', '01-12-2015'), false);
+      assert.equal(v.isBeforeDate('2016-10-10', '2015-01-12'), false);
     });
     it('should pass when the first date comes before the second date', () => {
       assert.equal(v.isBeforeDate(dec25_2015, oct31_2017), true);
@@ -221,10 +221,10 @@ describe('Validators - V', () => {
         );
     });
     it('should pass when the first date comes after the second date', () => {
-      assert.equal(v.isAfterDate('10-10-2018', '10-12-2016'), true);
+      assert.equal(v.isAfterDate('2018-10-10', '2016-10-12'), true);
     });
     it('should return false if the first date doesn\'t come after the second date', () => {
-      assert.equal(v.isAfterDate('01-01-2000', '01-12-2015'), false);
+      assert.equal(v.isAfterDate('2000-01-01', '2015-01-12'), false);
     });
     it('should pass when the first date comes after the second date', () => {
       assert.equal(v.isAfterDate(oct31_2017, dec25_2015), true);
@@ -258,10 +258,10 @@ describe('Validators - V', () => {
         );
     });
     it('should pass when the provided date comes before today', () => {
-      assert.equal(v.isBeforeToday('10-10-2016'), true);
+      assert.equal(v.isBeforeToday('2016-10-10'), true);
     });
     it('should return false when the provided date doesn\'t come before today', () => {
-      assert.equal(v.isBeforeToday('10-10-2200'), false);
+      assert.equal(v.isBeforeToday('2200-10-10'), false);
     });
   });
 
@@ -291,10 +291,10 @@ describe('Validators - V', () => {
         );
     });
     it('should pass when the provided date comes after today', () => {
-      assert.equal(v.isAfterToday('10-10-2200'), true);
+      assert.equal(v.isAfterToday('2200-10-10'), true);
     });
     it('should return false when the provided date doesn\'t come after today', () => {
-      assert.equal(v.isAfterToday('10-10-1999'), false);
+      assert.equal(v.isAfterToday('1999-10-10'), false);
     });
   });
 
